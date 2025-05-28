@@ -659,303 +659,304 @@ export interface PutRunSettings {
  */
 export interface GetConversations {}
 
-
-GetConversationMessages(PostRequest[r_GetConversationMessages]):
-"""Gets messages from a given conversation.
-
-
-conversationId: string;
-"""
-def __init__(self conversationId: string; **params) -> None:
-super().__init__("GetConversationMessages" r_GetConversationMessages conversationId: string;=conversationId: string; **params)
-
-PutConversation(PostRequest[r_PutConversation]):
-"""Creates a new conversation. May include several users.
-If the conversation already exists the message is sent to the existing conversation.
-
-NOTE: if the conversation exists but the user has left it they will _not_ rejoin the conversation.
-
-
-csrfToken: May be retrieved by `GetSession`.
-recipientId: string;s: A list of other users to add to the conversation.
-text: Content of the initial message.
-"""
-def __init__(self csrfToken: string; recipientId: string;s: list[string;] text: string; **params) -> None:
-super().__init__("PutConversation" r_PutConversation csrfToken=csrfToken recipientId: string;s=recipientId: string;s text=text **params)
-
-PutConversationMessage(PostRequest[r_PutConversationMessage]):
-"""Sends a message to a conversation.
-
-
-csrfToken: May be retrieved by `GetSession`.
-conversationId: string;
-text
-"""
-def __init__(self csrfToken: string; conversationId: string;: string; text: string; **params) -> None:
-super().__init__("PutConversationMessage" r_PutConversationMessage csrfToken=csrfToken conversationId: string;=conversationId: string; text=text **params)
-
-PutConversationLeave(PostRequest[r_Empty]):
-"""Leaves a conversation.
-
-
-csrfToken: May be retrieved by `GetSession`.
-conversationId: string;
-"""
-def __init__(self csrfToken: string; conversationId: string;: string; **params) -> None:
-super().__init__("PutConversationLeave" r_Empty csrfToken=csrfToken conversationId: string;=conversationId: string; **params)
-
-PutConversationReport(PostRequest[r_Ok]):
-"""Reports a conversation.
-
-
-csrfToken: May be retrieved by `GetSession`.
-conversationId: string;
-text: User description of the report
-"""
-def __init__(self csrfToken: string; conversationId: string;: string; text: string; **params) -> None:
-super().__init__("PutConversationReport" r_Ok csrfToken=csrfToken conversationId: string;=conversationId: string; text=text **params)
-
-# User notifications & follows
-GetNotifications(PostRequest[r_GetNotifications] BasePaginatedRequest[r_GetNotifications]):
-"""Gets the user's notifications.
-"""
-def __init__(self **params) -> None:
-super().__init__("GetNotifications" r_GetNotifications **params)
-
-def _combine_results(self pages: dict[int r_GetNotifications]) -> r_GetNotifications:
-combined = self._combine_keys(pages ["notifications"] [])
-combined["pagination"] = copy.copy(combined["pagination"])
-combined["pagination"]["page"] = 0  # type: ignorecombined["pagination"]["page"] = 0  # type: ignore
-return combined
-
-PutGameFollower(PostRequest[r_Empty]):
-"""Follow a game.
-
-
-gameId: string;
-userId: string;: string;: own userId: string;: string;
-"""
-def __init__(self gameId: string;: string; userId: string;: string;: string; **params) -> None:
-super().__init__("PutGameFollower" r_Empty gameId: string;=gameId: string; userId: string;: string;=userId: string;: string; **params)
-
-PutGameFollowerDelete(PostRequest[r_Empty]):
-"""Unfollow a game.
-
-
-gameId: string;
-userId: string;: string;: own userId: string;: string;
-"""
-def __init__(self gameId: string;: string; userId: string;: string;: string; **params) -> None:
-super().__init__("PutGameFollowerDelete" r_Empty gameId: string;=gameId: string; userId: string;: string;=userId: string;: string; **params)
-
-PutUserFollower(PostRequest[r_Empty]):
-"""Follow a user.
-
-
-userId: string;: string;
-"""
-def __init__(self userId: string;: string;: string; **params) -> None:
-super().__init__("PutUserFollower" r_Empty userId: string;: string;=userId: string;: string; **params)
-
-PutUserFollowerDelete(PostRequest[r_Empty]):
-"""Unfollow a user.
-
-
-userId: string;: string;
-"""
-def __init__(self userId: string;: string;: string; **params) -> None:
-super().__init__("PutUserFollowerDelete" r_Empty userId: string;: string;=userId: string;: string; **params)
-
-# User settings
-GetUserSettings(PostRequest[r_GetUserSettings]):
-"""Gets a user's settings.
-
-
-userUrl: must be your own unless you are a site moderator.
-"""
-def __init__(self userUrl: string; **params) -> None:
-super().__init__("GetUserSettings" r_GetUserSettings userUrl=userUrl **params)
-
-PutUserSettings(PostRequest[r_PutUserSettings]):
-"""Sets a user's settings.
-
-
-userUrl: must be your own unless you are a site moderator.
-settings
-"""
-def __init__(self userUrl: string; settings: UserSettings **params) -> None:
-super().__init__("PutUserSettings" r_PutUserSettings userUrl=userUrl settings=settings **params)
-
-PutUserUpdateFeaturedRun(PostRequest[r_Empty]):
-"""Sets the run featured on a user's profile.
-
-
-userUrl: must be your own unless you are an admin.
-fullRunId: string;: If omitted clears the full game featured run.
-levelRunId: string;: If omitted clears the level featured run
-"""
-def __init__(self userUrl: string; fullRunId: string;: string; | None = None levelRunId: string;: string; | None = None **params) -> None:
-super().__init__("PutUserUpdateFeaturedRun" r_Empty userUrl=userUrl fullRunId: string;=fullRunId: string; levelRunId: string;=levelRunId: string; **params)
-
-PutUserUpdateGameOrdering(PostRequest[r_Empty]):
-"""Updates the order of games displayed on your profile.
-
-Note that having multiple GameOrderGroups is a Supporter-only feature. The default group has fixed id "default".
-
-
-userUrl: must be your own unless you are an admin.
-groups: Groups to display on the profile.
-"""
-def __init__(self userUrl: string; groups: list[GameOrderGroup] **params) -> None:
-super().__init__("PutUserUpdateGameOrdering" r_Empty userUrl=userUrl groups=groups **params)
-
-GetUserApiKey(PostRequest[r_GetUserApiKey]):
-"""Get a user's API key.
-
-
-userId: string;: string;
-
-
-regenerate: boolean; # Returns a new API key if True
-"""
-def __init__(self userId: string;: string;: string; regenerate: boolean; | None = None **params) -> None:
-super().__init__("GetUserApiKey" r_GetUserApiKey userId: string;: string;=userId: string;: string; regenerate=regenerate **params)
-
-GetUserGameBoostData(PostRequest[r_GetUserGameBoostData]):
-"""Get a list of games that a user has boosted.
-
-
-userId: string;: string;
-"""
-def __init__(self userId: string;: string;: string; **params) -> None:
-super().__init__("GetUserGameBoostData" r_GetUserGameBoostData userId: string;: string;=userId: string;: string; **params)
-
-GetUserDataExport(PostRequest[r_GetUserDataExport]):
-"""Get a user's exported data.
-
-
-userId: string;: string;
-"""
-def __init__(self userId: string;: string;: string; **params) -> None:
-super().__init__("GetUserDataExport" r_GetUserDataExport userId: string;: string;=userId: string;: string; **params)
-
-PutGameFollowerOrder(PostRequest[r_Empty]):
-"""Reorder a user's followed games.
-
-
-gameId: string;s: list of game Id: string;s in the order they should be in
-userId: string;: string;
-"""
-def __init__(self gameId: string;s: list[string;] userId: string;: string;: string; **params) -> None:
-super().__init__("PutGameFollowerOrder" r_Empty gameId: string;s=gameId: string;s userId: string;: string;=userId: string;: string; **params)
-
-# PUT IT HERE
-
-# Comment Actions
-GetCommentable(PostRequest[r_GetCommentable]):
-"""Checks the comment permissions on an item.
-
-
-itemId: string;
-itemType
-"""
-def __init__(self itemId: string;: string; itemType: ItemType **params) -> None:
-super().__init__("GetCommentable" r_GetCommentable itemId: string;=itemId: string; itemType=itemType **params)
-
-PutComment(PostRequest[r_Empty]):
-"""Posts a comment on an item.
-
-
-itemId: string;
-itemType
-text
-"""
-def __init__(self itemId: string;: string; itemType: ItemType text: string; **params) -> None:
-super().__init__("PutComment" r_Empty itemId: string;=itemId: string; itemType=itemType text=text **params)
-
-PutLike(PostRequest[r_PutLike]):
-"""Adds or removes a like to a comment.
-
-
-itemId: string;
-itemType
-like
-"""
-def __init__(self itemId: string;: string; itemType: ItemType like: boolean; **params) -> None:
-super().__init__("PutLike" r_PutLike itemId: string;=itemId: string; itemType=itemType like=like **params)
-
-PutCommentableSettings(PostRequest[r_Empty]):
-"""Updates commentable settings on an item.
-
-
-itemId: string;
-itemType
-disabled
-locked
-"""
-def __init__(self itemId: string;: string; itemType: ItemType **params) -> None:
-super().__init__("PutCommentableSettings" r_Empty itemId: string;=itemId: string; itemType=itemType **params)
-
-# Thread Actions
+/**
+ * Gets messages from a given conversation.
+ */
+export interface GetConversationMessages {
+    conversationId: string;
+}
+
+/**
+ * Creates a new conversation. May include several users.
+ * If the conversation already exists the message is sent to the existing conversation.
+ * NOTE: if the conversation exists but the user has left it they will _not_ rejoin the conversation.
+ */
+export interface PutConversation {
+
+    /**
+     * May be retrieved by `GetSession`.
+     */
+    csrfToken: string;
+    /**
+     * A list of other users to add to the conversation.
+     */
+    recipientIds: string[];
+
+    /**
+     * Content of the initial message.
+     */
+    text: string;
+}
+
+/**
+ * Sends a message to a conversation.
+ */
+export interface PutConversationMessage {
+
+    /**
+     * May be retrieved by `GetSession`.
+     */
+    csrfToken: string;
+    conversationId: string;
+    text: string;
+}
+
+/**
+ * Leaves a conversation.
+ */
+export interface PutConversationLeave {
+
+    /**
+     * May be retrieved by `GetSession`.
+     */
+    csrfToken: string;
+    conversationId: string;
+}
+
+/**
+ * Reports a conversation.
+ */
+export interface PutConversationReport {
+
+    /**
+     * May be retrieved by `GetSession`.
+     */
+    csrfToken: string;
+    conversationId: string;
+
+    /**
+     * User description of the report
+     */
+    text: string;
+}
+
+// User notifications & follows
+
+/**
+ * Gets the user's notifications.
+ */
+export interface GetNotifications {}
+
+/**
+ * Follow a game.
+ */
+export interface PutGameFollower {
+    gameId: string;
+
+    /**
+     * Your `userId`.
+     */
+    userId: string;
+}
+
+/**
+ * Unfollow a game.
+ */
+export interface PutGameFollowerDelete {
+    gameId: string;
+
+    /**
+     * Your `userId`.
+     */
+    userId: string;
+}
+
+/**
+ * Follow a user.
+ */
+export interface PutUserFollower {
+    userId: string;
+}
+
+/**
+ * Unfollow a user.
+ */
+export interface PutUserFollowerDelete {
+    userId: string;
+}
+
+// User settings
+
+/**
+ * Gets a user's settings.
+ */
+export interface GetUserSettings {
+
+/**
+ * Must be your own.
+ */
+userUrl: string;
+}
+
+/**
+ * Sets a user's settings.
+ */
+export interface PutUserSettings {
+
+    /**
+     * Must be your own.
+     */
+    userUrl: string;
+    settings: Interfaces.UserSettings;
+}
+
+/**
+ * Sets the run featured on a user's profile.
+ */
+export interface PutUserUpdateFeaturedRun {
+
+/**
+ * Must be your own.
+ */
+userUrl: string;
+
+/**
+ * If omitted clears the full game featured run.
+ */
+fullRunId?: string;
+
+/**
+ * If omitted clears the level featured run.
+ */
+levelRunId?: string;
+}
+
+/**
+ * Updates the order of games displayed on your profile.
+ * Note that having multiple GameOrderGroups is a Supporter-only feature. The default group has fixed id of `default`.
+ */
+export interface PutUserUpdateGameOrdering {
+
+    /**
+     * Must be your own.
+     */
+    userUrl: string;
+    groups: Interfaces.GameOrderGroup
+}
+
+/**
+ * Get a user's API key (the authorization method for API version 1).
+ */
+export interface GetUserApiKey {
+    userId: string;
+
+    /**
+     * Returns a new API key if `true`.
+     */
+    regenerate: boolean;
+}
+
+/**
+ * Get a list of games that a user has boosted.
+ */
+export interface GetUserGameBoostData {
+    userId: string;
+}
+
+/**
+ * Get a user's exported data.
+ */
+export interface intGetUserDataExport {
+    userId: string;
+}
+
+/**
+ * Reorder a user's followed games.
+ */
+export interface PutGameFollowerOrder {
+
+    /**
+     * List of `gameId`s in the order they should be in
+     */
+    gameId: string[];
+    userId: string;
+}
+
+/**
+ * Checks the comment permissions on an item.
+ */
+export interface GetCommentable {
+    itemId: string;
+    itemType: Enums.ItemType;
+}
+
+/**
+ * Posts a comment on an item.
+ */
+export interface PutComment {
+    itemId: string;
+    itemType: Enums.ItemType;
+    text: string;
+}
+
+/**
+ * Adds or removes a like to a comment.
+ */
+export interface PutLike {
+    itemId: string;
+    itemType: Enums.ItemType;
+    like: boolean;
+}
+
+/**
+ * Updates commentable settings on an item.
+ */
+export interface PutCommentableSettings {
+    itemId: string;
+    itemType: Enums.ItemType;
+    disabled: boolean;
+    locked: boolean;
+}
+
+/**
+ * Gets whether a set of threads have been read by the user.
+ */
 GetThreadReadStatus(PostRequest[r_GetThreadReadStatus]):
-"""Gets whether a set of threads have been read by the user.
+/**
+ * List of thread IDs to get read status from.
+ */
+threadIds: string[]; 
 
+/**
+ * Sets a thread as read by the user.
+ */
+export interface PutThreadRead {
+    threadId: string;
+}
 
-threadId: string;s: list of IDs
-"""
-def __init__(self threadId: string;s: list[string;] **params) -> None:
-super().__init__("GetThreadReadStatus" r_GetThreadReadStatus threadId: string;s=threadId: string;s **params)
+// Forum actions
 
-PutThreadRead(PostRequest[r_Empty]):
-"""Sets a thread as read by the user.
+/**
+ * Gets whether a set of forums have been read by the user.
+ */
+export interface GetForumReadStatus {
 
+    /**
+     * List of forum IDs to get read status from.
+     */
+    forumIds: string[];
+}
 
-threadId: string;
-"""
-def __init__(self threadId: string;: string; **params) -> None:
-super().__init__("PutThreadRead" r_Empty threadId: string;=threadId: string; **params)
+/**
+ * Gets a user game or series' theme.  # TODO: check noargs & series
+ */
+export interface GetThemeSettings(PostRequest[r_GetThemeSettings]):
 
-# Forum actions
-GetForumReadStatus(PostRequest[r_GetForumReadStatus]):
-"""Gets whether a set of forums have been read by the user.
-
-
-forumId: string;s: list of IDs
-"""
-def __init__(self forumId: string;s: list[string;] **params) -> None:
-super().__init__("GetForumReadStatus" r_GetForumReadStatus forumId: string;s=forumId: string;s **params)
-
-# Theme actions
-GetThemeSettings(PostRequest[r_GetThemeSettings]):
-"""Gets a user game or series' theme.  # TODO: check noargs & series
-
-
-#### One of:
-userId: string;: string;
+// One of:
+userId: string;
 gameId: string;
 seriesId: string;
-"""
-def __init__(
-    self
-    userId: string;: string;: string; | None = None
-    gameId: string;: string; | None = None
-    seriesId: string;: string; | None = None
-    **params) -> None:
-super().__init__("GetThemeSettings" r_GetThemeSettings userId: string;: string;=userId: string;: string; gameId: string;=gameId: string;
-                    seriesId: string;=seriesId: string; **params)
 
-PutThemeSettings(PostRequest[r_Empty]):
-"""Sets a user game or series' theme.
-
-
-#### One of:
-userId: string;: string;
-gameId: string;
-seriesId: string;
-settings: ThemeSettings
-"""
-def __init__(self settings: ThemeSettings userId: string;: string;: string; | None = None gameId: string;: string; | None = None seriesId: string;: string; | None = None **params) -> None:
-super().__init__("PutThemeSettings" r_Empty userId: string;: string;=userId: string;: string; gameId: string;=gameId: string; seriesId: string;=seriesId: string; settings=settings **params)
+/**
+ * Sets a user game or series' theme.
+ */
+export interface PutThemeSettings {
+    // One of:
+    userId?: string;
+    gameId?: string;
+    seriesId?: string;
+    settings: Interfaces.ThemeSettings;
+}
 
 # Supporter
 GetUserSupporterData(PostRequest[r_GetUserSupporterData]):
