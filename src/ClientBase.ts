@@ -1,7 +1,6 @@
 import axios, { AxiosResponse, AxiosInstance, AxiosError } from 'axios';
-import * as Interfaces from './interfaces';
-import * as Enums from './enums';
 import * as Endpoints from './endpoints';
+import * as Responses frm './responses';
 
 const LANG = 'en';
 const ACCEPT = 'application/json';
@@ -99,64 +98,6 @@ export default class Client {
         delete this.axiosClient.defaults.headers.common['Cookie'];
     }
 
-    // Speedrun.com endpoints (auto-generated with build-client.ts)
+    // Endpoints (auto-generated with build-client.ts)
 
-    async GetGameLeaderboard2(params: Endpoints.GetGameLeaderboard2): Promise<{
-
-    }> {
-        return await this.request('GetGameLeaderboard2', params);
-    }
-
-    async GetGameLeaderboard(params: Endpoints.GetGameLeaderboard): Promise<{
-        leaderboard: Interfaces.Leaderboard; //check if this is used anywhere else
-    }> {
-        return await this.request('GetGameLeaderboard', params);
-    }
-
-    async GetGameData(params: Endpoints.GetGameData): Promise<{
-        game: Interfaces.Game;
-        categories: Interfaces.Category[];
-        levels: Interfaces.Level[];
-        moderators: Interfaces.GameModerator[];
-        platforms: Interfaces.Platform[];
-        regions: Interfaces.Region[];
-        theme?: Interfaces.Theme[];
-        users: Interfaces.User[];
-        values: Interfaces.Value[];
-        variables: Interfaces.Variable[];
-    }> {
-        return await this.request('GetGameData', params);
-    }
-
-    async GetGameSummary(params: Endpoints.GetGameSummary): Promise<{
- 
-    }> {
-        return await this.request('GetGameSummary', params);
-    }
-
-    async GetGameRecordHistory(params: Endpoints.GetGameRecordHistory): Promise<{
-        
-    }> {
-        return await this.request('GetGameRecordHistory', params);
-    }
-
-    async GetSearch(params: Endpoints.GetSearch): Promise<{
-        
-    }> {
-        return await this.request('GetSearch', params);
-    }
-
-    async GetLatestLeaderboard(params: Endpoints.GetLatestLeaderboard): Promise<{
-        
-    }> {
-        return await this.request('GetLatestLeaderboard', params);
-    }
-
-    async GetRun(params: Endpoints.GetRun): Promise<{
-
-    }> {
-        return await this.request('GetRun', params);
-    }
-
-    
 }

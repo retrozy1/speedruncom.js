@@ -1,6 +1,6 @@
 export * from './enums';
 export * from './interfaces';
 
-import Client from './API';
+import Client from './Client';
 
 export default Client;

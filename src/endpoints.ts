@@ -831,7 +831,7 @@ export interface PutUserUpdateGameOrdering {
      * Must be your own.
      */
     userUrl: string;
-    groups: Interfaces.GameOrderGroup
+    groups: Interfaces.GameOrderGroup;
 }
 
 /**

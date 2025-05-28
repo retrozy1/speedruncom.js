@@ -177,7 +177,9 @@ export enum RunStatus {
     Rejected
 }
 
-/**Video at-risk status for Twitch Highlights and the like.*/
+/**
+ * Video at-risk status for Twitch Highlights and the like.
+ */
 export enum VideoState {
     Unknown,
     AtRisk,
