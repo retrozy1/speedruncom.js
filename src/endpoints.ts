@@ -1,6 +1,7 @@
 import * as Enums from './enums';
 import * as Interfaces from './interfaces';
 
+
 export interface GetGameLeaderboard2 {
     gameId: string;
     categoryId: string;
@@ -89,6 +90,8 @@ export interface GetUserPopoverData {
     userId: string;
 }
 
+export interface GetTitleList {}
+
 export interface GetTitle {
     titleId: string;
 }
@@ -123,6 +126,11 @@ export interface GetGameList {
     orderType?: 1; //TODO
     limit?: number;
 }
+
+/**
+ * Gets information for the home page. Often empty.
+ */
+export interface GetHomeSummary {}
 
 /**
  * Gets a list of series on the site.
@@ -234,6 +242,11 @@ export interface GetChallengeLeaderboard {
 }
 
 /**
+ * Get a sitewide leaderboard for users who have won the most in Challenges.
+ */
+export interface GetChallengeGlobalRankingList {}
+
+/**
  * Get a specific Challenge run (not the same as a normal run!)
  */
 export interface GetChallengeRun {
@@ -267,6 +280,16 @@ export interface GetThread {
 }
 
 /**
+ * Get a list of site-wide forums. When logged in, may include forums of followed games.
+ */
+export interface GetForumList {}
+
+/**
+ * Get static data for the site. Including all areas, colors, gameTypes, platforms, etc.
+ */
+export interface GetStaticData {}
+
+/**
  * Logs in. If 2FA is enabled first provide `name` & `password` then check `tokenChallengeSent` and repeat w/ token.
  * Recommended to use `login(username password)` and `setToken(token)` for automatic Client authentication.
  */
@@ -283,12 +306,18 @@ export interface PutAuthLogin {
 // TODO PutAuthSignup
 
 /**
- * Gets a game series or user's audit log.
+ * Gets information about the current user's session.
+ * Most notably `csrfToken`, required for `PutRunSettings`, `PutConversation`, `PutConversationMessage`, `PutConversationLeave` and `PutConversationReport.
+ */
+export interface GetSession {}
+
+/**
+ * Gets a game, series, or your account's audit log.
  */
 export interface GetAuditLogList {
 
     /**
-     * Type to filter by (default "") TODO
+     * A single `EventType` string enum to filter by.
      */
     eventType: Enums.EventType;
     page: number; //TODO test if this is opt
