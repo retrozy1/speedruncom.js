@@ -1160,7 +1160,7 @@ export interface PutTicket {
 
 export interface PutTicketNote {
     ticketId: string;
-    note: strng;
+    note: string;
 
     /**
      * Whether the note is a message to the user. `false` only permitted for admins.
