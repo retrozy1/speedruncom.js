@@ -377,7 +377,7 @@ export interface GetConversations {
     conversations: Interfaces.Conversation[];
     participants: Interfaces.ConversationParticipant[];
     users: Interfaces.User[];
-    systemMessages: lInterfaces.SystemMessageist[];
+    systemMessages: Interfaces.SystemMessage[];
 }
 
 export interface GetForumReadStatus {
