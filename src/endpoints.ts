@@ -805,20 +805,20 @@ export interface PutUserSettings {
  */
 export interface PutUserUpdateFeaturedRun {
 
-/**
- * Must be your own.
- */
-userUrl: string;
+    /**
+     * Must be your own.
+     */
+    userUrl: string;
 
-/**
- * If omitted clears the full game featured run.
- */
-fullRunId?: string;
+    /**
+     * If omitted clears the full game featured run.
+     */
+    fullRunId?: string;
 
-/**
- * If omitted clears the level featured run.
- */
-levelRunId?: string;
+    /**
+     * If omitted clears the level featured run.
+     */
+    levelRunId?: string;
 }
 
 /**
@@ -911,11 +911,13 @@ export interface PutCommentableSettings {
 /**
  * Gets whether a set of threads have been read by the user.
  */
-GetThreadReadStatus(PostRequest[r_GetThreadReadStatus]):
-/**
- * List of thread IDs to get read status from.
- */
-threadIds: string[]; 
+export interface GetThreadReadStatus {
+
+    /**
+     * List of thread IDs to get read status from.
+     */
+    threadIds: string[];
+}
 
 /**
  * Sets a thread as read by the user.
@@ -940,12 +942,13 @@ export interface GetForumReadStatus {
 /**
  * Gets a user game or series' theme.  # TODO: check noargs & series
  */
-export interface GetThemeSettings(PostRequest[r_GetThemeSettings]):
+export interface GetThemeSettings {
 
-// One of:
-userId: string;
-gameId: string;
-seriesId: string;
+    // One of:
+    userId?: string;
+    gameId?: string;
+    seriesId?: string;
+}
 
 /**
  * Sets a user game or series' theme.
@@ -958,327 +961,279 @@ export interface PutThemeSettings {
     settings: Interfaces.ThemeSettings;
 }
 
-# Supporter
-GetUserSupporterData(PostRequest[r_GetUserSupporterData]):
-"""Gets supporter data for a user. # TODO: check auth
+// Supporter
 
+/**
+ * Gets supporter data for a user. # TODO: check auth
+ */
+export interface GetUserSupporterData {
+    userUrl: string;
+}
 
-userUrl
-"""
-def __init__(self userUrl: string; **params) -> None:
-super().__init__("GetUserSupporterData" r_GetUserSupporterData userUrl=userUrl **params)
+/**
+ * Get data used to construct a payment form.
+ */
+export interface PutUserSupporterNewSubscription {
+    planKey?: Enums.SupportPlanPeriod
+    userUrl?: string;
+}
 
-PutUserSupporterNewSubscription(PostRequest[r_PutUserSupporterNewSubscription]):
-"""Get data used to construct a payment form.
+/**
+ * Adds a boost to a game.
+ */
+export interface PutGameBoostGrant {
+    gameId: string;
+    anonymous: boolean;
+}
 
-## Mandatory:
-planKey: strEnum ("monthly" or "yearly")
-userUrl
-"""
-def __init__(self planKey: SupportPlanPeriod userUrl: string; **params) -> None:
-super().__init__("PutUserSuppoprterNewSubscription" r_PutUserSupporterNewSubscription planKey=planKey userUrl=userUrl **params)
+// To Be Sorted
 
-PutGameBoostGrant(PostRequest[r_Empty]):
-"""Adds a boost to a game.
-
-
-gameId: string;
-anonymous
-"""
-def __init__(self gameId: string;: string; anonymous: boolean; **params) -> None:
-super().__init__("PutGameBoostGrant" r_Empty gameId: string;=gameId: string; anonymous=anonymous **params)
-
-# To Be Sorted
-PutAdvertiseContact(PostRequest[r_Empty]):
-"""Sends a request for contact to SRC for collaboration.
-
-
-name
-company
-email
-message
-"""
-def __init__(self name: string; company: string; email: string; message: string; **params) -> None:
-super().__init__("PutAdvertiseContact" r_Empty
-                    name=name company=company email=email message=message **params)
-
-GetTickets(PostRequest[r_GetTickets] BasePaginatedRequest[r_GetTickets]):
-"""Gets tickets submitted by the user.
-
-
-ticketId: string;s: list of ticket IDs to fetch
-queues: list of `TicketQueueType` to filter by
-types: list of `TicketType`
-statuses: list of `TicketStatus`
-requestorId: string;s: list of userId: string;s who requested the ticket. - this is meant for use by site admins
-search: string;
-"""
-def __init__(
-    self
-    ticketId: string;s: list[string;] | None = None
-    queues: list[TicketQueueType] | None = None
-    types: list[TicketType] | None = None
-    statuses: list[TicketStatus] | None = None
-    requestorId: string;s: list[string;] | None = None
-    search: string; | None = None
-    **params
-) -> None:
-super().__init__("GetTickets" r_GetTickets ticketId: string;s=ticketId: string;s queues=queues
-                    types=types statuses=statuses requestorId: string;s=requestorId: string;s
-                    search=search **params)
-
-def _combine_results(self pages: dict):
-combined = self._combine_keys(pages ["ticketList"]
-                                ["userList" "gameList" "userModCountList" "userRunCountList"])
-combined["pagination"] = copy.copy(combined["pagination"])
-combined["pagination"]["page"] = 0  # type: ignorecombined["pagination"]["page"] = 0  # type: ignore
-return combined
-
-GetSeriesSettings(PostRequest[r_GetSeriesSettings]):
-"""Gets settings of a series.
-
-
-seriesId: string;
-"""
-def __init__(self seriesId: string;: string; **params) -> None:
-super().__init__("GetSeriesSettings" r_GetSeriesSettings seriesId: string;=seriesId: string; **params)
-
-GetUserBlocks(PostRequest[r_GetUserBlocks]):
-"""Gets blocks relevant to a user both as blocker and blockee.
-"""
-def __init__(self **params) -> None:
-super().__init__("GetUserBlocks" r_GetUserBlocks **params)
-
-PutUserBlock(PostRequest[r_Empty]):
-"""Blocks or unblocks a user.
-
-## Mandatory:
-block
-blockeeId: string;
-"""
-def __init__(self block: boolean; blockeeId: string;: string; **params) -> None:
-super().__init__("PutUserBlock" r_Empty block=block blockeeId: string;=blockeeId: string; **params)
-
-PutGame(PostRequest[r_PutGame]):  # TODO: needs param testing
-"""Add a new game.
-
-
-name
-releaseDate
-
-
-gameTypeId: string;s: list of `GameType`
-baseGame: string; # If one of the GameTypes supports a baseGame then this can be included with a game id.
-
-#
-seriesId: string;
-"""
-def __init__(
-    self
+/**
+ * Sends a request for contact to SRC for collaboration.
+ */
+export interface PutAdvertiseContact {
     name: string;
-    releaseDate: int
-    gameTypeId: string;s: list[GameType] | None = None
-    baseGame: string; | None = None
-    seriesId: string;: string; | None = None
-    **params
-) -> None:
-super().__init__("PutGame" r_PutGame name=name releaseDate=releaseDate gameTypeId: string;s=gameTypeId: string;s
-                    baseGame=baseGame seriesId: string;=seriesId: string; **params)
+    company: string;
+    email: string;
+    message: string;
+}
 
-PutGameModerator(PostRequest[r_Empty]):
-"""Add a moderator to a game.
+/**
+ * Gets tickets submitted by you.
+ */
+export interface GetTickets {
 
+    /**
+     * list of ticket IDs to fetch
+     */
+    ticketIds: string[];
 
-gameId: string;
-userId: string;: string;
-level: GamePowerLevel (-1 = verifier 0 = mod 1 = supermod)
-"""
-def __init__(self gameId: string;: string; userId: string;: string;: string; level: GamePowerLevel **params) -> None:
-super().__init__("PutGameModerator" r_Empty gameId: string;=gameId: string; userId: string;: string;=userId: string;: string; level=level **params)
+    /**
+     * list of `TicketQueueType` to filter by
+     */
+    queues: Enums.TicketQueueType[];
 
-PutGameModeratorDelete(PostRequest[r_Empty]):  # TODO: test `level` necessity & enum type
-"""Remove a moderator from a game.
+    /**
+     * list of `TicketType`
+     */
+    types: Enums.TicketType[];
 
+    /**
+     * list of `TicketStatus`
+     */
+    statuses: Enums.TicketStatus[];
 
-gameId: string;
-userId: string;: string;
-"""
-def __init__(self gameId: string;: string; userId: string;: string;: string; **params) -> None:
-super().__init__("PutGameModeratorDelete" r_Empty gameId: string;=gameId: string; userId: string;: string;=userId: string;: string; **params)
+    /**
+     * List of `userId`s. Must only have your `userId`.
+     */
+    requestorIds: string[];
+    search: string;
+}
 
-PutSeriesGame(PostRequest[r_Empty]):
-"""Add an existing game to a series.
+/**
+ * Gets settings of a series.
+ */
 
+export interface GetSeriesSettings {
+    seriesId: string;
+}
 
-seriesId: string;
-gameId: string;
-"""
-def __init__(self seriesId: string;: string; gameId: string;: string; **params) -> None:
-super().__init__("PutSeriesGame" r_Empty seriesId: string;=seriesId: string; gameId: string;=gameId: string; **params)
+/**
+ * Gets blocks relevant to a user both as blocker and blockee.
+ */
+export interface GetUserBlocks {}
 
-PutSeriesGameDelete(PostRequest[r_Empty]):
-"""Remove a game from a series. Does not delete the game.
+/**
+ * Blocks or unblocks a user on your account.
+ */
+export interface PutUserBlock {
 
+    /**
+     * Whether or not you are blocking (`true`) or unblocking (`false`) the user.
+     */
+    block: boolean;
 
-seriesId: string;
-gameId: string;
-"""
-def __init__(self seriesId: string;: string; gameId: string;: string; **params) -> None:
-super().__init__("PutSeriesGameDelete" r_Empty seriesId: string;=seriesId: string; gameId: string;=gameId: string; **params)
+    /**
+     * `userId` of you are blocking.
+     */
+    blockeeId: string;
+}
 
-PutTicket(PostRequest[r_PutTicket]):
-"""Submits support tickets.
-
-
-metadata: a JSON string of ticket data
-type: `TicketType` # TODO: check TicketType vs TicketQueue Type
-"""
-def __init__(self metadata: string; type: TicketType **params) -> None:
-super().__init__("PutTicket" r_PutTicket metadata=metadata type=type **params)
-
-PutTicketNote(PostRequest[r_Ok]):
-"""Adds a note/message to a ticket. When `isMessage` is `false` only admins can post or read the note.
-
-
-ticketId: string;
-note
-isMessage: whether the note is a message to the user. `False` only permitted for admins.
-"""
-def __init__(self ticketId: string;: string; note: string; isMessage: boolean; **params) -> None:
-super().__init__("PutTicketNote" r_Ok ticketId: string;=ticketId: string; note=note isMessage=isMessage **params)
-
-PutUserSocialConnection(PostRequest[r_Empty]):  # TODO: verification?
-"""Modifies a user's social connection.
-
-
-userId: string;: string;
-networkId: string;: see `NetworkId: string;`
-value
-"""
-def __init__(self userId: string;: string;: string; networkId: string;: NetworkId: string; value: string; **params) -> None:
-super().__init__("PutUserSocialConnection" r_Empty userId: string;: string;=userId: string;: string; networkId: string;=networkId: string; value=value **params)
-
-PutUserSocialConnectionDelete(PostRequest[r_Empty]):
-"""Remove a user's social connection.
+/**
+ * Add a new game.
+ */
+export interface PutGame { // TODO: needs param testing
+    name: string;
+    releaseDate: number;
 
 
-userId: string;: string;
-networkId: string;: see `NetworkId: string;`
-"""
-def __init__(self userId: string;: string;: string; networkId: string;: NetworkId: string; **params) -> None:
-super().__init__("PutUserSocialConnectionDelete" r_Empty userId: string;: string;=userId: string;: string; networkId: string;=networkId: string; **params)
+    /**
+     * list of `GameType`
+     */
+    gameTypeIds: string[];
 
-PutUserUpdatePassword(PostRequest[r_Ok]):
-"""Update a user's password.
+    /**
+     * If one of the GameTypes supports a baseGame then this can be included with a game id.
+     */
+    baseGame: string;
+    seriesId: string;
+}
 
+/**
+ * Add a moderator to a game.
+ */
+export interface PutGameModerator {
+    gameId: string;
+    userId: string;
+    level: Enums.GamePowerLevel;
+}
 
-userUrl
-oldPassword
-newPassword
-"""
-def __init__(self userUrl: string; oldPassword: string; newPassword: string; **params) -> None:
-super().__init__("PutUserUpdatePassword" r_Ok userUrl=userUrl oldPassword=oldPassword newPassword=newPassword **params)
+/**
+ * Remove a moderator from a game.
+ * TODO: test `level` necessity & enum type
+ */
+export interface PutGameModeratorDelete {
+    gameId: string;
+    userId: string;
+}
 
-PutUserUpdateEmail(PostRequest[r_PutUserUpdateEmail]):
-"""Update a user's email.
-First you send userUrl email and password. SRC will respond with `tokenChallengeSent: true`
-Afterwards you send the above data again but this time with `token` set.
+/**
+ * Add an existing game to a series.
+ */
+export interface PutSeriesGame {
+    seriesId: string;
+    gameId: string;
+}
 
+/**
+ * Remove a game from a series. Does not delete the game.
+ */
+export interface PutSeriesGameDelete {
+    seriesId: string;
+    gameId: string;
+}
 
-userUrl: string;
-email: string;
+/**
+ * Submits support tickets.
+ */
+export interface PutTicket {
 
+    /**
+     * a JSON string of ticket data
+     */
+    metadata: string;
 
-token: string;
-password: string; # Only optional if the user is authed as an admin
-"""
-def __init__(self userUrl: string; email: string; password: string; | None = None token: string; | None = None **params) -> None:
-super().__init__("PutUserUpdateEmail" r_Ok userUrl=userUrl email=email password=password token=token **params)
+    /**
+     * TODO: check TicketType vs TicketQueue Type
+     */
+    type: Enums.TicketType;
+}
 
-PutUserUpdateName(PostRequest[r_Ok]):  # TODO: check what the response is
-"""Update a user's name.
+export interface PutTicketNote {
+    ticketId: string;
+    note: strng;
 
+    /**
+     * Whether the note is a message to the user. `false` only permitted for admins.
+     */
+    isMessage: string;
+}
 
-userUrl: string; # url: string;: string;: string; of the user to update
-newName: string;
-acceptTerms: boolean;
-"""  # TODO: check if these are mandatory
-def __init__(self userUrl: string; newName: string; acceptTerms: boolean; **params) -> None:
-super().__init__("PutUserUpdateName" r_Empty userUrl=userUrl newName=newName acceptTerms=acceptTerms **params)
+/**
+ * Modifies a user's social connection.
+ * todo verification?
+ */
+export interface PutUserSocialConnection {
+    userId: string;
+    networkId: Enums.SocialConnection;
+    value: string;
+}
 
-PutCommentDelete(PostRequest[r_Empty]):
-"""Delete a comment.
+/**
+ * Remove a user's social connection.
+ */
+export interface PutUserSocialConnectionDelete {
+    userId: string;
+    networkId: Enums.SocialConnection;
+}
 
+/**
+ * Update a user's password.
+ */
+export interface PutUserUpdatePassword {
+    userUrl: string;
+    oldPassword: string;
+    newPassword: string;
+}
 
-commentId: string;
-"""
-def __init__(self commentId: string;: string; **params) -> None:
-super().__init__("PutCommentDelete" r_Empty commentId: string;=commentId: string; **params)
+/**
+ * Update a user's email.
+ * First you send userUrl email and password. SRC will respond with `tokenChallengeSent: true`
+ * Afterwards you send the above data again but this time with `token` set.
+ */
+export interface PutUserUpdateEmail {
+    userUrl: string;
+    email: string;
+    token?: string;
+    password: string;
+}
 
-PutCommentRestore(PostRequest[r_Empty]):
-"""Restores a deleted comment
+/**
+ * Update a user's name.
+ */
+export interface PutUserUpdateName {  // TODO: check what the response is
 
+    /**
+     * Your `userUrl`.
+     */
+    userUrl: string;
+    newName: string;
+    acceptTerms: boolean;
+    // TODO: check if these are mandatory
+}
 
-commentId: string;
-"""
-def __init__(self commentId: string;: string; **params) -> None:
-super().__init__("PutCommentRestore" r_Empty commentId: string;=commentId: string; **params)
+/**
+ * Delete a comment.
+ */
+export interface PutCommentDelete {
+    commentId: string;
+}
 
-PutThread(PostRequest[r_PutThread]):
-"""Create a new thread on a forum.
+/**
+ * Restores a deleted comment
+ */
+export interface PutCommentRestore {
+    commentId: string;
+}
 
+/**
+ * Create a new thread on a forum.
+ */
+export interface PutThread {
+    forumId: string;
+    name: string;
+    body: string;
+}
 
-forumId: string;
-name
-body
-"""
-def __init__(self forumId: string;: string; name: string; body: string; **params) -> None:
-super().__init__("PutThread" r_PutThread forumId: string;=forumId: string; name=name body=body **params)
-
-PutThreadLocked(PostRequest[r_Empty]):
-"""Lock or unlock a thread.
-
-
+/**
+ * Lock or unlock a thread.
+ */
+export interface PutThreadLocked {
 threadId: string;
-locked
-"""
-def __init__(self threadId: string;: string; locked: boolean; **params) -> None:
-super().__init__("PutThreadLocked" r_Empty threadId: string;=threadId: string; locked=locked **params)
+locked: boolean;
+}
 
-PutThreadSticky(PostRequest[r_Empty]):
-"""Sticky or un-sticky a thread.
+/**
+ * Pins or un-pins a thread by its `threadId`.
+ */
+export interface PutThreadSticky {
+    threadId: string;
+    sticky: boolean;
+}
 
-
-threadId: string;
-sticky
-"""
-def __init__(self threadId: string;: string; sticky: boolean; **params) -> None:
-super().__init__("PutThreadSticky" r_Empty threadId: string;=threadId: string; sticky=sticky **params)
-
-PutThreadDelete(PostRequest[r_Empty]):
-"""Delete a thread.
-
-
-threadId: string;
-"""
-def __init__(self threadId: string;: string; **params) -> None:
-super().__init__("PutThreadDelete" r_Empty threadId: string;=threadId: string; **params)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/**
+ * Delete a thread.
+ */
+export interface PutThreadDelete {
+    threadId: string;
 }

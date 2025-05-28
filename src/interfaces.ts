@@ -940,7 +940,7 @@ export interface UserBlock {
     blockeeId: string;
 }
 
-class UserSettings {
+export interface UserSettings {
     id: string;
     name: string;
     url: string;
