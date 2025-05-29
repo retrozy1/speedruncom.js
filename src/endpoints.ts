@@ -3,37 +3,41 @@ import * as Interfaces from './interfaces.ts';
 
 
 export interface GetGameLeaderboard2 {
-    gameId: string;
-    categoryId: string;
-    dateFrom?: string;
-    dateTo?: string;
-    emulator?: Enums.EmulatorFilter;
-    levelId?: string;
-    obsolete?: Enums.ObsoleteFilter;
-    platformId: string[];
-    regionId: string[];
-    timer?: Enums.TimingMethod;
-    verified?: Enums.RunStatus;
-    values?: Interfaces.VariableValues[];
-    video?: string;
-    page?: number;
+    params: {
+        gameId: string;
+        categoryId: string;
+        dateFrom?: string;
+        dateTo?: string;
+        emulator?: Enums.EmulatorFilter;
+        levelId: string;
+        obsolete?: Enums.ObsoleteFilter;
+        platformId: string[];
+        regionId: string[];
+        timer?: Enums.TimingMethod;
+        verified?: Enums.RunStatus;
+        values?: Interfaces.VariableValues[];
+        video?: string;
+        page?: number;
+    }
 }
 //TODO check the difference between the two
 export interface GetGameLeaderboard {
-    gameId: string;
-    categoryId: string;
-    dateFrom?: string;
-    dateTo?: string;
-    emulator?: Enums.EmulatorFilter;
-    levelId: string;
-    obsolete?: Enums.ObsoleteFilter;
-    platformId: string[];
-    regionId: string[];
-    timer?: Enums.TimingMethod;
-    verified?: Enums.RunStatus;
-    values?: Interfaces.VariableValues[];
-    video?: string;
-    page?: number;
+    params: {
+        gameId: string;
+        categoryId: string;
+        dateFrom?: string;
+        dateTo?: string;
+        emulator?: Enums.EmulatorFilter;
+        levelId: string;
+        obsolete?: Enums.ObsoleteFilter;
+        platformId: string[];
+        regionId: string[];
+        timer?: Enums.TimingMethod;
+        verified?: Enums.RunStatus;
+        values?: Interfaces.VariableValues[];
+        video?: string;
+        page?: number;
+    }
 }
 
 export interface GetGameData {
@@ -42,7 +46,7 @@ export interface GetGameData {
 }
 
 export interface GetGameSummary {
-    gameId: string;
+    gameId?: string;
     gameUrl?: string;
 }
 

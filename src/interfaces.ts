@@ -158,17 +158,64 @@ export interface Color {
     pos: number;
 }
 
+/**
+ * A 'category' of threads, being site-wide such as *The Site* and *Supporter* or representing the forum section that every game has. 
+ */
 export interface Forum {
+
+    /**
+     * `id` of this forum section.
+     */
     id: string;
+
+    /**
+     * Name of the forum. If this is the game's forum, it is the game name.
+     */
     name: string;
+
+    /**
+     * Page URL of the forum. If this is the game's forum, it is the game's page URL.
+     */
     url: string;
+
+    /**
+     * A description used to describe site-wide forums.
+     */
     description?: string;
+
+    /**
+     * The `ForumType` the forum is.
+     */
     type: Enums.ForumType;
+
+    /**
+     * The amount of threads inside of a forum.
+     */
     threadCount: number;
+
+    /**
+     * The amont of combined posts of every thread in the forum.
+     */
     postCount: number;
+
+    /**
+     * The ID of the latest post in any thread in the forum.
+     */
     lastPostId: string;
+
+    /**
+     * The `userId` of the latest post in any thread in the forum.
+     */
     lastPostUserId: string;
+
+    /**
+     * The UNIX timestamp of when the latest post in any thread in the forum was posted.
+     */
     lastPostDate: number;
+
+    /**
+     * 
+     */
     touchDate: number;
 }
 
