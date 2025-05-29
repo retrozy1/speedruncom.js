@@ -90,7 +90,7 @@ export default class Client {
     }
 
     /**
-     * Attempts to remove the PHPSESSID cookie if using a browser, otherwise removes your Client's authentication
+     * Attempts to remove the PHPSESSID cookie if using a browser, otherwise removes your Client's authentication.
      */
     async logout() {
         if (this.isBrowser) return await this.request('PutAuthLogout');

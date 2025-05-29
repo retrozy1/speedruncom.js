@@ -1,23 +1,30 @@
-import * as Endpoints from './endpoints.ts';
-import * as Responses from './responses.ts';
-import fs from 'fs';
+import { mkdirSync } from 'fs';
+import { Project, InterfaceDeclaration } from 'ts-morph';
 
-const endpointNames = Object.keys(Endpoints);
+const project = new Project({
+    tsConfigFilePath: "tsconfig.json",
+});
 
-let clientBase = fs.readFileSync('./src/ClientBase.ts', 'utf-8');
-clientBase = clientBase.slice(0, -1); // Removes the '}' to insert these methods.
+const baseClient = project.getSourceFileOrThrow('src/BaseClient.ts');
+const clientFile = project.createSourceFile('src/Client.ts', baseClient.getFullText(), { overwrite: true });
+const clientClass = clientFile.getClasses()[0];
 
-for (const endpoint of endpointNames) {
-    const key = endpoint as keyof typeof Responses;
-    const response = key in Responses ? `Responses.${key}` : 'void';
+const endpointsFile = project.getSourceFileOrThrow('src/endpoints.ts');
+const responsesFile = project.getSourceFileOrThrow('src/responses.ts');
 
-    clientBase += `async ${endpoint}(params: Endpoints.${endpoint}): Promise<${response}> {
-        return await this.request<${response}>('${endpoint}', params);
-    }
+const endpointNames = endpointsFile.getInterfaces().map((i: InterfaceDeclaration) => i.getName());
+const responseNames = new Set(responsesFile.getInterfaces().map((i: InterfaceDeclaration) => i.getName()));
 
-    `;
+for (const endpointName of endpointNames) {
+    const returnType = responseNames.has(endpointName) ? `Promise<Responses.${endpointName}>` : 'Promise<void>';
+
+    clientClass.addMethod({
+        name: endpointName,
+        isAsync: true,
+        parameters: [{ name: 'params', type: `Endpoints.${endpointName}` }],
+        returnType,
+        statements: [`await this.fetch('${endpointName}', params)`]
+    });
 }
 
-clientBase += '}'; // Adds it back
-
-fs.writeFileSync('./src/Client.ts', clientBase);
+clientFile.saveSync();
