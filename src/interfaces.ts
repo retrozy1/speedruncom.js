@@ -1,4 +1,4 @@
-import * as Enums from './enums';
+import * as Enums from './enums.ts';
 
 export interface Category {
     id: string;
@@ -776,6 +776,11 @@ export interface ThemeSettings {
     foregroundScrolling: Enums.ScrollType;
     staticAssets: StaticAsset[];
     staticAssetUpdates: StaticAssetUpdate[];
+}
+
+export interface ThreadReadStatus {
+    threadId: string;
+    date: number;
 }
 
 export interface Ticket {

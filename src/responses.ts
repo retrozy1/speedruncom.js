@@ -1,4 +1,4 @@
-import * as Interfaces from './interfaces';
+import * as Interfaces from './interfaces.ts';
 
 export interface GetGameLeaderboard2 {
     runList: Interfaces.Run[];
@@ -199,7 +199,7 @@ export interface GetNews {
 }
 
 export interface GetNewsList {
-    newsList: Interfaces.News[];
+    newsList: Interfaces.GameNews[];
     users: Interfaces.User[];
 }
 
@@ -223,7 +223,7 @@ export interface GetRun {
 
 export interface GetSearch {
     gameList: Interfaces.Game[];
-    newsList: Interfaces.News[];
+    newsList: Interfaces.GameNews[];
     pageList: Interfaces.Article[];
     seriesList: Interfaces.Series[];
     userList: Interfaces.User[];
@@ -288,7 +288,7 @@ export interface GetUserLeaderboard {
      */
     followedGameIds: null;
     challengeList: Interfaces.Challenge[];
-    challengeRunList: lisInterfaces.ChallengeRunt[];
+    challengeRunList: Interfaces.Run[];
 }
 
 export interface GetUserSummary {
@@ -314,7 +314,7 @@ export interface GetUserComments {
     forumList: Interfaces.Forum[];
     gameList: Interfaces.Game[];
     likeList: Interfaces.Like[];
-    newsList: Interfaces.News[];
+    newsList: Interfaces.GameNews[];
     runList: Interfaces.Run[];
     threadList: Interfaces.Thread[];
     userList: Interfaces.User[];
@@ -573,7 +573,7 @@ export interface GetUserDataExport {
     guideList: Interfaces.Guide[];
     likeList: Interfaces.Like[];
     messageList: Interfaces.ConversationMessage[];
-    newsList: Interfaces.News[];
+    newsList: Interfaces.GameNews[];
     resourceList: Interfaces.Resource[];
     runList: Interfaces.Run[];
     threadList: Interfaces.Thread[];

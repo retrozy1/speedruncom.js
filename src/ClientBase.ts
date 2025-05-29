@@ -1,6 +1,6 @@
 import axios, { AxiosResponse, AxiosInstance, AxiosError } from 'axios';
-import * as Endpoints from './endpoints';
-import * as Responses frm './responses';
+import * as Endpoints from './endpoints.ts';
+import * as Responses from './responses.ts';
 
 const LANG = 'en';
 const ACCEPT = 'application/json';
@@ -26,8 +26,8 @@ export default class Client {
         }
     });
 
-    private user: string;
-    private pass: string;
+    private user!: string;
+    private pass!: string;
     isBrowser = typeof window !== 'undefined';
 
     constructor({ PHPSESSID, userAgent }: { PHPSESSID?: string, userAgent?: string }) {

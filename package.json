@@ -1,8 +1,18 @@
 {
+  "type": "module",
   "dependencies": {
     "axios": "^1.9.0"
   },
+  "types": "dist/index.d.ts",
   "scripts": {
-    "postinstall": "./src/build-client.ts"
-  }
+    "clean": "rimraf dist src/Client.ts",
+    "build": "node --loader ts-node/esm src/build-client.ts && tsc"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.24",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "main": "dist/index.js"
 }

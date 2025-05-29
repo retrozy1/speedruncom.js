@@ -1,5 +1,5 @@
-import * as Enums from './enums';
-import * as Interfaces from './interfaces';
+import * as Enums from './enums.ts';
+import * as Interfaces from './interfaces.ts';
 
 
 export interface GetGameLeaderboard2 {

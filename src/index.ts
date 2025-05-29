@@ -1,6 +1,6 @@
-export * from './enums';
-export * from './interfaces';
+export * from './enums.ts';
+export * from './interfaces.ts';
 
-import Client from './Client';
+import Client from './Client.ts';
 
 export default Client;
