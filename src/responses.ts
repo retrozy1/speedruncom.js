@@ -1,7 +1,16 @@
 import * as Interfaces from './interfaces.ts';
 
+//TODO does src use GetGameData along with this to get things like platform objects?
 export interface GetGameLeaderboard2 {
+
+    /**
+     * Runs in the leaderboard.
+     */
     runList: Interfaces.Run[];
+
+    /**
+     * Every Player with a run in a game.
+     */
     playerList: Interfaces.Player[];
     pagination: Interfaces.Pagination;
 }
@@ -52,13 +61,13 @@ export interface GetGameRecordHistory {
     runList: Interfaces.Run[];
 }
 
-export interface GetSearch {
+export interface GetSearch { //TODO add platform 
     gameList: Interfaces.Game[];
     newsList: Interfaces.GameNews[];
     pageList: Interfaces.Article[];
     seriesList: Interfaces.Series[];
     userList: Interfaces.User[];
-    challengeList: Interfaces.Challenge[];
+    challengeList: Interfaces.Challenge[] | null;
 }
 
 export interface GetLatestLeaderboard {
@@ -509,13 +518,13 @@ export interface PutAuthSignup {
 }
     
 export interface PutConversation {
-    ok: boolean;
+    ok: true;
     conversationId: string;
     messageId: string;
 }
 
 export interface PutConversationMessage {
-    ok: boolean;
+    ok: true;
     conversationId: string;
     messageId: string;
 }
@@ -587,5 +596,9 @@ export interface GetUserDataExport {
 
 export interface PutUserUpdateEmail {
     emailChanged: boolean;
-    tokenChallengeSent: boolean; //check if opt
+    tokenChallengeSent?: boolean;
+}
+
+export interface PutUserUpdateName {
+    ok: true;
 }

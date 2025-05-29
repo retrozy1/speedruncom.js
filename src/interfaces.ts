@@ -1,42 +1,160 @@
 import * as Enums from './enums.ts';
 
+/**
+ * A Category item.
+ */
 export interface Category {
+
+    /**
+     * ID of the category.
+     */
     id: string;
+
+    /**
+     * Name of the category.
+     */
     name: string;
+
+    /**
+     * Page URL of the category.
+     * This is never actually used in site pages.
+     * The URL is permanent and can never update, even when changing the category name.
+     */
     url: string;
+
+    /**
+     * A global, site-wide position order number for the category.
+     */
     pos: number;
+
+    /**
+     * ID of the game the category is on.
+     */
     gameId: string;
+
+    /**
+     * Whether or not the category is miscellaneous.
+     */
     isMisc: boolean;
+
+    /**
+     * Whether or not the category is only for individual levels.
+     */
     isPerLevel: boolean;
+
+    /**
+     * The maximum amount of players you can choose when submitting a run to the category.
+     * todo check if the 1 player > infinite player glitch is still patches yet
+     */
     numPlayers: number;
+
+    /**
+     * todo wtf is this
+     */
     exactPlayers: boolean;
+
+    /**
+     * `PlayerMatchMode` of the category.
+     */
     playerMatchMode: Enums.PlayerMatchMode;
+
+    /**
+     * `TimeDirection` of the category.
+     */
     timeDirection: Enums.TimeDirection;
+
+    /**
+     * Whether or not runs with `.000` milliseconds have their milliseconds shown on leaderboards or not.
+     */
     enforceMs: boolean;
+
+    /**
+     * Rules for the category.
+     */
     rules: string;
+
+    /**
+     * Whether or not the category is archived.
+     */
     archived?: boolean;
 }
 
+/**
+ * A moderator (or verifier) of a challenge.
+ */
 export interface ChallengeModerator {
+
+    /**
+     * ID of the challenge being moderated.
+     */
     challengeId: string;
+
+    /**
+     * ID of the user moderating.
+     */
     userId: string;
+
+    /**
+     * `GamePowerLevel` of the moderator.
+     */
     level: Enums.GamePowerLevel;
 }
 
+/**
+ * A current status of a challenge.
+ */
 export interface ChallengeStanding {
+    
+    /**
+     * ID of the challenge.
+     */
     challengeId: string;
+    
+    /**
+     * todo
+     */
     place: number;
+
+    /**
+     * todo
+     */
     registeredPlayerIds: string[];
+
+    /**
+     * todo
+     */
     prizeAmount: number;
+
+    /**
+     * todo
+     */
     unregisteredPlayers: string[]
+
+    /**
+     * todo
+     */
     prizeCurrency: string;
 }
 
+/**
+ * A currency reward for getting a certain ranking in a challenge.
+ */
 export interface ChallengePrize {
+
+    /**
+     * The ranking in the challenge for the reward.
+     */
     place: number;
+
+    /**
+     * The amount of money rewarded to the player in the `place`.
+     */
     amount: number;
 }
 
+/**
+ * 
+ */
 export interface ChallengePrizeConfig {
     prizePool: number;
     currency: string;
@@ -249,11 +367,84 @@ export interface Leaderboard {
     game: Game;
     pagination: Pagination;
     platforms: Platform[];
+
+    /**
+     * Every Player with a run in a game.
+     */
     players: Player[];
     regions: Region[];
     runs: Run[];
     values: VariableValue[];
     variables: Variable[];
+}
+
+/**
+ * Paramaters for filtering a leaderboard.
+ */
+export interface LeaderboardParams {
+
+    /**
+     * ID of the leaderboard's game.
+     */
+    gameId: string;
+
+    /**
+     * ID of the leaderboard's category.
+     */
+    categoryId: string;
+
+    /**
+     * YYYY-MM-DD format of the minimum speedrun date of runs.
+     */
+    dateFrom?: string;
+
+    /**
+     * YYYY-MM-DD format of the maximum speedrun date of runs.
+     */
+    dateTo?: string;
+
+    /**
+     * `EmulatorFilter` determining the emulator inclusivity of runs.
+     */
+    emulator?: Enums.EmulatorFilter;
+
+    /**
+     * ID of the leaderboard's level, if applicable.
+     */
+    levelId?: string;
+
+    /**
+     * `ObsoleteFilter` determining the obsoletion inclusivity of runs.
+     */
+    obsolete?: Enums.ObsoleteFilter;
+
+    /**
+     * IDs of the platforms of runs.
+     * Platform IDs can be found with `GetPlatformList`.
+     */
+    platformIds?: string[];
+
+    /**
+     * IDs of the regions of runs.
+     * This is not to be confused with country, you cannot filter runs by country.
+     */
+    regionIds?: string[];
+    timer?: Enums.TimingMethod;
+
+    /**
+     * `RunStatus` of runs.
+     */
+    verified?: Enums.RunStatus;
+
+    /**
+     * Variable and value pairs of runs.
+     */
+    values?: VariableValues[];
+    
+    /**
+     * `VideoFilter` determining video inclusivity of runs.
+     */
+    video?: Enums.VideoFilter;
 }
 
 export interface RunCount {

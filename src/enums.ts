@@ -79,7 +79,9 @@ export enum EventType {
     CategoryUpdated = "category-updated",
     CommentCreated = "comment-created",
     CommentDeleted = "comment-deleted",
-    /**New comment updates are not recognized as events as of a few years ago.*/
+    /**
+     * New comment updates are not recognized as events as of a few years ago.
+     */
     CommentUpdated = "comment-updated",
     GameCoversUpdated = "game-covers-updated",
     GameCreated = "game-created",

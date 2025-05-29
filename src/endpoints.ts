@@ -1,63 +1,110 @@
 import * as Enums from './enums.ts';
 import * as Interfaces from './interfaces.ts';
+import { AtLeastOne } from './types.ts';
 
-
+/**
+ * Gets a leaderboard, with Players included.
+ * `GetGameLeaderboard` can fetch twice as many runs, and also fetches Games, Platforms, Regions, Values, and Variables.
+ */
 export interface GetGameLeaderboard2 {
-    params: {
-        gameId: string;
-        categoryId: string;
-        dateFrom?: string;
-        dateTo?: string;
-        emulator?: Enums.EmulatorFilter;
-        levelId: string;
-        obsolete?: Enums.ObsoleteFilter;
-        platformId: string[];
-        regionId: string[];
-        timer?: Enums.TimingMethod;
-        verified?: Enums.RunStatus;
-        values?: Interfaces.VariableValues[];
-        video?: string;
-        page?: number;
-    }
+
+    /**
+     * Filtering parameters.
+     */
+    params: Interfaces.LeaderboardParams;
+
+    /**
+     * The leaderboard page, in relation to `limit`.
+     */
+    page?: number;
+
+    /**
+     * The limit of Runs per page.
+     * Max: 100
+     * @default 100
+     */
+    limit?: number;
 }
-//TODO check the difference between the two
+
+/**
+ * Gets a leaderboard, with all relevant items included.
+ * `GetGameLeaderboard2` only includes Runs and Players, and has half the maximum `limit`.
+ */
 export interface GetGameLeaderboard {
-    params: {
-        gameId: string;
-        categoryId: string;
-        dateFrom?: string;
-        dateTo?: string;
-        emulator?: Enums.EmulatorFilter;
-        levelId: string;
-        obsolete?: Enums.ObsoleteFilter;
-        platformId: string[];
-        regionId: string[];
-        timer?: Enums.TimingMethod;
-        verified?: Enums.RunStatus;
-        values?: Interfaces.VariableValues[];
-        video?: string;
-        page?: number;
-    }
+
+    /**
+     * Filtering parameters.
+     */
+    params: Interfaces.LeaderboardParams;
+
+    /**
+     * The leaderboard page, in relation to `limit`.
+     */
+    page?: number;
+
+    /**
+     * The limit of Runs per page.
+     * Max: 200
+     * @default 100
+     */
+    limit?: number;
 }
 
-export interface GetGameData {
-    gameId: string;
-    gameUrl?: string;
-}
+/**
+ * Gets mostly leaderboard-related data of a game.
+ * Both parameters function the same. If both are included, `gameId` will override.
+ */
+interface GetGameData_Base {
 
-export interface GetGameSummary {
+    /**
+     * ID of the game.
+     */
     gameId?: string;
+
+    /**
+     * Game page URL.
+     */
     gameUrl?: string;
 }
+
+export type GetGameData = AtLeastOne<GetGameData_Base, 'gameId' | 'gameUrl'>;
+
+/**
+ * Gets miscellaneous data of a game.
+ * Both parameters function the same. If both are included, `gameId` will override.
+ */
+export interface GetGameSummary_Base {
+
+    /**
+     * ID of the game.
+     */
+    gameId?: string;
+
+    /**
+     * Game page URL.
+     */
+    gameUrl?: string;
+}
+
+export type GetGameSummary = AtLeastOne<GetGameSummary_Base, 'gameId' | 'gameUrl'>;
 
 export interface GetGameRecordHistory {
-    gameId: string;
-    categoryId: string;
+
+    /**
+     * ID of the game. When exempted, both properties will be empty arrays.
+     */
+    //todo test if catId is fine on it's own
+    gameId?: string;
+    categoryId?: string;
     values?: Interfaces.VariableValues[];
-    emulator?: Enums.ObsoleteFilter[];
+    emulator?: Enums.EmulatorFilter;
+    obsolete?: Enums.ObsoleteFilter
 }
 
-export interface GetSearch {
+/**
+ * Searches 
+ */
+export interface GetSearch { // todo add platform
     query: string;
     favorExactMatches: boolean;
     includeGames: boolean;
@@ -164,7 +211,7 @@ export interface GetGameLevelSummary {
     emulator?: Enums.EmulatorFilter;
 
     /**
-     * If `categoryId: string;` refers to a level category.
+     * If `categoryId: string` refers to a level category.
      */
     levelId?: string;
     obsolete?: Enums.ObsoleteFilter;
@@ -179,6 +226,8 @@ export interface GetGameLevelSummary {
     values?: Interfaces.VariableValues[];
     video?: Enums.VideoFilter;
     page?: number;
+    limit?: number;
+
 }
 
 /**
@@ -317,26 +366,23 @@ export interface GetSession {}
 
 /**
  * Gets a game, series, or your account's audit log.
+ * If getting a game or series audit log, you must be a Super Moderator for it.
+ * If getting your account's audit log, you cannot be banned.
  */
-export interface GetAuditLogList {
+export interface GetAuditLogList { //todo check if you can do multiple
 
     /**
      * A single `EventType` string enum to filter by.
      */
-    eventType: Enums.EventType;
-    page: number; //TODO test if this is opt
+    eventType?: Enums.EventType;
+    page?: number;
     gameId?: string;
     seriesId?: string;
 
     /**
-     * Every change that has happened to this user.
+     * Every change that has happened to this user's account.
      */
     userId?: string;
-
-    /**
-     * Every change this user has made (Admin only)
-     */
-    actorId?: string;
 }
 
 /**
@@ -626,13 +672,12 @@ export interface PutResourceDelete {
  */
 export interface GetModerationRuns {
     gameId: string;
-    limit: number;
-    page: number; // check if opt
-
     search?: string;
     verified?: Enums.RunStatus;
     verifiedById?: string;
-    videoState: Enums.VideoState;
+    ideoState?: Enums.VideoState;
+    page?: number;
+    limit?: number;
 }
 
 /**
@@ -816,7 +861,7 @@ export interface PutUserFollowerDelete {
 export interface GetUserSettings {
 
 /**
- * Must be your own.
+ * Your user page URL for your account.
  */
 userUrl: string;
 }
@@ -827,7 +872,7 @@ userUrl: string;
 export interface PutUserSettings {
 
     /**
-     * Must be your own.
+     * Your user page URL for your account.
      */
     userUrl: string;
     settings: Interfaces.UserSettings;
@@ -839,7 +884,7 @@ export interface PutUserSettings {
 export interface PutUserUpdateFeaturedRun {
 
     /**
-     * Must be your own.
+     * Your user page URL for your account.
      */
     userUrl: string;
 
@@ -861,7 +906,7 @@ export interface PutUserUpdateFeaturedRun {
 export interface PutUserUpdateGameOrdering {
 
     /**
-     * Must be your own.
+     * Your user page URL for your account.
      */
     userUrl: string;
     groups: Interfaces.GameOrderGroup;
@@ -984,7 +1029,7 @@ export interface GetThemeSettings {
 }
 
 /**
- * Sets a user game or series' theme.
+ * Sets a user, game, or series' theme.
  */
 export interface PutThemeSettings {
     // One of:
@@ -997,9 +1042,13 @@ export interface PutThemeSettings {
 // Supporter
 
 /**
- * Gets supporter data for a user. # TODO: check auth
+ * Gets supporter data for your account.
  */
 export interface GetUserSupporterData {
+
+    /**
+     * Your user page URL for your account.
+     */
     userUrl: string;
 }
 
@@ -1072,7 +1121,7 @@ export interface GetSeriesSettings {
 }
 
 /**
- * Gets blocks relevant to a user both as blocker and blockee.
+ * Gets blocks of you blocking a user and users blocking you.
  */
 export interface GetUserBlocks {}
 
@@ -1205,22 +1254,35 @@ export interface PutUserUpdatePassword {
  * Afterwards you send the above data again but this time with `token` set.
  */
 export interface PutUserUpdateEmail {
+
+    /**
+     * Your user page URL for your account.
+     */
     userUrl: string;
+
+    /**
+     * The **new** email you want to have for the account.
+     */
     email: string;
     token?: string;
     password: string;
 }
 
 /**
- * Update a user's name.
+ * Updates your name.
+ * You must wait 60 days after changing your name to change it again.
  */
-export interface PutUserUpdateName {  // TODO: check what the response is
+export interface PutUserUpdateName {
 
     /**
-     * Your `userUrl`.
+     * Your user page URL for your account.
      */
     userUrl: string;
     newName: string;
+
+    /**
+     * Whether or not 
+     */
     acceptTerms: boolean;
     // TODO: check if these are mandatory
 }
