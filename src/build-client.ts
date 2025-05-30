@@ -1,5 +1,5 @@
 import { mkdirSync } from 'fs';
-import { Project, InterfaceDeclaration } from 'ts-morph';
+import { Project, InterfaceDeclaration, SourceFile, TypeAliasDeclaration } from 'ts-morph';
 
 const project = new Project({
     tsConfigFilePath: "tsconfig.json",
@@ -12,8 +12,16 @@ const clientClass = clientFile.getClasses()[0];
 const endpointsFile = project.getSourceFileOrThrow('src/endpoints.ts');
 const responsesFile = project.getSourceFileOrThrow('src/responses.ts');
 
-const endpointNames = endpointsFile.getInterfaces().map((i: InterfaceDeclaration) => i.getName());
-const responseNames = new Set(responsesFile.getInterfaces().map((i: InterfaceDeclaration) => i.getName()));
+function getEndpoints(
+    method: () => InterfaceDeclaration[] | TypeAliasDeclaration[]
+): string[] {
+    return method()
+        .filter((i) => i.isExported())
+        .map((i) => i.getName());
+}
+
+const endpointNames = getEndpoints(() => endpointsFile.getInterfaces()).concat(getEndpoints(() => responsesFile.getTypeAliases()));
+const responseNames = new Set(getEndpoints(() => responsesFile.getInterfaces()).concat(getEndpoints(() => responsesFile.getTypeAliases())));
 
 for (const endpointName of endpointNames) {
     const returnType = responseNames.has(endpointName) ? `Promise<Responses.${endpointName}>` : 'Promise<void>';
@@ -23,7 +31,7 @@ for (const endpointName of endpointNames) {
         isAsync: true,
         parameters: [{ name: 'params', type: `Endpoints.${endpointName}` }],
         returnType,
-        statements: [`await this.fetch('${endpointName}', params)`]
+        statements: [`await this.fetch('${endpointName}', params);`]
     });
 }
 
