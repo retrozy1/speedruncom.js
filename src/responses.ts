@@ -61,7 +61,7 @@ export interface GetGameRecordHistory {
     runList: Interfaces.Run[];
 }
 
-export interface GetSearch { //TODO add platform 
+export interface GetSearch { //TODO add platform, TODO this is probably inacurate i think the users are much less detailed + more
     gameList: Interfaces.Game[];
     newsList: Interfaces.GameNews[];
     pageList: Interfaces.Article[];
@@ -404,12 +404,12 @@ export interface GetGameSettings {
 export interface GetModerationGames {
 
     /**
-     * Is null when not logged in.
+     * List of Games you moderate. `null` when not logged in.
      */
     games: Interfaces.Game[] | null;
 
     /**
-     * Is null when not logged in.
+     * `GameModerationStats` of the games you moderate. `null` when not logged in.
      */
     gameModerationStats: Interfaces.GameModerationStats[] | null;
 }

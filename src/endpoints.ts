@@ -73,7 +73,7 @@ export type GetGameData = AtLeastOne<GetGameData_Base, 'gameId' | 'gameUrl'>;
  * Gets miscellaneous data of a game.
  * Both parameters function the same. If both are included, `gameId` will override.
  */
-export interface GetGameSummary_Base {
+interface GetGameSummary_Base {
 
     /**
      * ID of the game.
@@ -88,12 +88,15 @@ export interface GetGameSummary_Base {
 
 export type GetGameSummary = AtLeastOne<GetGameSummary_Base, 'gameId' | 'gameUrl'>;
 
+/**
+ * Gets the world record history of a game leaderboard.
+ */
 export interface GetGameRecordHistory {
 
     /**
      * ID of the game. When exempted, both properties will be empty arrays.
      */
-    //todo test if catId is fine on it's own
+    //todo test if catId is fine on it's own, test more filters
     gameId?: string;
     categoryId?: string;
     values?: Interfaces.VariableValues[];
@@ -102,61 +105,175 @@ export interface GetGameRecordHistory {
 }
 
 /**
- * Searches 
+ * Searches for site items with a query.
  */
 export interface GetSearch { // todo add platform
-    query: string;
-    favorExactMatches: boolean;
-    includeGames: boolean;
-    includeNews: boolean;
-    includePages: boolean;
-    includeSeries: boolean;
-    includeUsers: boolean;
-    includeChallenges: boolean;
-    limit: number;
+
+    /**
+     * The text you are searching.
+     */
+    query?: string;
+
+    /**
+     * todo
+     */
+    favorExactMatches?: boolean;
+
+    /**
+     * Whether or not you are searching for games.
+     */
+    includeGames?: boolean;
+
+    /**
+     * Whether or not you are searching for news.
+     */
+    includeNews?: boolean;
+
+    /**
+     * Whether or not you are searching for pages.
+     */
+    includePages?: boolean;
+
+    /**
+     * Whether or not you are searching for series.
+     */
+    includeSeries?: boolean;
+
+    /**
+     * Whether or not you are searching for users.
+     */
+    includeUsers?: boolean;
+
+    /**
+     * Whether or not you are searching for challenges.
+     */
+    includeChallenges?: boolean;
+
+    /**
+     * The maximum amount of elements in each array.
+     * @default 100
+     * Max: 100
+     */
+    limit?: number;
 }
 
+/**
+ * Gets non-obsolete latest runs.
+ */
 export interface GetLatestLeaderboard {
-    gameId: string;
-    seriesId: string;
-    limit: number;
+    gameId?: string;
+    seriesId?: string;
+
+    /**
+     * The maximum amount of `runs` there will be in the response.
+     * 
+     * Warning: Obsolete runs are not included, but still count to the limit.
+     * 
+     * If this is `20` and 5 out of the 20 latest runs are obsolete, it will only return the 15 non-obsolete runs.
+     * 
+     * @default 25
+     * Max: 99999
+     */
+    limit?: number;
 }
 
+/**
+ * Gets a run.
+ */
 export interface GetRun {
+
+    /**
+     * ID of the run.
+     */
     runId: string;
 }
 
+/**
+ * Gets non-run related data of a user.
+ */
 export interface GetUserSummary {
+
+    /**
+     * Page URL of the user.
+     */
     url: string;
 }
 
+/**
+ * Gets comments posted by a user.
+ */
 export interface GetUserComments {
+
+    /**
+     * ID of the user.
+     */
     userId: string;
 }
 
 /**
- * Gets data for user popovers. Includes `userSocialConnectionList` `userStats` & `titleList`.
+ * Gets data for user popovers (when you hover over a username).
  */
 export interface GetUserPopoverData {
+
+    /**
+     * ID of the user.
+     */
     userId: string;
 }
 
+/**
+ * Gets all Titles in the site.
+ */
 export interface GetTitleList {}
 
+/**
+ * Gets a Title.
+ */
 export interface GetTitle {
+
+    /**
+     * ID of the title.
+     */
     titleId: string;
 }
 
 /**
- * Gets a list of articles on the site
+ * Gets articles on the site.
  */
 export interface GetArticleList {
+
+    /**
+     * Whether or not the article is published (verified by admin).
+     */
     published?: boolean;
+
+    /**
+     * Whether or not the article is rejected.
+     */
     rejected?: boolean;
+
+    /**
+     * A query to search for articles.
+     */
     search?: string;
+
+    /**
+     * Tags an article has.
+     */
     tags?: string[];
+
+    /**
+     * The target of an article, either being `news` or a page URL for site information articles.
+     */
     target?: string;
-    limit?: string;
+
+    /**
+     * The maximum amount of articles included in the response.
+     * 
+     * @default 500
+     * Max: 500
+     */
+    limit?: number;
 }
 
 /**
@@ -196,7 +313,6 @@ export interface GetSeriesList {
  * Gets most information pertinent to a series.
  */
 export interface GetSeriesSummary {
-    seriesId?: string;
     seriesUrl?: string;
 }
 
@@ -363,6 +479,11 @@ export interface PutAuthLogin {
  * Most notably `csrfToken`, required for `PutRunSettings`, `PutConversation`, `PutConversationMessage`, `PutConversationLeave` and `PutConversationReport.
  */
 export interface GetSession {}
+
+/**
+ * todo test which credentials this is for
+ */
+export interface PutSessionPing {}
 
 /**
  * Gets a game, series, or your account's audit log.
@@ -606,7 +727,7 @@ export interface PutGuideDelete {
  * Posts a resource item to a game.
  */
 export interface PutResource {
-    // check all check base64 encoding of content
+    // todo check all check base64 encoding of content and also test priority and make aliases
     gameId: string;
 
     /**
@@ -668,6 +789,12 @@ export interface PutResourceDelete {
 }
 
 /**
+ * Get moderation games and stats for the logged in user.
+ * If the user is not logged in, the response is void.
+ */
+export interface GetModerationGames {}
+
+/**
  * Get data for runs waiting in the moderation queue for a game.
  */
 export interface GetModerationRuns {
@@ -706,13 +833,14 @@ export interface PutRunVideoState {
 
 /**
  * Gets a run's settings.
+ * TODO: check specific details on who can use
  */
 export interface GetRunSettings {
     runId: string;
 }
 
 /**
- * Sets a run's settings OR submit a new run if `settings.runId` is exempted.
+ * Sets a run's settings or submit a new run if `settings.runId` is exempted.
  */
 export interface PutRunSettings {
 
@@ -939,7 +1067,7 @@ export interface intGetUserDataExport {
 }
 
 /**
- * Reorder a user's followed games.
+ * Reorder a your account's followed games.
  */
 export interface PutGameFollowerOrder {
 
@@ -949,6 +1077,17 @@ export interface PutGameFollowerOrder {
     gameId: string[];
     userId: string;
 }
+
+/**
+ * Submits a site article.
+ */
+export interface PutArticleSubmission {
+    title: string;
+    summary: string;
+    body: string;
+    game?: string;
+    publishTags?: string[];
+} // todo coverImagePath?: string;
 
 /**
  * Checks the comment permissions on an item.
@@ -971,16 +1110,38 @@ export interface PutComment {
  * Adds or removes a like to a comment.
  */
 export interface PutLike {
+
+    /**
+     * ID 0f the item you are liking or removing your like from.
+     */
     itemId: string;
+
+    /**
+     * `ItemType` of the item you are liking or removing your like from.
+     */
     itemType: Enums.ItemType;
-    like: boolean;
+
+    /**
+     * Whether you are liking a comment (`true`) or removing your like from a comment (`false`).
+     * 
+     * `false` when exempted.
+     */
+    like?: boolean;
 }
 
 /**
  * Updates commentable settings on an item.
  */
 export interface PutCommentableSettings {
+
+    /**
+     * ID of the item you are modifying the comment settings on.
+     */
     itemId: string;
+
+    /**
+     * `itemType` of the item you are modifying the comment settings on.
+     */
     itemType: Enums.ItemType;
     disabled: boolean;
     locked: boolean;

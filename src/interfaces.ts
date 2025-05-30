@@ -153,7 +153,7 @@ export interface ChallengePrize {
 }
 
 /**
- * 
+ * todo: is this just unused?
  */
 export interface ChallengePrizeConfig {
     prizePool: number;
