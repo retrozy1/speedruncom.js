@@ -619,15 +619,30 @@ export interface SystemMessage {
 
 
 export interface Game {
-    /**Unique identification characters of a game.*/
+    
+    /**
+     * ID of the game.
+     */
     id: string;
-    /**Name of the game.*/
+    
+    /**
+     * Name of the game.
+     */
     name: string;
-    /**Page name of where a game can be accessed.*/
+
+    /**
+     * Page name of where a game can be accessed.
+     */
     url: string;
-    /**Unused enum that is always `1`.*/
+
+    /**
+     * Unused enum that is always `1`.
+     */
     type: 1;
-    /**Whether or not a game has Load Removed Time (LRT) as a timing method.*/
+    
+    /**
+     * Whether or not a game has Load Removed Time (LRT) as a timing method.
+     */
     loadtimes: boolean;
     /**Whether or not the game supports entering milliseconds when entering a time into a run.*/
     milliseconds: boolean;
