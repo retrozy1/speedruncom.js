@@ -103,7 +103,9 @@ export enum ChallengeState {
     Finalized
 }
 
-/**Who is allowed to perform an action (posting comments, guides or resources).*/
+/**
+ * Who is allowed to perform an action (posting comments, guides or resources).
+ */
 export enum ItemPermissionType {
     All,
     Disabled,
@@ -319,7 +321,9 @@ export enum TimeFormat {
     HH_MM_SS_12h
 }
 
-/**Depricated values are still accessible by the API, but not settable.*/
+/**
+ * Depricated values are still accessible by the API, but not settable.
+ */
 export enum SocialConnection {
     /**@deprecated*/
     ASKfm = 1,

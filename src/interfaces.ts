@@ -617,7 +617,9 @@ export interface SystemMessage {
     read: boolean;
 }
 
-
+/**
+ * The basic data of a game.
+ */
 export interface Game {
     
     /**
@@ -631,12 +633,12 @@ export interface Game {
     name: string;
 
     /**
-     * Page name of where a game can be accessed.
+     * Page URL of the game.
      */
     url: string;
 
     /**
-     * Unused enum that is always `1`.
+     * Unused enum that is always `1`. todo check if gameType is this
      */
     type: 1;
     
@@ -644,20 +646,70 @@ export interface Game {
      * Whether or not a game has Load Removed Time (LRT) as a timing method.
      */
     loadtimes: boolean;
-    /**Whether or not the game supports entering milliseconds when entering a time into a run.*/
+
+    /**
+     * Whether or not the game supports entering milliseconds when entering a time into a run.
+     */
     milliseconds: boolean;
-    /**Whether or not a game has In Game Time (IGT) as a timing method.*/
+
+    /**
+     * Whether or not a game has In Game Time (IGT) as a timing method.
+     */
     igt: boolean;
-    /**Whether or not runs require moderators to verify them.*/
+
+    /**
+     * Whether or not runs require moderators to verify them.
+     */
     verification: boolean;
-    /**Whether or not the default option for 'Automatically Verify Run' is true.*/
+    
+    /**
+     * Whether or not the default option for 'Automatically Verify Run' is true.
+     */
     autoVerify?: boolean;
-    /**Whether or not videos are required for submission.*/
+
+    /**
+     * Whether or not videos are required for submission.
+     */
     requireVideo: boolean;
-    /**Emulator allowability in a game.*/
+
+    /**
+     * Emulator allowability in a game.
+     */
     emulator: Enums.EmulatorType;
-    /**Default timing method of the game.*/
+
+    /**
+     * Default timing method of the game.
+     */
     defaultTimer: Enums.TimingMethod;
+    validTimers: Enums.TimingMethod[];
+    releaseDate?: number;
+    addedDate: number;
+    touchDate: number;
+    baseGameId?: string;
+    coverPath: string; //check if opt
+    trophy1stPath?: string;
+    trophy2ndPath?: string;
+    trophy3rdPath?: string;
+    trophy4thPath?: string;
+    runCommentsMode: Enums.ItemPermissionType;
+    runCount: number;
+    activePlayerCount: number;
+    totalPlayerCount: number;
+    boostReceivedCount: number;
+    boostDistinctDonorsCount: number;
+    rules?: string;
+    viewPowerLevel: Enums.SitePowerLevel;
+    platformIds: string[];
+    regionIds: string[];
+    gameTypeIds: Enums.GameType[];
+    websiteUrl?: string;
+    discordUrl?: string;
+    defaultView: Enums.DefaultViewType
+    guidePermissionType: Enums.ItemPermissionType;
+    resourcePermissionType: Enums.ItemPermissionType;
+    staticAssets: StaticAsset[];
+    embargoDate?: number;
+    embargoText?: string;
 }
 
 export interface GameStats {
@@ -681,7 +733,9 @@ export interface GameNews {
     gameId: string;
     userId: string;
     title: string;
-    /**Omitted for all but the first item in `GetGameSummary.newsList[]*/
+    /**
+     * Omitted for all but the first item in `GetGameSummary.newsList[]`.
+     */
     body?: string;
     dateSubmitted: number;
 }
@@ -710,7 +764,7 @@ export interface GameTypeDetails {
     allowBaseGame: boolean;
 }
 
-/**TODO: Check for optional props*/
+/**TODO: Check for optional properties*/
 export interface GameSettings {
     id: string;
     name: string;
