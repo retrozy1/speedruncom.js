@@ -1,6 +1,6 @@
-import * as Enums from './enums.ts';
-import * as Interfaces from './interfaces.ts';
-import { AtLeastOne } from './types.ts';
+import * as Enums from './enums.js';
+import * as Interfaces from './interfaces.js';
+import { AtLeastOne } from './types.js';
 
 /**
  * Gets a leaderboard, with Players included.

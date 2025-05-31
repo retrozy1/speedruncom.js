@@ -1,6 +1,6 @@
 import axios, { AxiosResponse, AxiosInstance, AxiosError } from 'axios';
-import * as Endpoints from './endpoints.ts';
-import * as Responses from './responses.ts';
+import * as Endpoints from './endpoints.js';
+import * as Responses from './responses.js';
 
 const LANG = 'en';
 const ACCEPT = 'application/json';
@@ -98,6 +98,6 @@ export default class Client {
         delete this.axiosClient.defaults.headers.common['Cookie'];
     }
 
-    // Endpoints (auto-generated with build-client.ts)
+    // Endpoints (auto-generated with build-client)
 
 }

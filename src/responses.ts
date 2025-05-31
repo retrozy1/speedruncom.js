@@ -1,4 +1,4 @@
-import * as Interfaces from './interfaces.ts';
+import * as Interfaces from './interfaces.js';
 
 //TODO does src use GetGameData along with this to get things like platform objects?
 export interface GetGameLeaderboard2 {
