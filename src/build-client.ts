@@ -1,4 +1,4 @@
-import { Project, InterfaceDeclaration, TypeAliasDeclaration } from 'ts-morph';
+import { Project, InterfaceDeclaration, TypeAliasDeclaration, ExportDeclaration } from 'ts-morph';
 
 const project = new Project({
     tsConfigFilePath: "tsconfig.json",
@@ -11,16 +11,9 @@ const clientClass = clientFile.getClasses()[1];
 const endpointsFile = project.getSourceFileOrThrow('src/endpoints.ts');
 const responsesFile = project.getSourceFileOrThrow('src/responses.ts');
 
-function getEndpoints(
-    method: () => InterfaceDeclaration[] | TypeAliasDeclaration[]
-): string[] {
-    return method()
-        .filter((i) => i.isExported())
-        .map((i) => i.getName());
-}
+const endpointNames = Array.from(endpointsFile.getExportedDeclarations().keys())
 
-const endpointNames = getEndpoints(() => endpointsFile.getInterfaces()).concat(getEndpoints(() => responsesFile.getTypeAliases()));
-const responseNames = new Set(getEndpoints(() => responsesFile.getInterfaces()).concat(getEndpoints(() => responsesFile.getTypeAliases())));
+const responseNames = new Set(Array.from(responsesFile.getExportedDeclarations().keys()));
 
 for (const endpointName of endpointNames) {
     const returnType = responseNames.has(endpointName) ? `Promise<Responses.${endpointName}>` : 'Promise<void>';
