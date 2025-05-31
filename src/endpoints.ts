@@ -210,6 +210,10 @@ export interface GetUserComments {
     userId: string;
 }
 
+export interface GetUserThreads {
+    userId: string;
+}
+
 /**
  * Gets data for user popovers (when you hover over a username).
  */
@@ -343,8 +347,12 @@ export interface GetGameLevelSummary {
     video?: Enums.VideoFilter;
     page?: number;
     limit?: number;
-
 }
+
+/**
+ * Gets a random Game.
+ */
+export interface GetGameRandom {}
 
 /**
  * Gets all guides on a game.
@@ -393,7 +401,14 @@ export interface GetStreamList {
  * Get threads on a forum.
  */
 export interface GetThreadList {
-forumId: string;
+    forumId: string;
+}
+
+/**
+ * Gets a comment post's Thread and Forum.
+ */
+export interface GetThreadStateByCommentId {
+    commentId: string;
 }
 
 /**
@@ -426,6 +441,13 @@ export interface GetChallengeRun {
  * Get a user's runs for display on their profile.
  */
 export interface GetUserLeaderboard {
+    userId: string;
+}
+
+/**
+ * Gets game and series moderation stats for any user.
+ */
+export interface GetUserModeration {
     userId: string;
 }
 
@@ -654,7 +676,7 @@ export interface PutVariableOrder {
 }
 
 /**
- * Set the default value on a variable.
+ * Puts a variable's default value on all runs in the variable's scope.
  */
 export interface PutVariableApplyDefault {
     gameId: string;
@@ -815,6 +837,11 @@ export interface PutRunAssignee {
     runId: string;
 }
 
+export interface PutRunDelete {
+    gameId: string;
+    runId: string;
+}
+
 /**
  * Assigns a verification level `RunStatus` to a run.
  */
@@ -939,9 +966,14 @@ export interface PutConversationReport {
 // User notifications & follows
 
 /**
- * Gets the user's notifications.
+ * Gets your notifications.
  */
 export interface GetNotifications {}
+
+/**
+ * Marks all notifications as read.
+ */
+export interface PutNotificationsRead {}
 
 /**
  * Follow a game.
@@ -988,10 +1020,10 @@ export interface PutUserFollowerDelete {
  */
 export interface GetUserSettings {
 
-/**
- * Your user page URL for your account.
- */
-userUrl: string;
+    /**
+     * Your user page URL for your account.
+     */
+    userUrl: string;
 }
 
 /**
@@ -1052,6 +1084,24 @@ export interface GetUserApiKey {
     regenerate: boolean;
 }
 
+export interface GetUserFollowers {
+    userId: string;
+    limit?: number;
+    page?: number;
+}
+
+export interface GetUserFollowingGames {
+    userId: string;
+    limit?: number;
+    page?: number;
+}
+
+export interface GetUserFollowingUsers {
+    userId: string;
+    limit?: number;
+    page?: number;
+}
+
 /**
  * Get a list of games that a user has boosted.
  */
@@ -1062,7 +1112,7 @@ export interface GetUserGameBoostData {
 /**
  * Get a user's exported data.
  */
-export interface intGetUserDataExport {
+export interface GetUserDataExport {
     userId: string;
 }
 
@@ -1349,11 +1399,24 @@ export interface PutSeriesGame {
 }
 
 /**
- * Remove a game from a series. Does not delete the game.
+ * Remove a game from a series.
+ * 
+ * Does not delete the game.
  */
 export interface PutSeriesGameDelete {
     seriesId: string;
     gameId: string;
+}
+
+export interface PutSeriesModerator extends Interfaces.SeriesModerator {}
+
+export interface PutSeriesModeratorUpdate extends Interfaces.SeriesModerator {}
+
+export interface PutSeriesModeratorDelete extends Interfaces.SeriesModerator {}
+
+export interface PutSeriesSettings {
+    seriesId: string;
+    settings: Interfaces.SeriesSettings;
 }
 
 /**
@@ -1398,6 +1461,16 @@ export interface PutUserSocialConnection {
 export interface PutUserSocialConnectionDelete {
     userId: string;
     networkId: Enums.SocialConnection;
+}
+
+/**
+ * Undocumented.
+ */
+export interface PutUserSocialConnectionSsoExchange {
+    userId: string;
+    provider: string;
+    state: string;
+    code: string;
 }
 
 /**
@@ -1448,6 +1521,11 @@ export interface PutUserUpdateName {
     // TODO: check if these are mandatory
 }
 
+export interface PutUserDelete {
+    userUrl: string;
+    password: string;
+}
+
 /**
  * Delete a comment.
  */
@@ -1472,7 +1550,7 @@ export interface PutThread {
 }
 
 /**
- * Lock or unlock a thread.
+ * Locks or unlocks a thread.
  */
 export interface PutThreadLocked {
 threadId: string;
@@ -1480,7 +1558,7 @@ locked: boolean;
 }
 
 /**
- * Pins or un-pins a thread by its `threadId`.
+ * Pins or un-pins a thread.
  */
 export interface PutThreadSticky {
     threadId: string;

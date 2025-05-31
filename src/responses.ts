@@ -187,6 +187,10 @@ export interface GetGameLevelSummary {
     playerList: Interfaces.Player[];
 }
 
+export interface GetGameRandom {
+    game: Interfaces.Game;
+}
+
 export interface GetGuideList {
     guideList: Interfaces.Guide[];
     users: Interfaces.User[];
@@ -278,6 +282,13 @@ export interface GetThreadList {
     users: Interfaces.User[];
 }
 
+export interface GetThreadStateByCommentId {
+    forum: Interfaces.Forum;
+    thread: Interfaces.Thread;
+    commentId: string;
+    pagination: Interfaces.Pagination;
+}
+
 export interface GetUserLeaderboard {
     categories: Interfaces.Category[];
     games: Interfaces.Game[];
@@ -298,6 +309,15 @@ export interface GetUserLeaderboard {
     followedGameIds: null;
     challengeList: Interfaces.Challenge[];
     challengeRunList: Interfaces.Run[];
+}
+
+export interface GetUserModeration {
+    gameList: Interfaces.Game[];
+    gameModeratorList: Interfaces.GameModerator[];
+    platformList: Interfaces.Platform[];
+    seriesList: Interfaces.Series[];
+    seriesModeratorList: Interfaces.SeriesModerator[];
+    userGameModeratorStatsList: Interfaces.UserModerationStats[];
 }
 
 export interface GetUserSummary {
@@ -325,6 +345,15 @@ export interface GetUserComments {
     likeList: Interfaces.Like[];
     newsList: Interfaces.GameNews[];
     runList: Interfaces.Run[];
+    threadList: Interfaces.Thread[];
+    userList: Interfaces.User[];
+    pagination: Interfaces.Pagination;
+}
+
+export interface GetUserThreads {
+    commentList: Interfaces.Comment[];
+    forumList: Interfaces.Forum[];
+    likeList: Interfaces.Like[];
     threadList: Interfaces.Thread[];
     userList: Interfaces.User[];
     pagination: Interfaces.Pagination;
@@ -558,6 +587,24 @@ export interface GetUserApiKey {
     apiKey: string;
 }
 
+export interface GetUserFollowers {
+    followerList: Interfaces.UserFollower;
+    userList: Interfaces.User;
+    pagination: Interfaces.Pagination;
+}
+
+export interface GetUserFollowingGames {
+    followerList: Interfaces.UserFollower;
+    gameList: Interfaces.Game;
+    pagination: Interfaces.Pagination;
+}
+
+export interface GetUserFollowingUsers {
+    followerList: Interfaces.UserFollower;
+    userList: Interfaces.User;
+    pagination: Interfaces.Pagination;
+}
+
 export interface GetUserGameBoostData {
     boostAvailableTokens: number;
     boostDistinctGamesCount: number;
@@ -601,4 +648,26 @@ export interface PutUserUpdateEmail {
 
 export interface PutUserUpdateName {
     ok: true;
+}
+
+export interface GetAnnouncementLatest {
+    id: string;
+    title: string;
+    message: string;
+
+    /**
+     * Site subpath to a related article.
+     */
+    link: string;
+    enabled: boolean;
+
+    /**
+     * UNIX timestamp of when the announcement was created.
+     */
+    createDate: number;
+
+    /**
+     * UNIX timestamp of when the announcement was last updated.
+     */
+    updateDate: number;
 }

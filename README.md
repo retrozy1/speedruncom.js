@@ -10,24 +10,24 @@ Version 1 is mainly read-only, and when it isn't read only it may just be broken
 
 ## Installation
 
-**`npm i speedruncom.js`
+**`npm i speedruncom.js`**
 
 ## Importing
 
 `Client` is the default export, and enums and interfaces are available in named exports for TypeScript users.
 
 ```js
-import SpeedrunClient, { User } from 'speedruncom.js';
+import SpeedrunClient from 'speedruncom.js';
 
 const client = new SpeedrunClient({
   userAgent: 'RunCollabGetter'
 });
 
-const getCollabs = async (userUrl: string): Promise<string> => {
+const getCollabs = async (userUrl) => {
   // Fetch user summary
   const {
     user: { id: userId, name }
-  } = await client.GetUserSummary({ userUrl });
+  } = await client.GetUserSummary({ url: userUrl });
 
   // Fetch leaderboard and extract player names
   const { players } = await client.GetUserLeaderboard({ userId });

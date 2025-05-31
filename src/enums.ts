@@ -165,8 +165,8 @@ export enum ResourceType {
 
 export enum GamePowerLevel {
     Verifier = -1,
-    Mod,
-    Supermod,
+    Moderator,
+    SuperModerator,
 }
 
 export enum EmulatorType {
