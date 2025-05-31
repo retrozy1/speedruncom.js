@@ -8,7 +8,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "clean": "rimraf dist src/Client.ts",
-    "build": "node --loader ts-node/esm src/build-client.ts && tsc"
+    "prepare": "node --loader ts-node/esm src/build-client.ts && tsc"
   },
   "devDependencies": {
     "@types/node": "^22.15.24",
