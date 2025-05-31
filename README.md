@@ -1,4 +1,4 @@
-## `npm i speedruncom.js`
+## `npm i retrozy1/speedruncom.js`
 
 # About
 
@@ -10,7 +10,7 @@ Version 1 is mainly read-only, and when it isn't read only it may just be broken
 
 ## Installation
 
-**`npm i speedruncom.js`**
+**`npm i retrozy1/speedruncom.js`**
 
 ## Importing
 
