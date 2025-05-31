@@ -17,7 +17,7 @@ Version 1 is mainly read-only, and when it isn't read only it may just be broken
 `Client` is the default export, and enums and interfaces are available in named exports for TypeScript users.
 
 ```js
-import SpeedrunClient from 'npm i retrozy1/speedruncom.js';
+import SpeedrunClient from 'speedruncom.js';
 
 const client = new SpeedrunClient({
   userAgent: 'RunCollabGetter'
