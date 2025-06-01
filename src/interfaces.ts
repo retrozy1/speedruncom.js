@@ -373,7 +373,7 @@ export interface Leaderboard {
      */
     players: Player[];
     regions: Region[];
-    runs: Run[];
+    runs: GameRun[];
     values: VariableValue[];
     variables: Variable[];
 }
@@ -876,65 +876,166 @@ export interface GameOrdering {
     supporterGroups: GameOrderGroup[];
 }
 
-/**Represents a speedrun's public data.*/
-export interface Run {
-    /**Unique identification characters of a run.*/
+interface Run_Base {
+    /**
+     * Unique identification characters of a run.
+     */
     id: string;
-    /**Unique identification characters of the run's game.*/
+    /**
+     * Unique identification characters of the run's game.
+     */
     gameId: string;
-    /**Unique identification characters of the run's category.*/
-    categoryId: string;
-    /**Unique identification characters of the run's level, if the run is on an individual level (IL).*/
-    levelId?: string;
-    /**Timing of the run, in seconds. If the run has an *LRT* (Load Removed Time) **and** an *RTA* (Real Time Attack) time, this property will be the LRT. If there is an RTA and not an LRT, this will be the RTA.*/
+    
+    /**
+     * Timing of the run, in seconds. If the run has an *LRT* (Load Removed Time) **and** an *RTA* (Real Time Attack) time, this property will be the LRT. If there is an RTA and not an LRT, this will be the RTA.
+     */
     time?: number;
-    /**Timing of the run, in seconds. If the run has an *LRT* (Load Removed Time) **and** an *RTA* (Real Time Attack) time, this property will be the RTA. If there is an LRT and not an RTA, this will be the LRT.*/
+
+        /**
+     * Timing of the run, in seconds. If the run has an *LRT* (Load Removed Time) **and** an *RTA* (Real Time Attack) time, this property will be the RTA. If there is an LRT and not an RTA, this will be the LRT.
+     */
     timeWithLoads?: number;
-    /**In Game Time* of the run, in seconds.*/
+
+    /**
+     * In Game Time* of the run, in seconds.
+     */
     igt?: number;
-    /**Unique identification characters of a platform. Platforms can be accessed with `GetPlatformList`.*/
+
+    /**
+     * Unique identification characters of a platform. Platforms can be accessed with `GetPlatformList`.
+     */
     platformId?: string;
-    /**Whether or not an emulator was used in the run.*/
+
+    /**
+     * Whether or not an emulator was used in the run.
+     */
     emulator: boolean;
-    /**Unique identification characters of a region. Found in older games that vary based on regions.*/
+
+    /**
+     * Unique identification characters of a region. Found in older games that vary based on regions.
+     */
     regionId?: string;
-    /**Everything in the 'Video URL' box.*/
+
+    /**
+     * Everything in the 'Video URL' box.
+     */
     video?: string;
-    /**Description of a run.*/
+
+    /**
+     * Description of a run.
+     */
     comment?: string;
-    /**Unique user identification of the run submitter. Absent if the submitter is deleted.*/
+    
+    /**
+     * Unique user identification of the run submitter. Absent if the submitter is deleted.
+     */
     submittedById?: string;
-    /**A run's verification status.*/
+
+    /**
+     * A run's verification status.
+     */
     verified: Enums.RunStatus;
-    /**Unique user identification characters of the run resolver. Absent if the resolver is deleted.*/
+
+    /**
+     * Unique user identification characters of the run resolver.
+     * 
+     * Absent if the resolver is deleted.
+     */
     verifiedById?: string;
-    /**Run rejection reason if it was rejected.*/
+    
+    /**
+     * Run rejection reason if it was rejected.
+     */
     reason?: string;
-    /**UNIX timestamp of a run's (changeable) date.*/
+
+    /**
+     * UNIX timestamp of a run's (changeable) date.
+     */
     date: number;
-    /**UNIX timestamp of when the run was submitted.*/
+
+    /**
+     * UNIX timestamp of when the run was submitted.
+     */
     dateSubmitted?: number;
-    /**UNIX timestamp of when the run was resolved.*/
+    
+    /**
+     * UNIX timestamp of when the run was resolved.
+     */
     dateVerified?: number;
-    /**Whether the run has *splits.io* splits. Splits.io has been shut down; this is `false` on all new runs.*/
-    hasSplits: boolean;
-    /**Whether the run is obsolete or not - absent when false.*/
+
+    /**
+     * Whether the run is obsolete or not - absent when false.
+     */
     obsolete?: boolean;
-    /**Leaderboard rank of the run. Absent when obsolete.*/
+
+    /**
+     * Leaderboard rank of the run. Absent when obsolete.
+     */
     place?: number;
-    /**Unique identification characters of players in the run.*/
+
+    /**
+     * Unique identification characters of players in the run.
+     */
     playerIds: string[];
-    /**Unique identification characters of values (subcategories and annotations) in the run.*/
-    valueIds: string[];
-    /**Whether or not the run's category or subcategories were archived - absent when false.*/
-    orphaned?: boolean;
-    /**Property only present when fetching `GetModerationRuns` determining whether or not the run's ranking is estimated - absent when false.*/
-    estimated?: boolean;
-    /**Unused property that used to store reports of bad data for a run.*/
+
+    /**
+     * Unused property that used to store reports of bad data for a run.
+     */
     issues: null;
-    /**Availibility and 'status' of the video of a run.*/
+
+    /**
+     * Availibility and 'status' of the video of a run.
+     */
     VideoState: Enums.VideoState;
-};
+}
+
+/**
+ * A game speedrun's public data.
+ */
+export interface GameRun extends Run_Base {
+
+    /**
+     * Unique identification characters of the run's category.
+     */
+    categoryId: string;
+
+    /**
+     * Unique identification characters of the run's level, if the run is on an individual level (IL).
+     */
+    levelId?: string;
+
+    /**
+     * Whether the run has *splits.io* splits. Splits.io has been shut down; this is `false` on all new runs.
+     */
+    hasSplits: boolean;
+
+    /**
+     * Unique identification characters of values (subcategories and annotations) in the run.
+     */
+    valueIds: string[];
+    
+    /**
+     * Whether or not the run's category or subcategories were archived - absent when false.
+     */
+    orphaned?: boolean;
+}
+
+export interface ChallengeRun extends Run_Base {
+    challengeId: string;
+    screened: boolean;
+    screenedById?: string;
+    dateScreened?: number;
+    commentsCount: number;
+}
+
+export interface ModerationRun extends GameRun {
+    /**
+     * Whether or not the run's ranking is estimated.
+     * 
+     * Missing when false.
+     */
+    estimated?: true;
+}
 
 export interface RunTime {
     hour: number;
@@ -944,12 +1045,18 @@ export interface RunTime {
 }
 
 export interface RunSettings {
-    /**Omitted when submitting a new run.*/
+
+    /**
+     * Omitted when submitting a new run.
+     */
     runId?: string;
     gameId: string;
     categoryId: string;
     playerNames: string[];
-    /**whichever timing method is primary to the game is required*/
+
+    /**
+     * whichever timing method is primary to the game is required.
+     */
     time?: RunTime;
     timeWithLoads?: RunTime;
     igt?: RunTime;

@@ -6,7 +6,7 @@ export interface GetGameLeaderboard2 {
     /**
      * Runs in the leaderboard.
      */
-    runList: Interfaces.Run[];
+    runList: Interfaces.GameRun[];
 
     /**
      * Every Player with a run in a game.
@@ -58,7 +58,7 @@ export interface GetGameSummary {
 
 export interface GetGameRecordHistory {
     playerList: Interfaces.Player[];
-    runList: Interfaces.Run[];
+    runList: Interfaces.GameRun[];
 }
 
 export interface GetSearch { //TODO add platform, TODO this is probably inacurate i think the users are much less detailed + more
@@ -76,7 +76,7 @@ export interface GetLatestLeaderboard {
     levels: Interfaces.Level[];
     players: Interfaces.Player[];
     regions: Interfaces.Region[];
-    runs: Interfaces.Run[];
+    runs: Interfaces.GameRun[];
     values: Interfaces.Value[];
     variables: Interfaces.Variable[];
     platforms: Interfaces.Platform[];
@@ -89,7 +89,7 @@ export interface GetRun {
     platform?: Interfaces.Platform;
     players: Interfaces.Player[];
     region?: Interfaces.Region;
-    run: Interfaces.Run;
+    run: Interfaces.GameRun;
     users: Interfaces.User[];
     values: Interfaces.Value[];
     variables: Interfaces.Variable[];
@@ -119,7 +119,7 @@ export interface GetUserComments {
     gameList: Interfaces.Game[];
     likeList: Interfaces.Like[];
     newsList: Interfaces.GameNews[];
-    runList: Interfaces.Run[];
+    runList: Interfaces.GameRun[];
     threadList: Interfaces.Thread[];
     userList: Interfaces.User[];
     pagination: Interfaces.Pagination;
@@ -156,11 +156,76 @@ export interface GetArticle {
     userList: Interfaces.User[];
 }
 
+export interface GetChallenge {
+    challenge: Interfaces.Challenge;
+    game: Interfaces.Game;
+    moderatorList: Interfaces.ChallengeModerator[];
+    standingList: Interfaces.ChallengeStanding[];
+    theme: Interfaces.Theme;
+    userList: Interfaces.User[];
+    challengeRunCount: number;
+    gameFollowerCount: number;
+    titleList: Interfaces.Title[];
+}
+
+export interface GetChallengeLeaderboard {
+    challengeRunList: Interfaces.ChallengeRun[]
+    playerList: Interfaces.Player[]
+    userList: Interfaces.User[]
+    pagination: Interfaces.Pagination
+}
+
+export interface GetChallengeRun {
+    challenge: Interfaces.Challenge;
+    challengeRun: Interfaces.ChallengeRun;
+    game: Interfaces.Game;
+    playerList: Interfaces.Player[];
+    userList: Interfaces.User[];
+}
+
+export interface GetChallengeGlobalRankingList {
+    rankingList: Interfaces.GlobalChallengeRanking[];
+    userList: Interfaces.User[];
+}
+
 export interface GetGameList {
     article: Interfaces.Article;
     relatedArticleList: Interfaces.Article[];
     gameList: Interfaces.Game[];
     userList: Interfaces.User[];
+}
+
+export interface GetCommentList {
+    commentable: Interfaces.Commentable;
+    commentList: Interfaces.Comment[];
+    likeList: Interfaces.Like[];
+    userList: Interfaces.User[];
+    pagination: Interfaces.Pagination;
+}
+
+export interface GetForumList {
+    forumList: Interfaces.Forum[];
+    gameList: Interfaces.Game[];
+    userList: Interfaces.User[];
+}
+
+export interface GetStaticData {
+    areas: Interfaces.Area[];
+    colors: Interfaces.Color[];
+    gameTypeList: Interfaces.GameTypeDetails[];
+    notificationSettings: Interfaces.NotificationSettingStaticData[];
+    platformList: Interfaces.Platform[];
+    regionList: Interfaces.Region[];
+    socialNetworkList: Interfaces.SocialNetwork[];
+
+    /**
+     * Unknown type
+     */
+    supporterPlanList?: any[] | null;
+}
+
+export interface GetHomeSummary {
+    stream?: Interfaces.Stream;
 }
 
 export interface GetSeriesList {
@@ -183,7 +248,7 @@ export interface GetSeriesSummary {
 
 export interface GetGameLevelSummary {
     category: Interfaces.Category;
-    runList: Interfaces.Run[];
+    runList: Interfaces.GameRun[];
     playerList: Interfaces.Player[];
 }
 
@@ -228,7 +293,7 @@ export interface GetRun {
     platform?: Interfaces.Platform
     players: Interfaces.Player[];
     region?: Interfaces.Region;
-    run: Interfaces.Run;
+    run: Interfaces.GameRun;
     users: Interfaces.User[];
     values: Interfaces.Value[];
     variables: Interfaces.Variable[];
@@ -295,7 +360,7 @@ export interface GetUserLeaderboard {
     levels: Interfaces.Level[];
     platforms: Interfaces.Platform[];
     regions: Interfaces.Region[];
-    runs: Interfaces.Run[];
+    runs: Interfaces.GameRun[];
     user: Interfaces.User;
     userProfile: Interfaces.UserReducedProfile;
     users: [];
@@ -308,7 +373,7 @@ export interface GetUserLeaderboard {
      */
     followedGameIds: null;
     challengeList: Interfaces.Challenge[];
-    challengeRunList: Interfaces.Run[];
+    challengeRunList: Interfaces.GameRun[];
 }
 
 export interface GetUserModeration {
@@ -344,7 +409,7 @@ export interface GetUserComments {
     gameList: Interfaces.Game[];
     likeList: Interfaces.Like[];
     newsList: Interfaces.GameNews[];
-    runList: Interfaces.Run[];
+    runList: Interfaces.GameRun[];
     threadList: Interfaces.Thread[];
     userList: Interfaces.User[];
     pagination: Interfaces.Pagination;
@@ -395,7 +460,7 @@ export interface GetAuditLogList {
     levelList: Interfaces.Level[] | null;
     variableList: Interfaces.Variable[];
     valueList: Interfaces.Value[];
-    runList: Interfaces.Run[];
+    runList: Interfaces.GameRun[];
     pagination: Interfaces.Pagination;
 }
 
@@ -451,7 +516,7 @@ export interface GetModerationRuns {
     platforms: Interfaces.Platform[];
     players: Interfaces.Player[];
     regions: Interfaces.Region[];
-    runs: Interfaces.Run[];
+    runs: Interfaces.GameRun[];
     values: Interfaces.Value[];
     variables: Interfaces.Variable[];
     users: Interfaces.User[];
@@ -631,7 +696,7 @@ export interface GetUserDataExport {
     messageList: Interfaces.ConversationMessage[];
     newsList: Interfaces.GameNews[];
     resourceList: Interfaces.Resource[];
-    runList: Interfaces.Run[];
+    runList: Interfaces.GameRun[];
     threadList: Interfaces.Thread[];
     ticketList: Interfaces.Ticket[];
     ticketNoteList: Interfaces.TicketNote[];
