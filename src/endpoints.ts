@@ -649,6 +649,7 @@ export interface PutVariableUpdate {
      * The new variable settings for the variable you are updating.
      */
     variable: Interfaces.Variable;
+    values: Interfaces.Value[];
 }
 
 /**
