@@ -1,4 +1,4 @@
-import * as Enums from './enums';
+import * as Enums from './enums.js';
 
 /**
  * A Category item.

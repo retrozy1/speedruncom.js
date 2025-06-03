@@ -1,10 +1,18 @@
 import axios, { AxiosResponse, AxiosInstance, AxiosError } from 'axios';
-import * as Endpoints from './endpoints.js';
+import * as GetEndpoints from './endpoints/endpoints.get.js';
+import * as PostEndpoints from './endpoints/endpoints.post.js'
 import * as Responses from './responses.js';
 
 const LANG = 'en';
 const ACCEPT = 'application/json';
 const BASE_USER_AGENT = 'speedrun.js';
+
+const isBrowser = typeof window !== 'undefined';
+
+const objectToBase64 = (obj: object) => {
+    const jsonString = JSON.stringify(obj).replace(/\s+/g, '');
+    return Buffer.from(jsonString).toString('base64');
+}
 
 class APIError extends Error {
     public status: number;
@@ -17,7 +25,8 @@ class APIError extends Error {
 }
 
 export default class Client {
-    private axiosClient: AxiosInstance = axios.create({
+
+    axiosClient: AxiosInstance = axios.create({
         baseURL: 'https://www.speedrun.com/api/v2/',
         withCredentials: true,
         headers: {
@@ -26,15 +35,22 @@ export default class Client {
         }
     });
 
-    private user!: string;
-    private pass!: string;
-    isBrowser = typeof window !== 'undefined';
+    static axiosClient: AxiosInstance = axios.create({
+        baseURL: 'https://www.speedrun.com/api/v2/',
+        headers: {
+            'Accept-Language': LANG,
+            'Accept': ACCEPT,
+        }
+    });
+
+    user!: string;
+    pass!: string;
 
     constructor({ PHPSESSID, userAgent }: { PHPSESSID?: string, userAgent?: string }) {
-        if (!this.isBrowser) this.axiosClient.defaults.headers.common['User-Agent'] = BASE_USER_AGENT + (userAgent ? `/${userAgent}` : '');
+        if (!isBrowser) this.axiosClient.defaults.headers.common['User-Agent'] = BASE_USER_AGENT + (userAgent ? `/${userAgent}` : '');
 
         if (PHPSESSID) {
-            if (this.isBrowser) {
+            if (isBrowser) {
                 console.error('You cannot use a PHPSESSID to authenticate in a browser environment.');
             } else {
                 this.axiosClient.defaults.headers.common['Cookie'] = `PHPSESSID=${PHPSESSID}`;
@@ -52,11 +68,30 @@ export default class Client {
         );
     }
 
-    private async request<T>(endpoint: string, params: object = {}): Promise<T> {
-        const response = await this.axiosClient.post<T>(endpoint, params);
+    async request<T>(endpoint: string, params: object = {}, method: string = 'post'): Promise<T> {
+        let response: any;
+        if (method === 'post') {
+            response = await this.axiosClient.post<T>(endpoint, params);
+        } else {
+            response = await this.axiosClient.get(`${endpoint}?_r=${objectToBase64(params)}`);
+        }
         
         const cookie = response.headers['set-cookie'];
-        if (cookie && !this.isBrowser) this.axiosClient.defaults.headers.common['Cookie'] = `PHPSESSID=${cookie[0].split('=')[1].split(';')[0]}`;
+        if (cookie && !isBrowser) this.axiosClient.defaults.headers.common['Cookie'] = `PHPSESSID=${cookie[0].split('=')[1].split(';')[0]}`;
+
+        return response.data;
+    }
+
+    static async request<T>(endpoint: string, params: object = {}, method: string = 'post'): Promise<T> {
+        let response: any;
+        if (method === 'post') {
+            response = await this.axiosClient.post<T>(endpoint, params);
+        } else {
+            response = await this.axiosClient.get(`${endpoint}?_r=${objectToBase64(params)}`);
+        }
+        
+        const cookie = response.headers['set-cookie'];
+        if (cookie && !isBrowser) this.axiosClient.defaults.headers.common['Cookie'] = `PHPSESSID=${cookie[0].split('=')[1].split(';')[0]}`;
 
         return response.data;
     }
@@ -93,7 +128,7 @@ export default class Client {
      * Attempts to remove the PHPSESSID cookie if using a browser, otherwise removes your Client's authentication.
      */
     async logout() {
-        if (this.isBrowser) return await this.request('PutAuthLogout');
+        if (isBrowser) return await this.request('PutAuthLogout');
 
         delete this.axiosClient.defaults.headers.common['Cookie'];
     }
