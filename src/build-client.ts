@@ -1,4 +1,5 @@
 import { Project } from 'ts-morph';
+import { execSync } from 'child_process';
 
 const project = new Project({
     tsConfigFilePath: "tsconfig.json",
@@ -50,3 +51,9 @@ for (const endpointName of postEndpointNames) {
 }
 
 clientFile.saveSync();
+
+execSync('git config user.name "github-actions[bot]"');
+execSync('git config user.email "github-actions[bot]@users.noreply.github.com"');
+execSync('git add .');
+execSync(`git commit -m "Updated Client.ts"`);
+execSync('git push');
