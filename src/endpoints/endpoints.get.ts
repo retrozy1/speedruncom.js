@@ -4,9 +4,9 @@ import * as Enums from '../enums.js';
 import * as Interfaces from '../interfaces.js';
 import { AtLeastOne } from '../types.js';
 
-//todo GetPlatformList
 /**
  * Gets a leaderboard, with Players included.
+ * 
  * `GetGameLeaderboard` can fetch twice as many runs, and also fetches Games, Platforms, Regions, Values, and Variables.
  */
 export interface GetGameLeaderboard2 {
@@ -17,20 +17,23 @@ export interface GetGameLeaderboard2 {
     params: Interfaces.LeaderboardParams;
 
     /**
+     * The limit of Runs per page.
+     * 
+     * @max 100
+     * @default 100
+     */
+    limit?: number;
+
+    /**
      * The leaderboard page, in relation to `limit`.
      */
     page?: number;
 
-    /**
-     * The limit of Runs per page.
-     * Max: 100
-     * @default 100
-     */
-    limit?: number;
 }
 
 /**
  * Gets a leaderboard, with all relevant items included.
+ * 
  * `GetGameLeaderboard2` only includes Runs and Players, and has half the maximum `limit`.
  */
 export interface GetGameLeaderboard {
@@ -41,20 +44,22 @@ export interface GetGameLeaderboard {
     params: Interfaces.LeaderboardParams;
 
     /**
-     * The leaderboard page, in relation to `limit`.
-     */
-    page?: number;
-
-    /**
      * The limit of Runs per page.
-     * Max: 200
+     * 
+     * @max 200
      * @default 100
      */
     limit?: number;
+
+    /**
+     * The leaderboard page, in relation to `limit`.
+     */
+    page?: number;
 }
 
 /**
  * Gets mostly leaderboard-related data of a game.
+ * 
  * Both parameters function the same. If both are included, `gameId` will override.
  */
 interface GetGameData_Base {
@@ -73,7 +78,8 @@ interface GetGameData_Base {
 export type GetGameData = AtLeastOne<GetGameData_Base, 'gameId' | 'gameUrl'>;
 
 /**
- * Gets miscellaneous data of a game.
+ * Gets mostly miscellaneous data of a game.
+ * 
  * Both parameters function the same. If both are included, `gameId` will override.
  */
 interface GetGameSummary_Base {
@@ -84,7 +90,7 @@ interface GetGameSummary_Base {
     gameId?: string;
 
     /**
-     * Game page URL.
+     * Subpath URL of the game.
      */
     gameUrl?: string;
 }
@@ -97,20 +103,28 @@ export type GetGameSummary = AtLeastOne<GetGameSummary_Base, 'gameId' | 'gameUrl
 export interface GetGameRecordHistory {
 
     /**
-     * ID of the game. When exempted, both properties will be empty arrays.
+     * ID of the game. When exempted, the lists will be empty arrays.
      */
     //todo test if catId is fine on it's own, test more filters
     gameId?: string;
     categoryId?: string;
     values?: Interfaces.VariableValues[];
+
+    /**
+     * `EmulatorFilter` to filter the leaderboard by.
+     */
     emulator?: Enums.EmulatorFilter;
+
+    /**
+     * `ObsoleteFilter` to filter the leaderboard by.
+     */
     obsolete?: Enums.ObsoleteFilter
 }
 
 /**
  * Searches for site items with a query.
  */
-export interface GetSearch { // todo add platform
+export interface GetSearch {
 
     /**
      * The text you are searching.
@@ -118,7 +132,7 @@ export interface GetSearch { // todo add platform
     query?: string;
 
     /**
-     * todo
+     * Useless parameter, there is no affect on what is fetched based on the value.
      */
     favorExactMatches?: boolean;
 
@@ -154,17 +168,34 @@ export interface GetSearch { // todo add platform
 
     /**
      * The maximum amount of elements in each array.
+     * @max 100
      * @default 100
-     * Max: 100
      */
     limit?: number;
+
+    /**
+     * The leaderboard page, in relation to `limit`.
+     */
+    page?: number;
 }
 
 /**
- * Gets non-obsolete latest runs.
+ * Gets non-obsolete latest runs of a game.
+ * 
+ * When `seriesId` and `gameId` are exempted, 
  */
 export interface GetLatestLeaderboard {
+
+    /**
+     * ID of the game.
+     * 
+     * When exempted, lists in the responses will be empty.
+     */
     gameId?: string;
+
+    /**
+     * ID of a series
+     */
     seriesId?: string;
 
     /**
@@ -174,14 +205,15 @@ export interface GetLatestLeaderboard {
      * 
      * If this is `20` and 5 out of the 20 latest runs are obsolete, it will only return the 15 non-obsolete runs.
      * 
+     * @max Around 99999, however it varies with caching-related factors.
+     * 
      * @default 25
-     * Max: 99999
      */
     limit?: number;
 }
 
 /**
- * Gets a run.
+ * Gets a single run.
  */
 export interface GetRun {
 
@@ -197,7 +229,7 @@ export interface GetRun {
 export interface GetUserSummary {
 
     /**
-     * Page URL of the user.
+     * Subpath URL of the user.
      */
     url: string;
 }
@@ -213,7 +245,14 @@ export interface GetUserComments {
     userId: string;
 }
 
+/**
+ * Gets threads created by a specific user.
+ */
 export interface GetUserThreads {
+
+    /**
+     * ID of the user.
+     */
     userId: string;
 }
 
@@ -234,7 +273,7 @@ export interface GetUserPopoverData {
 export interface GetTitleList {}
 
 /**
- * Gets a Title.
+ * Gets a specific Title.
  */
 export interface GetTitle {
 
@@ -245,7 +284,7 @@ export interface GetTitle {
 }
 
 /**
- * Gets articles on the site.
+ * Gets site articles.
  */
 export interface GetArticleList {
 
@@ -270,21 +309,26 @@ export interface GetArticleList {
     tags?: string[];
 
     /**
-     * The target of an article, either being `news` or a page URL for site information articles.
+     * The target of an article, either being `news` or a path URL for site information articles.
      */
     target?: string;
 
     /**
      * The maximum amount of articles included in the response.
      * 
+     * @max 500
      * @default 500
-     * Max: 500
      */
     limit?: number;
+
+    /**
+     * The article list page, in relation to `limit`.
+     */
+    page?: number;
 }
 
 /**
- * Gets a specific article from the site.
+ * Gets a specific site article.
  */
 export interface GetArticle {
     id?: string;
@@ -292,18 +336,44 @@ export interface GetArticle {
 }
 
 /**
- * Gets a list of all games on the site.
+ * Gets a list of games.
  */
 export interface GetGameList {
+
+    /**
+     * ID of a series to filter by.
+     */
     seriesId?: string;
+
+    /**
+     * ID of a platform to filter by.
+     */
     platformId?: string;
+
+    /**
+     * Search query for game names or game subpath URLs.
+     */
     search?: string;
     orderType?: 1; //TODO
+
+    /**
+     * 
+     */
     limit?: number;
 }
 
 /**
- * Gets information for the home page. Often empty.
+ * Gets a list of Platforms in the site.
+ */
+//todo check for args in the admin panel
+export interface GetPlatformList {
+
+}
+
+/**
+ * Gets information for the home page.
+ * 
+ * @returns Todo
  */
 export interface GetHomeSummary {}
 
@@ -311,8 +381,18 @@ export interface GetHomeSummary {}
  * Gets a list of series on the site.
  */
 export interface GetSeriesList {
+
+    /**
+     * A query to search for, of series names or subpath URLs.
+     */
     search?: string;
     orderType?: 1; //TODO
+
+    /**
+     * The maximum amount of Series you want to fetch.
+     * @default 500
+     * Maximum: 500
+     */
     limit?: number;
 }
 
@@ -320,6 +400,10 @@ export interface GetSeriesList {
  * Gets most information pertinent to a series.
  */
 export interface GetSeriesSummary {
+
+    /**
+     * Subpath URL of the series.
+     */
     seriesUrl?: string;
 }
 
@@ -327,28 +411,82 @@ export interface GetSeriesSummary {
  * Gets the top 3 runs from all levels under a level category.
  */
 export interface GetGameLevelSummary {
+
+    /**
+     * ID of the game.
+     */
     gameId: string;
+
+    /**
+     * ID of the category.
+     */
     categoryId: string;
+
+    /**
+     * TODO
+     */
     dateFrom?: string;
     dateTo?: string;
+
+    /**
+     * `EmulatorFilter` to filter by.
+     */
     emulator?: Enums.EmulatorFilter;
 
     /**
-     * If `categoryId: string` refers to a level category.
+     * ID of a leaderboards level, if the leaderboard is a level.
      */
     levelId?: string;
+
+    /**
+     * `ObsoleteFilter` to filter by.
+     */
     obsolete?: Enums.ObsoleteFilter;
+
+    /**
+     * ID of a platform to filter by.
+     * 
+     * All platforms can be fetched with `GetPlatformList`.
+     */
     platformId?: string;
+
+    /**
+     * ID of a region to filter by.
+     * 
+     * All regions can be fetched with `GetStaticData.regionList`
+     */
     regionId?: string;
+
+    /**
+     * The game's default `TimingMethod`. todo
+     */
     timer?: Enums.TimingMethod;
 
     /**
      * If runs other than verified should be included.
      */
     verified?: Enums.RunStatus;
+
+    /**
+     * `VariableValues` to filter the leaderboard by.
+     */
     values?: Interfaces.VariableValues[];
+
+    /**
+     * `VideoFilter` to filter the leaderboard by.
+     */
     video?: Enums.VideoFilter;
+
+    /**
+     * The leaderboard page, in relation to `limit`.
+     */
     page?: number;
+
+    /**
+     * The limit of Runs per page.
+     * @default todo
+     * Maximum: todo
+     */
     limit?: number;
 }
 
@@ -361,27 +499,43 @@ export interface GetGameRandom {}
  * Gets all guides on a game.
  */
 export interface GetGuideList {
+
+    /**
+     * ID of the game.
+     */
     gameId: string;
 }
 
 /**
- * Get a specific guide by id.
+ * Get a specific guide.
  */
 export interface GetGuide {  
+
+    /**
+     * ID of the guide.
+     */
     id: string;
 }
 
 /**
- * Get a list of game news articles.
+ * Gets news posts in a game.
  */
 export interface GetNewsList {
+
+    /**
+     * ID of the game.
+     */
     gameId: string;
 }
 
 /**
- * Get a game news article.
+ * Gets a specific game news post.
  */
 export interface GetNews {
+    
+    /**
+     * ID of the news post.
+     */
     id: string;
 }
 
@@ -393,24 +547,42 @@ export interface GetResourceList {
 }
 
 /**
- * Gets a list of live runners.
+ * Gets a list of live streams on twitch with the TODO find what classifies as a stream
  */
-export interface GetStreamList {
+interface GetStreamList_Base {
+
+    /**
+     * ID of the series.
+     */
     seriesId?: string;
+
+    /**
+     * ID of the game.
+     */
     gameId?: string;
 }
+
+export type GetStreamList = AtLeastOne<GetStreamList_Base, 'seriesId' | 'gameId'>;
 
 /**
  * Get threads on a forum.
  */
 export interface GetThreadList {
+
+    /**
+     * ID of the forum.
+     */
     forumId: string;
 }
 
 /**
- * Gets a comment post's Thread and Forum.
+ * Gets a comment post's Thread and Forum by `commentId`.
  */
 export interface GetThreadStateByCommentId {
+
+    /**
+     * ID of the comment.
+     */
     commentId: string;
 }
 
@@ -425,6 +597,10 @@ export interface GetChallenge {
  * Get runs from a Challenge board.
  */
 export interface GetChallengeLeaderboard {
+
+    /**
+     * ID of the challenge you are getting the leaderboard from.
+     */
     challengeId: string;
 }
 
@@ -437,6 +613,10 @@ export interface GetChallengeGlobalRankingList {}
  * Get a specific Challenge run (not the same as a normal run!)
  */
 export interface GetChallengeRun {
+
+    /**
+     * ID of the challenge.
+     */
     id: string;
 }
 
@@ -444,6 +624,10 @@ export interface GetChallengeRun {
  * Get a user's runs for display on their profile.
  */
 export interface GetUserLeaderboard {
+
+    /**
+     * ID of the user.
+     */
     userId: string;
 }
 
@@ -451,6 +635,10 @@ export interface GetUserLeaderboard {
  * Gets game and series moderation stats for any user.
  */
 export interface GetUserModeration {
+
+    /**
+     * ID of the user.
+     */
     userId: string;
 }
 
@@ -461,7 +649,7 @@ export interface GetCommentList {
     itemId: string;
 
     /**
-     * ItemType of the above `itemId: string;`
+     * `ItemType` of the item referenced in `itemId`.
      */
     itemType: Enums.ItemType;
 }
@@ -470,11 +658,15 @@ export interface GetCommentList {
  * Get a specific thread.
  */
 export interface GetThread {
+
+    /**
+     * ID of the thread.
+     */
     id: string;
 }
 
 /**
- * Get static data for the site. Including all areas, colors, gameTypes, platforms, etc.
+ * Get static data for the site.
  */
 export interface GetStaticData {}
 

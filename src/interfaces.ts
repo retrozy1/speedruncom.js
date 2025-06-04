@@ -153,65 +153,208 @@ export interface ChallengePrize {
 }
 
 /**
- * todo: is this just unused?
+ * Configuration settings of a challenge.
  */
 export interface ChallengePrizeConfig {
+
+    /**
+     * TODO
+     */
     prizePool: number;
+
+    /**
+     * TODO
+     */
     currency: string;
     prizes: ChallengePrize[];
 }
 
-/**Sitewide rank based on all challenges entered.*/
+/**
+ * A single user's site-wide ranking details based on all challenges entered.
+ */
 export interface GlobalChallengeRanking {
+
+    /**
+     * ID of the user.
+     */
     userId: string;
+
+    /**
+     * The user's site-wide rank.
+     */
     rank: number;
     totalEarnings: number;
+
+    /**
+     * The amount of first place ranks the user has achieved in challenges.
+     */
     firstPlaces: number;
+
+    /**
+     * The amount of second place ranks the user has achieved in challenges.
+     */
     secondPlaces: number;
+
+    /**
+     * The amount of third place ranks the user has achieved in challenges.
+     */
     thirdPlaces: number;
+
+    /**
+     * The total amount of challenges the user has entered.
+     */
     challengesEntered: number;
 }
 
+/**
+ * A site challenge.
+ */
 export interface Challenge {
+
+    /**
+     * ID of the challenge.
+     */
     id: string;
+
+    /**
+     * Name of the challenge.
+     */
     name: string;
+
+    /**
+     * todo
+     */
     announcement: string;
+
+    /**
+     * Subpath URL of the challenge.
+     */
     url: string;
+
+    /**
+     * ID of the game the challenge is based on.
+     */
     gameId: string;
+
+    /**
+     * UNIX timestamp of when the challenge was created.
+     */
     createDate: number;
+
+    /**
+     * UNIX timestamp of when the challenge settings were last updated.
+     */
     updateDate: number;
+
+    /**
+     * todo
+     */
     startDate: number;
+
+    /**
+     * todo
+     */
     endDate: number;
+
+    /**
+     * `ChallengeState` of the challenge.
+     */
     state: Enums.ChallengeState;
+
+    /**
+     * Description of the challenge.
+     */
     description: string;
+
+    /**
+     * Rules of the challenge (not to be confused with `contestRules`).
+     */
     rules: string;
+
+    /**
+     * 
+     */
     numPlayers: number;
     exactPlayers: boolean;
     playerMatchMode: Enums.PlayerMatchMode;
     timeDirection: Enums.TimeDirection;
     enforceMs: boolean;
+
+    /**
+     * Subpath URL of the challenge's cover image.
+     * check if opt
+     */
     coverImagePath: string;
     contest: boolean;
     contestRules: string;
     runCommentsMode: Enums.ItemPermissionType;
+
+    /**
+     * `ChallengePrizeConfig` of the challenge.
+     */
     prizeConfig: ChallengePrizeConfig;
 }
 
-/**User reward for completing a Challenge.*/
+/**
+ * Player reward for completing a Challenge.
+ */
 export interface Title {
+
+    /**
+     * ID of the title.
+     */
     id: string;
+
+    /**
+     * Title of the challenge.
+     */
     title: string;
+
+    /**
+     * Description of how the challenge is rewarded to players.
+     */
     comment: string;
+
+    /**
+     * Subpath URL of the challenge that rewards the title.
+     */
     referenceUrl: string;
 }
 
+/**
+ * Permissions of a comment section.
+ */
 export interface CommentPermissions {
+
+    /**
+     * Whether or not 
+     */
     canManage: boolean;
+
+    /**
+     * Whether or 
+     */
     canViewComments: boolean;
     canPostComments: boolean;
+
+    /**
+     * Whether or not editing comments is allowed.
+     */
     canEditComments: boolean;
+
+    /**
+     * Whether or not deleting comments is allowsed.
+     */
     canDeleteComments: boolean;
+
+    /**
+     * Reasons for not being able to not view a thread.
+     */
     cannotViewReasons: string[];
+
+    /**
+     * Reasons for not being able to post a comment.
+     */
     cannotPostReasons: string[];
 }
 
@@ -249,10 +392,34 @@ export interface Like {
 }
 
 export interface SocialNetwork {
+
+    /**
+     * `SocialConnection` of the social network.
+     */
     id: Enums.SocialConnection;
+
+    /**
+     * Name of the social network.
+     */
     name: string;
+
+    /**
+     * Arbitrary and unknown determination of if the platform is popular.
+     * 
+     * This does not have to do with if the platform is depricated or not.
+     */
     major: boolean;
+
+    /**
+     * Site-wide ordering method of the platform.
+     */
     pos: number;
+
+    /**
+     * Either a URL with a `[id]` placeholder of where the entered value would be stored, `popup` when there is complex authentication of the social network, or an empty string when the value you enter is exactly what the end result will be.
+     * 
+     * Example: `https://www.youtube.com/user/[id]` 
+     */
     pattern: string;
 }
 

@@ -195,6 +195,10 @@ export interface GetGameList {
     userList: Interfaces.User[];
 }
 
+export interface GetPlatformList {
+    platformList: Interfaces.Platform[];
+}
+
 export interface GetCommentList {
     commentable: Interfaces.Commentable;
     commentList: Interfaces.Comment[];
@@ -214,14 +218,13 @@ export interface GetStaticData {
     colors: Interfaces.Color[];
     gameTypeList: Interfaces.GameTypeDetails[];
     notificationSettings: Interfaces.NotificationSettingStaticData[];
-    platformList: Interfaces.Platform[];
     regionList: Interfaces.Region[];
     socialNetworkList: Interfaces.SocialNetwork[];
 
     /**
      * Unknown type
      */
-    supporterPlanList?: any[] | null;
+    supporterPlanList?: null;
 }
 
 export interface GetHomeSummary {
