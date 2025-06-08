@@ -8,7 +8,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "clean": "rimraf dist src/Client.ts",
-    "build": "tsc"
+    "prepare": "tsc"
   },
   "devDependencies": {
     "@types/node": "^22.15.24",
