@@ -466,11 +466,11 @@ export default class Client {
         return await this.request('PutAuthLogin', params, 'post');
     }
 
-    async GetSession(params: PostEndpoints.GetSession): Promise<Responses.GetSession> {
+    async GetSession(params?: PostEndpoints.GetSession): Promise<Responses.GetSession> {
         return await this.request('GetSession', params, 'post');
     }
 
-    async PutSessionPing(params: PostEndpoints.PutSessionPing): Promise<void> {
+    async PutSessionPing(params?: PostEndpoints.PutSessionPing): Promise<void> {
         return await this.request('PutSessionPing', params, 'post');
     }
 
@@ -586,7 +586,7 @@ export default class Client {
         return await this.request('PutResourceDelete', params, 'post');
     }
 
-    async GetModerationGames(params: PostEndpoints.GetModerationGames): Promise<Responses.GetModerationGames> {
+    async GetModerationGames(params?: PostEndpoints.GetModerationGames): Promise<Responses.GetModerationGames> {
         return await this.request('GetModerationGames', params, 'post');
     }
 
@@ -618,7 +618,7 @@ export default class Client {
         return await this.request('PutRunSettings', params, 'post');
     }
 
-    async GetConversations(params: PostEndpoints.GetConversations): Promise<Responses.GetConversations> {
+    async GetConversations(params?: PostEndpoints.GetConversations): Promise<Responses.GetConversations> {
         return await this.request('GetConversations', params, 'post');
     }
 
@@ -642,11 +642,11 @@ export default class Client {
         return await this.request('PutConversationReport', params, 'post');
     }
 
-    async GetNotifications(params: PostEndpoints.GetNotifications): Promise<Responses.GetNotifications> {
+    async GetNotifications(params?: PostEndpoints.GetNotifications): Promise<Responses.GetNotifications> {
         return await this.request('GetNotifications', params, 'post');
     }
 
-    async PutNotificationsRead(params: PostEndpoints.PutNotificationsRead): Promise<void> {
+    async PutNotificationsRead(params?: PostEndpoints.PutNotificationsRead): Promise<void> {
         return await this.request('PutNotificationsRead', params, 'post');
     }
 
@@ -774,7 +774,7 @@ export default class Client {
         return await this.request('GetSeriesSettings', params, 'post');
     }
 
-    async GetUserBlocks(params: PostEndpoints.GetUserBlocks): Promise<Responses.GetUserBlocks> {
+    async GetUserBlocks(params?: PostEndpoints.GetUserBlocks): Promise<Responses.GetUserBlocks> {
         return await this.request('GetUserBlocks', params, 'post');
     }
 
@@ -802,15 +802,15 @@ export default class Client {
         return await this.request('PutSeriesGameDelete', params, 'post');
     }
 
-    async PutSeriesModerator(params: PostEndpoints.PutSeriesModerator): Promise<void> {
+    async PutSeriesModerator(params?: PostEndpoints.PutSeriesModerator): Promise<void> {
         return await this.request('PutSeriesModerator', params, 'post');
     }
 
-    async PutSeriesModeratorUpdate(params: PostEndpoints.PutSeriesModeratorUpdate): Promise<void> {
+    async PutSeriesModeratorUpdate(params?: PostEndpoints.PutSeriesModeratorUpdate): Promise<void> {
         return await this.request('PutSeriesModeratorUpdate', params, 'post');
     }
 
-    async PutSeriesModeratorDelete(params: PostEndpoints.PutSeriesModeratorDelete): Promise<void> {
+    async PutSeriesModeratorDelete(params?: PostEndpoints.PutSeriesModeratorDelete): Promise<void> {
         return await this.request('PutSeriesModeratorDelete', params, 'post');
     }
 
