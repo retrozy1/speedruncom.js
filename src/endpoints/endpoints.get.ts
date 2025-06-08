@@ -1,5 +1,6 @@
 //Endpoints that don't give the "Method Not Allowed" error when called with GET.
 
+import { LargeNumberLike } from 'crypto';
 import * as Enums from '../enums.js';
 import * as Interfaces from '../interfaces.js';
 import { AtLeastOne } from '../types.js';
@@ -101,24 +102,75 @@ export type GetGameSummary = AtLeastOne<GetGameSummary_Base, 'gameId' | 'gameUrl
  * Gets the world record history of a game leaderboard.
  */
 export interface GetGameRecordHistory {
+    params?: {
+
+        /**
+         * ID of the leaderboard's category.
+         */
+        categoryId?: string;
+
+        /**
+         * `EmulatorFilter` to filter the leaderboard by.
+         */
+        emulator?: Enums.EmulatorFilter;
+
+        /**
+         * ID of the game. When exempted, the lists will be empty arrays.
+         */
+        gameId?: string;
+
+        /**
+         * `ObsoleteFilter` to filter the leaderboard by.
+         */
+        obsolete?: Enums.ObsoleteFilter;
+
+        /**
+         * IDs of platforms to filter the leaderboard by.
+         * 
+         * All Platforms can be fetched with `GetPlatformList`.
+         */
+        platformIds?: string[];
+
+        /**
+         * IDs of regions to filter the leaderboard by.
+         * 
+         * All Regions can be fetched with `GetStaticData.regionList`.
+         */
+        regionIds?: string[];
+
+        /**
+         * `TimingMethod` to filter the leaderboard by.
+         */
+        timer?: Enums.TimingMethod;
+
+        /**
+         * `RunStatus` to filter the leaderboard by.
+         */
+        verified?: Enums.RunStatus,
+
+        /**
+         * `VariableValues` to filter the leaderboard by.
+         */
+        values?: Interfaces.VariableValues[];
+
+        /**
+         * `VideoState` of runs to filter the leaderboard by.
+         */
+        video?: Enums.VideoState;
+    }
 
     /**
-     * ID of the game. When exempted, the lists will be empty arrays.
+     * The limit of Runs per page.
+     * 
+     * @max 200
+     * @default 100
      */
-    //todo test if catId is fine on it's own, test more filters
-    gameId?: string;
-    categoryId?: string;
-    values?: Interfaces.VariableValues[];
+    limit?: number;
 
     /**
-     * `EmulatorFilter` to filter the leaderboard by.
+     * The leaderboard page, in relation to `limit`.
      */
-    emulator?: Enums.EmulatorFilter;
-
-    /**
-     * `ObsoleteFilter` to filter the leaderboard by.
-     */
-    obsolete?: Enums.ObsoleteFilter
+    page?: number;
 }
 
 /**
