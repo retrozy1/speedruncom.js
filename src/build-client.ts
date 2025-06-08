@@ -59,7 +59,7 @@ for (const endpointName of getEndpointNames) {
 
 for (const endpointName of postEndpointNames) {
     const returnType = responseNames.has(endpointName) ? `Promise<Responses.${endpointName}>` : 'Promise<void>';
-    const isEmpty = isInterfaceEmpty(endpointName, getEndpointsFile);
+    const isEmpty = isInterfaceEmpty(endpointName, postEndpointsFile);
 
     const parameters = [{
         name: 'params',
