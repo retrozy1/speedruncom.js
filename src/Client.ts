@@ -462,419 +462,419 @@ export default class Client {
         return await this.request('GetForumList', params, 'get');
     }
 
-    async PutAuthLogin(params: GetEndpoints.PutAuthLogin): Promise<Responses.PutAuthLogin> {
+    async PutAuthLogin(params: PostEndpoints.PutAuthLogin): Promise<Responses.PutAuthLogin> {
         return await this.request('PutAuthLogin', params, 'post');
     }
 
-    async GetSession(params: GetEndpoints.GetSession): Promise<Responses.GetSession> {
+    async GetSession(params: PostEndpoints.GetSession): Promise<Responses.GetSession> {
         return await this.request('GetSession', params, 'post');
     }
 
-    async PutSessionPing(params: GetEndpoints.PutSessionPing): Promise<void> {
+    async PutSessionPing(params: PostEndpoints.PutSessionPing): Promise<void> {
         return await this.request('PutSessionPing', params, 'post');
     }
 
-    async GetAuditLogList(params: GetEndpoints.GetAuditLogList): Promise<Responses.GetAuditLogList> {
+    async GetAuditLogList(params: PostEndpoints.GetAuditLogList): Promise<Responses.GetAuditLogList> {
         return await this.request('GetAuditLogList', params, 'post');
     }
 
-    async GetGameSettings(params: GetEndpoints.GetGameSettings): Promise<Responses.GetGameSettings> {
+    async GetGameSettings(params: PostEndpoints.GetGameSettings): Promise<Responses.GetGameSettings> {
         return await this.request('GetGameSettings', params, 'post');
     }
 
-    async PutGameSettings(params: GetEndpoints.PutGameSettings): Promise<void> {
+    async PutGameSettings(params: PostEndpoints.PutGameSettings): Promise<void> {
         return await this.request('PutGameSettings', params, 'post');
     }
 
-    async PutCategory(params: GetEndpoints.PutCategory): Promise<void> {
+    async PutCategory(params: PostEndpoints.PutCategory): Promise<void> {
         return await this.request('PutCategory', params, 'post');
     }
 
-    async PutCategoryUpdate(params: GetEndpoints.PutCategoryUpdate): Promise<void> {
+    async PutCategoryUpdate(params: PostEndpoints.PutCategoryUpdate): Promise<void> {
         return await this.request('PutCategoryUpdate', params, 'post');
     }
 
-    async PutCategoryArchive(params: GetEndpoints.PutCategoryArchive): Promise<void> {
+    async PutCategoryArchive(params: PostEndpoints.PutCategoryArchive): Promise<void> {
         return await this.request('PutCategoryArchive', params, 'post');
     }
 
-    async PutCategoryRestore(params: GetEndpoints.PutCategoryRestore): Promise<void> {
+    async PutCategoryRestore(params: PostEndpoints.PutCategoryRestore): Promise<void> {
         return await this.request('PutCategoryRestore', params, 'post');
     }
 
-    async PutCategoryOrder(params: GetEndpoints.PutCategoryOrder): Promise<void> {
+    async PutCategoryOrder(params: PostEndpoints.PutCategoryOrder): Promise<void> {
         return await this.request('PutCategoryOrder', params, 'post');
     }
 
-    async PutLevel(params: GetEndpoints.PutLevel): Promise<void> {
+    async PutLevel(params: PostEndpoints.PutLevel): Promise<void> {
         return await this.request('PutLevel', params, 'post');
     }
 
-    async PutLevelUpdate(params: GetEndpoints.PutLevelUpdate): Promise<void> {
+    async PutLevelUpdate(params: PostEndpoints.PutLevelUpdate): Promise<void> {
         return await this.request('PutLevelUpdate', params, 'post');
     }
 
-    async PutLevelArchive(params: GetEndpoints.PutLevelArchive): Promise<void> {
+    async PutLevelArchive(params: PostEndpoints.PutLevelArchive): Promise<void> {
         return await this.request('PutLevelArchive', params, 'post');
     }
 
-    async PutLevelRestore(params: GetEndpoints.PutLevelRestore): Promise<void> {
+    async PutLevelRestore(params: PostEndpoints.PutLevelRestore): Promise<void> {
         return await this.request('PutLevelRestore', params, 'post');
     }
 
-    async PutLevelOrder(params: GetEndpoints.PutLevelOrder): Promise<void> {
+    async PutLevelOrder(params: PostEndpoints.PutLevelOrder): Promise<void> {
         return await this.request('PutLevelOrder', params, 'post');
     }
 
-    async PutVariable(params: GetEndpoints.PutVariable): Promise<void> {
+    async PutVariable(params: PostEndpoints.PutVariable): Promise<void> {
         return await this.request('PutVariable', params, 'post');
     }
 
-    async PutVariableUpdate(params: GetEndpoints.PutVariableUpdate): Promise<void> {
+    async PutVariableUpdate(params: PostEndpoints.PutVariableUpdate): Promise<void> {
         return await this.request('PutVariableUpdate', params, 'post');
     }
 
-    async PutVariableArchive(params: GetEndpoints.PutVariableArchive): Promise<void> {
+    async PutVariableArchive(params: PostEndpoints.PutVariableArchive): Promise<void> {
         return await this.request('PutVariableArchive', params, 'post');
     }
 
-    async PutVariableRestore(params: GetEndpoints.PutVariableRestore): Promise<void> {
+    async PutVariableRestore(params: PostEndpoints.PutVariableRestore): Promise<void> {
         return await this.request('PutVariableRestore', params, 'post');
     }
 
-    async PutVariableOrder(params: GetEndpoints.PutVariableOrder): Promise<void> {
+    async PutVariableOrder(params: PostEndpoints.PutVariableOrder): Promise<void> {
         return await this.request('PutVariableOrder', params, 'post');
     }
 
-    async PutVariableApplyDefault(params: GetEndpoints.PutVariableApplyDefault): Promise<void> {
+    async PutVariableApplyDefault(params: PostEndpoints.PutVariableApplyDefault): Promise<void> {
         return await this.request('PutVariableApplyDefault', params, 'post');
     }
 
-    async PutNews(params: GetEndpoints.PutNews): Promise<void> {
+    async PutNews(params: PostEndpoints.PutNews): Promise<void> {
         return await this.request('PutNews', params, 'post');
     }
 
-    async PutNewsUpdate(params: GetEndpoints.PutNewsUpdate): Promise<void> {
+    async PutNewsUpdate(params: PostEndpoints.PutNewsUpdate): Promise<void> {
         return await this.request('PutNewsUpdate', params, 'post');
     }
 
-    async PutNewsDelete(params: GetEndpoints.PutNewsDelete): Promise<void> {
+    async PutNewsDelete(params: PostEndpoints.PutNewsDelete): Promise<void> {
         return await this.request('PutNewsDelete', params, 'post');
     }
 
-    async PutGuide(params: GetEndpoints.PutGuide): Promise<void> {
+    async PutGuide(params: PostEndpoints.PutGuide): Promise<void> {
         return await this.request('PutGuide', params, 'post');
     }
 
-    async PutGuideUpdate(params: GetEndpoints.PutGuideUpdate): Promise<void> {
+    async PutGuideUpdate(params: PostEndpoints.PutGuideUpdate): Promise<void> {
         return await this.request('PutGuideUpdate', params, 'post');
     }
 
-    async PutGuideDelete(params: GetEndpoints.PutGuideDelete): Promise<void> {
+    async PutGuideDelete(params: PostEndpoints.PutGuideDelete): Promise<void> {
         return await this.request('PutGuideDelete', params, 'post');
     }
 
-    async PutResource(params: GetEndpoints.PutResource): Promise<void> {
+    async PutResource(params: PostEndpoints.PutResource): Promise<void> {
         return await this.request('PutResource', params, 'post');
     }
 
-    async PutResourceUpdate(params: GetEndpoints.PutResourceUpdate): Promise<void> {
+    async PutResourceUpdate(params: PostEndpoints.PutResourceUpdate): Promise<void> {
         return await this.request('PutResourceUpdate', params, 'post');
     }
 
-    async PutResourceDelete(params: GetEndpoints.PutResourceDelete): Promise<void> {
+    async PutResourceDelete(params: PostEndpoints.PutResourceDelete): Promise<void> {
         return await this.request('PutResourceDelete', params, 'post');
     }
 
-    async GetModerationGames(params: GetEndpoints.GetModerationGames): Promise<Responses.GetModerationGames> {
+    async GetModerationGames(params: PostEndpoints.GetModerationGames): Promise<Responses.GetModerationGames> {
         return await this.request('GetModerationGames', params, 'post');
     }
 
-    async GetModerationRuns(params: GetEndpoints.GetModerationRuns): Promise<Responses.GetModerationRuns> {
+    async GetModerationRuns(params: PostEndpoints.GetModerationRuns): Promise<Responses.GetModerationRuns> {
         return await this.request('GetModerationRuns', params, 'post');
     }
 
-    async PutRunAssignee(params: GetEndpoints.PutRunAssignee): Promise<void> {
+    async PutRunAssignee(params: PostEndpoints.PutRunAssignee): Promise<void> {
         return await this.request('PutRunAssignee', params, 'post');
     }
 
-    async PutRunDelete(params: GetEndpoints.PutRunDelete): Promise<void> {
+    async PutRunDelete(params: PostEndpoints.PutRunDelete): Promise<void> {
         return await this.request('PutRunDelete', params, 'post');
     }
 
-    async PutRunVerification(params: GetEndpoints.PutRunVerification): Promise<void> {
+    async PutRunVerification(params: PostEndpoints.PutRunVerification): Promise<void> {
         return await this.request('PutRunVerification', params, 'post');
     }
 
-    async PutRunVideoState(params: GetEndpoints.PutRunVideoState): Promise<void> {
+    async PutRunVideoState(params: PostEndpoints.PutRunVideoState): Promise<void> {
         return await this.request('PutRunVideoState', params, 'post');
     }
 
-    async GetRunSettings(params: GetEndpoints.GetRunSettings): Promise<Responses.GetRunSettings> {
+    async GetRunSettings(params: PostEndpoints.GetRunSettings): Promise<Responses.GetRunSettings> {
         return await this.request('GetRunSettings', params, 'post');
     }
 
-    async PutRunSettings(params: GetEndpoints.PutRunSettings): Promise<Responses.PutRunSettings> {
+    async PutRunSettings(params: PostEndpoints.PutRunSettings): Promise<Responses.PutRunSettings> {
         return await this.request('PutRunSettings', params, 'post');
     }
 
-    async GetConversations(params: GetEndpoints.GetConversations): Promise<Responses.GetConversations> {
+    async GetConversations(params: PostEndpoints.GetConversations): Promise<Responses.GetConversations> {
         return await this.request('GetConversations', params, 'post');
     }
 
-    async GetConversationMessages(params: GetEndpoints.GetConversationMessages): Promise<Responses.GetConversationMessages> {
+    async GetConversationMessages(params: PostEndpoints.GetConversationMessages): Promise<Responses.GetConversationMessages> {
         return await this.request('GetConversationMessages', params, 'post');
     }
 
-    async PutConversation(params: GetEndpoints.PutConversation): Promise<Responses.PutConversation> {
+    async PutConversation(params: PostEndpoints.PutConversation): Promise<Responses.PutConversation> {
         return await this.request('PutConversation', params, 'post');
     }
 
-    async PutConversationMessage(params: GetEndpoints.PutConversationMessage): Promise<Responses.PutConversationMessage> {
+    async PutConversationMessage(params: PostEndpoints.PutConversationMessage): Promise<Responses.PutConversationMessage> {
         return await this.request('PutConversationMessage', params, 'post');
     }
 
-    async PutConversationLeave(params: GetEndpoints.PutConversationLeave): Promise<void> {
+    async PutConversationLeave(params: PostEndpoints.PutConversationLeave): Promise<void> {
         return await this.request('PutConversationLeave', params, 'post');
     }
 
-    async PutConversationReport(params: GetEndpoints.PutConversationReport): Promise<void> {
+    async PutConversationReport(params: PostEndpoints.PutConversationReport): Promise<void> {
         return await this.request('PutConversationReport', params, 'post');
     }
 
-    async GetNotifications(params: GetEndpoints.GetNotifications): Promise<Responses.GetNotifications> {
+    async GetNotifications(params: PostEndpoints.GetNotifications): Promise<Responses.GetNotifications> {
         return await this.request('GetNotifications', params, 'post');
     }
 
-    async PutNotificationsRead(params: GetEndpoints.PutNotificationsRead): Promise<void> {
+    async PutNotificationsRead(params: PostEndpoints.PutNotificationsRead): Promise<void> {
         return await this.request('PutNotificationsRead', params, 'post');
     }
 
-    async PutGameFollower(params: GetEndpoints.PutGameFollower): Promise<void> {
+    async PutGameFollower(params: PostEndpoints.PutGameFollower): Promise<void> {
         return await this.request('PutGameFollower', params, 'post');
     }
 
-    async PutGameFollowerDelete(params: GetEndpoints.PutGameFollowerDelete): Promise<void> {
+    async PutGameFollowerDelete(params: PostEndpoints.PutGameFollowerDelete): Promise<void> {
         return await this.request('PutGameFollowerDelete', params, 'post');
     }
 
-    async PutUserFollower(params: GetEndpoints.PutUserFollower): Promise<void> {
+    async PutUserFollower(params: PostEndpoints.PutUserFollower): Promise<void> {
         return await this.request('PutUserFollower', params, 'post');
     }
 
-    async PutUserFollowerDelete(params: GetEndpoints.PutUserFollowerDelete): Promise<void> {
+    async PutUserFollowerDelete(params: PostEndpoints.PutUserFollowerDelete): Promise<void> {
         return await this.request('PutUserFollowerDelete', params, 'post');
     }
 
-    async GetUserSettings(params: GetEndpoints.GetUserSettings): Promise<Responses.GetUserSettings> {
+    async GetUserSettings(params: PostEndpoints.GetUserSettings): Promise<Responses.GetUserSettings> {
         return await this.request('GetUserSettings', params, 'post');
     }
 
-    async PutUserSettings(params: GetEndpoints.PutUserSettings): Promise<Responses.PutUserSettings> {
+    async PutUserSettings(params: PostEndpoints.PutUserSettings): Promise<Responses.PutUserSettings> {
         return await this.request('PutUserSettings', params, 'post');
     }
 
-    async PutUserUpdateFeaturedRun(params: GetEndpoints.PutUserUpdateFeaturedRun): Promise<void> {
+    async PutUserUpdateFeaturedRun(params: PostEndpoints.PutUserUpdateFeaturedRun): Promise<void> {
         return await this.request('PutUserUpdateFeaturedRun', params, 'post');
     }
 
-    async PutUserUpdateGameOrdering(params: GetEndpoints.PutUserUpdateGameOrdering): Promise<void> {
+    async PutUserUpdateGameOrdering(params: PostEndpoints.PutUserUpdateGameOrdering): Promise<void> {
         return await this.request('PutUserUpdateGameOrdering', params, 'post');
     }
 
-    async GetUserApiKey(params: GetEndpoints.GetUserApiKey): Promise<Responses.GetUserApiKey> {
+    async GetUserApiKey(params: PostEndpoints.GetUserApiKey): Promise<Responses.GetUserApiKey> {
         return await this.request('GetUserApiKey', params, 'post');
     }
 
-    async GetUserFollowers(params: GetEndpoints.GetUserFollowers): Promise<Responses.GetUserFollowers> {
+    async GetUserFollowers(params: PostEndpoints.GetUserFollowers): Promise<Responses.GetUserFollowers> {
         return await this.request('GetUserFollowers', params, 'post');
     }
 
-    async GetUserFollowingGames(params: GetEndpoints.GetUserFollowingGames): Promise<Responses.GetUserFollowingGames> {
+    async GetUserFollowingGames(params: PostEndpoints.GetUserFollowingGames): Promise<Responses.GetUserFollowingGames> {
         return await this.request('GetUserFollowingGames', params, 'post');
     }
 
-    async GetUserFollowingUsers(params: GetEndpoints.GetUserFollowingUsers): Promise<Responses.GetUserFollowingUsers> {
+    async GetUserFollowingUsers(params: PostEndpoints.GetUserFollowingUsers): Promise<Responses.GetUserFollowingUsers> {
         return await this.request('GetUserFollowingUsers', params, 'post');
     }
 
-    async GetUserGameBoostData(params: GetEndpoints.GetUserGameBoostData): Promise<Responses.GetUserGameBoostData> {
+    async GetUserGameBoostData(params: PostEndpoints.GetUserGameBoostData): Promise<Responses.GetUserGameBoostData> {
         return await this.request('GetUserGameBoostData', params, 'post');
     }
 
-    async GetUserDataExport(params: GetEndpoints.GetUserDataExport): Promise<Responses.GetUserDataExport> {
+    async GetUserDataExport(params: PostEndpoints.GetUserDataExport): Promise<Responses.GetUserDataExport> {
         return await this.request('GetUserDataExport', params, 'post');
     }
 
-    async PutGameFollowerOrder(params: GetEndpoints.PutGameFollowerOrder): Promise<void> {
+    async PutGameFollowerOrder(params: PostEndpoints.PutGameFollowerOrder): Promise<void> {
         return await this.request('PutGameFollowerOrder', params, 'post');
     }
 
-    async PutArticleSubmission(params: GetEndpoints.PutArticleSubmission): Promise<void> {
+    async PutArticleSubmission(params: PostEndpoints.PutArticleSubmission): Promise<void> {
         return await this.request('PutArticleSubmission', params, 'post');
     }
 
-    async GetCommentable(params: GetEndpoints.GetCommentable): Promise<Responses.GetCommentable> {
+    async GetCommentable(params: PostEndpoints.GetCommentable): Promise<Responses.GetCommentable> {
         return await this.request('GetCommentable', params, 'post');
     }
 
-    async PutComment(params: GetEndpoints.PutComment): Promise<void> {
+    async PutComment(params: PostEndpoints.PutComment): Promise<void> {
         return await this.request('PutComment', params, 'post');
     }
 
-    async PutLike(params: GetEndpoints.PutLike): Promise<Responses.PutLike> {
+    async PutLike(params: PostEndpoints.PutLike): Promise<Responses.PutLike> {
         return await this.request('PutLike', params, 'post');
     }
 
-    async PutCommentableSettings(params: GetEndpoints.PutCommentableSettings): Promise<void> {
+    async PutCommentableSettings(params: PostEndpoints.PutCommentableSettings): Promise<void> {
         return await this.request('PutCommentableSettings', params, 'post');
     }
 
-    async GetThreadReadStatus(params: GetEndpoints.GetThreadReadStatus): Promise<Responses.GetThreadReadStatus> {
+    async GetThreadReadStatus(params: PostEndpoints.GetThreadReadStatus): Promise<Responses.GetThreadReadStatus> {
         return await this.request('GetThreadReadStatus', params, 'post');
     }
 
-    async PutThreadRead(params: GetEndpoints.PutThreadRead): Promise<void> {
+    async PutThreadRead(params: PostEndpoints.PutThreadRead): Promise<void> {
         return await this.request('PutThreadRead', params, 'post');
     }
 
-    async GetForumReadStatus(params: GetEndpoints.GetForumReadStatus): Promise<Responses.GetForumReadStatus> {
+    async GetForumReadStatus(params: PostEndpoints.GetForumReadStatus): Promise<Responses.GetForumReadStatus> {
         return await this.request('GetForumReadStatus', params, 'post');
     }
 
-    async GetThemeSettings(params: GetEndpoints.GetThemeSettings): Promise<Responses.GetThemeSettings> {
+    async GetThemeSettings(params: PostEndpoints.GetThemeSettings): Promise<Responses.GetThemeSettings> {
         return await this.request('GetThemeSettings', params, 'post');
     }
 
-    async PutThemeSettings(params: GetEndpoints.PutThemeSettings): Promise<void> {
+    async PutThemeSettings(params: PostEndpoints.PutThemeSettings): Promise<void> {
         return await this.request('PutThemeSettings', params, 'post');
     }
 
-    async GetUserSupporterData(params: GetEndpoints.GetUserSupporterData): Promise<Responses.GetUserSupporterData> {
+    async GetUserSupporterData(params: PostEndpoints.GetUserSupporterData): Promise<Responses.GetUserSupporterData> {
         return await this.request('GetUserSupporterData', params, 'post');
     }
 
-    async PutUserSupporterNewSubscription(params: GetEndpoints.PutUserSupporterNewSubscription): Promise<Responses.PutUserSupporterNewSubscription> {
+    async PutUserSupporterNewSubscription(params: PostEndpoints.PutUserSupporterNewSubscription): Promise<Responses.PutUserSupporterNewSubscription> {
         return await this.request('PutUserSupporterNewSubscription', params, 'post');
     }
 
-    async PutGameBoostGrant(params: GetEndpoints.PutGameBoostGrant): Promise<void> {
+    async PutGameBoostGrant(params: PostEndpoints.PutGameBoostGrant): Promise<void> {
         return await this.request('PutGameBoostGrant', params, 'post');
     }
 
-    async PutAdvertiseContact(params: GetEndpoints.PutAdvertiseContact): Promise<void> {
+    async PutAdvertiseContact(params: PostEndpoints.PutAdvertiseContact): Promise<void> {
         return await this.request('PutAdvertiseContact', params, 'post');
     }
 
-    async GetTickets(params: GetEndpoints.GetTickets): Promise<Responses.GetTickets> {
+    async GetTickets(params: PostEndpoints.GetTickets): Promise<Responses.GetTickets> {
         return await this.request('GetTickets', params, 'post');
     }
 
-    async GetSeriesSettings(params: GetEndpoints.GetSeriesSettings): Promise<Responses.GetSeriesSettings> {
+    async GetSeriesSettings(params: PostEndpoints.GetSeriesSettings): Promise<Responses.GetSeriesSettings> {
         return await this.request('GetSeriesSettings', params, 'post');
     }
 
-    async GetUserBlocks(params: GetEndpoints.GetUserBlocks): Promise<Responses.GetUserBlocks> {
+    async GetUserBlocks(params: PostEndpoints.GetUserBlocks): Promise<Responses.GetUserBlocks> {
         return await this.request('GetUserBlocks', params, 'post');
     }
 
-    async PutUserBlock(params: GetEndpoints.PutUserBlock): Promise<void> {
+    async PutUserBlock(params: PostEndpoints.PutUserBlock): Promise<void> {
         return await this.request('PutUserBlock', params, 'post');
     }
 
-    async PutGame(params: GetEndpoints.PutGame): Promise<Responses.PutGame> {
+    async PutGame(params: PostEndpoints.PutGame): Promise<Responses.PutGame> {
         return await this.request('PutGame', params, 'post');
     }
 
-    async PutGameModerator(params: GetEndpoints.PutGameModerator): Promise<void> {
+    async PutGameModerator(params: PostEndpoints.PutGameModerator): Promise<void> {
         return await this.request('PutGameModerator', params, 'post');
     }
 
-    async PutGameModeratorDelete(params: GetEndpoints.PutGameModeratorDelete): Promise<void> {
+    async PutGameModeratorDelete(params: PostEndpoints.PutGameModeratorDelete): Promise<void> {
         return await this.request('PutGameModeratorDelete', params, 'post');
     }
 
-    async PutSeriesGame(params: GetEndpoints.PutSeriesGame): Promise<void> {
+    async PutSeriesGame(params: PostEndpoints.PutSeriesGame): Promise<void> {
         return await this.request('PutSeriesGame', params, 'post');
     }
 
-    async PutSeriesGameDelete(params: GetEndpoints.PutSeriesGameDelete): Promise<void> {
+    async PutSeriesGameDelete(params: PostEndpoints.PutSeriesGameDelete): Promise<void> {
         return await this.request('PutSeriesGameDelete', params, 'post');
     }
 
-    async PutSeriesModerator(params: GetEndpoints.PutSeriesModerator): Promise<void> {
+    async PutSeriesModerator(params: PostEndpoints.PutSeriesModerator): Promise<void> {
         return await this.request('PutSeriesModerator', params, 'post');
     }
 
-    async PutSeriesModeratorUpdate(params: GetEndpoints.PutSeriesModeratorUpdate): Promise<void> {
+    async PutSeriesModeratorUpdate(params: PostEndpoints.PutSeriesModeratorUpdate): Promise<void> {
         return await this.request('PutSeriesModeratorUpdate', params, 'post');
     }
 
-    async PutSeriesModeratorDelete(params: GetEndpoints.PutSeriesModeratorDelete): Promise<void> {
+    async PutSeriesModeratorDelete(params: PostEndpoints.PutSeriesModeratorDelete): Promise<void> {
         return await this.request('PutSeriesModeratorDelete', params, 'post');
     }
 
-    async PutSeriesSettings(params: GetEndpoints.PutSeriesSettings): Promise<void> {
+    async PutSeriesSettings(params: PostEndpoints.PutSeriesSettings): Promise<void> {
         return await this.request('PutSeriesSettings', params, 'post');
     }
 
-    async PutTicket(params: GetEndpoints.PutTicket): Promise<Responses.PutTicket> {
+    async PutTicket(params: PostEndpoints.PutTicket): Promise<Responses.PutTicket> {
         return await this.request('PutTicket', params, 'post');
     }
 
-    async PutTicketNote(params: GetEndpoints.PutTicketNote): Promise<void> {
+    async PutTicketNote(params: PostEndpoints.PutTicketNote): Promise<void> {
         return await this.request('PutTicketNote', params, 'post');
     }
 
-    async PutUserSocialConnection(params: GetEndpoints.PutUserSocialConnection): Promise<void> {
+    async PutUserSocialConnection(params: PostEndpoints.PutUserSocialConnection): Promise<void> {
         return await this.request('PutUserSocialConnection', params, 'post');
     }
 
-    async PutUserSocialConnectionDelete(params: GetEndpoints.PutUserSocialConnectionDelete): Promise<void> {
+    async PutUserSocialConnectionDelete(params: PostEndpoints.PutUserSocialConnectionDelete): Promise<void> {
         return await this.request('PutUserSocialConnectionDelete', params, 'post');
     }
 
-    async PutUserSocialConnectionSsoExchange(params: GetEndpoints.PutUserSocialConnectionSsoExchange): Promise<void> {
+    async PutUserSocialConnectionSsoExchange(params: PostEndpoints.PutUserSocialConnectionSsoExchange): Promise<void> {
         return await this.request('PutUserSocialConnectionSsoExchange', params, 'post');
     }
 
-    async PutUserUpdatePassword(params: GetEndpoints.PutUserUpdatePassword): Promise<void> {
+    async PutUserUpdatePassword(params: PostEndpoints.PutUserUpdatePassword): Promise<void> {
         return await this.request('PutUserUpdatePassword', params, 'post');
     }
 
-    async PutUserUpdateEmail(params: GetEndpoints.PutUserUpdateEmail): Promise<Responses.PutUserUpdateEmail> {
+    async PutUserUpdateEmail(params: PostEndpoints.PutUserUpdateEmail): Promise<Responses.PutUserUpdateEmail> {
         return await this.request('PutUserUpdateEmail', params, 'post');
     }
 
-    async PutUserUpdateName(params: GetEndpoints.PutUserUpdateName): Promise<Responses.PutUserUpdateName> {
+    async PutUserUpdateName(params: PostEndpoints.PutUserUpdateName): Promise<Responses.PutUserUpdateName> {
         return await this.request('PutUserUpdateName', params, 'post');
     }
 
-    async PutUserDelete(params: GetEndpoints.PutUserDelete): Promise<void> {
+    async PutUserDelete(params: PostEndpoints.PutUserDelete): Promise<void> {
         return await this.request('PutUserDelete', params, 'post');
     }
 
-    async PutCommentDelete(params: GetEndpoints.PutCommentDelete): Promise<void> {
+    async PutCommentDelete(params: PostEndpoints.PutCommentDelete): Promise<void> {
         return await this.request('PutCommentDelete', params, 'post');
     }
 
-    async PutCommentRestore(params: GetEndpoints.PutCommentRestore): Promise<void> {
+    async PutCommentRestore(params: PostEndpoints.PutCommentRestore): Promise<void> {
         return await this.request('PutCommentRestore', params, 'post');
     }
 
-    async PutThread(params: GetEndpoints.PutThread): Promise<Responses.PutThread> {
+    async PutThread(params: PostEndpoints.PutThread): Promise<Responses.PutThread> {
         return await this.request('PutThread', params, 'post');
     }
 
-    async PutThreadLocked(params: GetEndpoints.PutThreadLocked): Promise<void> {
+    async PutThreadLocked(params: PostEndpoints.PutThreadLocked): Promise<void> {
         return await this.request('PutThreadLocked', params, 'post');
     }
 
-    async PutThreadSticky(params: GetEndpoints.PutThreadSticky): Promise<void> {
+    async PutThreadSticky(params: PostEndpoints.PutThreadSticky): Promise<void> {
         return await this.request('PutThreadSticky', params, 'post');
     }
 
-    async PutThreadDelete(params: GetEndpoints.PutThreadDelete): Promise<void> {
+    async PutThreadDelete(params: PostEndpoints.PutThreadDelete): Promise<void> {
         return await this.request('PutThreadDelete', params, 'post');
     }
 }
