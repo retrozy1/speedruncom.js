@@ -63,7 +63,7 @@ for (const endpointName of postEndpointNames) {
 
     const parameters = [{
         name: 'params',
-        type: `GetEndpoints.${endpointName}`,
+        type: `PostEndpoints.${endpointName}`,
         hasQuestionToken: isEmpty
     }];
 
