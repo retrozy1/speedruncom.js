@@ -3,19 +3,29 @@
 import * as Enums from '../enums.js';
 import * as Interfaces from '../interfaces.js';
 import { AtLeastOne } from '../types.js';
-
 /**
- * Logs in. If 2FA is enabled first provide `name` & `password` then check `tokenChallengeSent` and repeat w/ token.
- * Recommended to use `login(username password)` and `setToken(token)` for automatic Client authentication.
+ * Logs in by giving a `set-cookie` header in a response with a `PHPSESSID` cookie.
+ * 
+ * The first (or only) call only must have only the `name` and `password` params.
+ * 
+ * If the account has 2 factor authentication (indicated by `loggedIn = false` and `tokenChallengeSent = true`), a 5-digit code will be sent to the account's email. Then a second call with `name`, `password`, and `token` (the token provided in the email) will authenticate.
  */
 export interface PutAuthLogin {
+
+    /**
+     * The username of the account.
+     */
     name: string;
+
+    /**
+     * The password of the account.
+     */
     password: string;
 
     /**
-     * On second attempt if 2FA is enabled.
+     * Five-digit token sent to the account's email after a call to an account that has 2 factor authentication.
      */
-    token: string;
+    token?: string;
 }
 
 // TODO PutAuthSignup
@@ -33,41 +43,76 @@ export interface PutSessionPing {}
 
 /**
  * Gets a game, series, or your account's audit log.
+ * 
  * If getting a game or series audit log, you must be a Super Moderator for it.
- * If getting your account's audit log, you cannot be banned.
+ * 
+ * If getting your account's audit log, your account must not be banned.
+ * 
+ * If multiple item ID parameters are called, it will fetch events concurrent to the items (ex. getting added as a moderator to the game).
  */
-export interface GetAuditLogList { //todo check if you can do multiple
+interface GetAuditLogList_Base {
 
     /**
-     * A single `EventType` string enum to filter by.
+     * An `EventType` of an event.
      */
     eventType?: Enums.EventType;
-    page?: number;
+
+    /**
+     * ID of a game.
+     */
     gameId?: string;
+
+    /**
+     * ID of a series.
+     */
     seriesId?: string;
 
     /**
-     * Every change that has happened to this user's account.
+     * ID of the user.
      */
     userId?: string;
+
+    /**
+     * The maximum amount of `AuditLogEntry`s to fetch.
+     */
+    limit?: number;
+
+    /**
+     * The audit log page, in relation to `limit`.
+     */
+    page?: number;
 }
 
+export type GetAuditLogList = AtLeastOne<GetAuditLogList_Base, 'gameId' | 'seriesId' | 'userId'>;
+
 /**
- * Get a game's settings. Must be at least a verifier on the game.
+ * Gets a game's settings.
+ * 
+ * You must be a verifier, moderator, or super moderator in the game.
  */
 export interface GetGameSettings {
+
+    /**
+     * ID of the game.
+     */
     gameId: string;
 }
 
 /**
- * Set a game's settings. Must be at least a moderator on the game.
+ * Set a game's settings.
+ * 
+ * You must be a moderator or super moderator in a game.
  */
 export interface PutGameSettings {
 
     /**
-     * Must be provided even though `settings` contains `id`.
+     * ID of the game.
      */
     gameId: string;
+
+    /**
+     * New game settings.
+     */
     settings: Interfaces.GameSettings;
 }
 
@@ -75,16 +120,36 @@ export interface PutGameSettings {
  * Creates a new category.
  */
 export interface PutCategory {
+
+    /**
+     * ID of the game.
+     */
     gameId: string;
-    category: Interfaces.Category
+
+    /**
+     * Settings for the new category.
+     */
+    category: Interfaces.Category;
 }
 
 /**
  * Updates an existing category.
  */
 export interface PutCategoryUpdate {
+
+    /**
+     * ID of the game the category is on.
+     */
     gameId: string;
+
+    /**
+     * ID of the category.
+     */
     categoryId: string;
+
+    /**
+     * New settings for the category.
+     */
     category: Interfaces.Category;
 }
 
@@ -92,7 +157,15 @@ export interface PutCategoryUpdate {
  * Archives a category.
  */
 export interface PutCategoryArchive {
+
+    /**
+     * ID of the game the category is on.
+     */
     gameId: string;
+
+    /**
+     * ID of the category to archive.
+     */
     categoryId: string;
 }
 
@@ -100,40 +173,92 @@ export interface PutCategoryArchive {
  * Restores an archived category.
  */
 export interface PutCategoryRestore {
+
+    /**
+     * ID of the game that the category to restore is on.
+     */
     gameId: string;
+
+    /**
+     * ID of the category to restore.
+     */
     categoryId: string;
 }
 
 /**
- * Re-orders categories.
+ * Re-orders game categories.
+ * 
+ * You must be a moderator or super moderator of the game.
  */
-export interface PutCategoryOrder {  
+export interface PutCategoryOrder {
+
+    /**
+     * ID of the game to order categories on.
+     */
     gameId: string;
-    categoryId: string;
+
+    /**
+     * The new order of categories.
+     */
+    categoryIds: string[];
 }
 
 /**
- * Creates a new level.
+ * Creates a new game Level.
+ * 
+ * You must be a moderator or super moderator of the game.
  */
 export interface PutLevel {
+
+    /**
+     * ID of the game to put the level on.
+     */
     gameId: string;
-    level: Interfaces.Level;
+
+    /**
+     * Settings for the new level.
+     */
+    level: Interfaces.NewLevel;
 }
 
 /**
  * Updates an existing level.
+ * 
+ * You must be a moderator or super moderator of the level's game.
  */
 export interface PutLevelUpdate {
+
+    /**
+     * ID of the game that the level to update is on.
+     */
     gameId: string;
+
+    /**
+     * ID of the level to update.
+     */
     levelId: string;
+
+    /**
+     * New settings for the level.
+     */
     level: Interfaces.Level;
 }
 
 /**
  * Archives a level.
+ * 
+ * You must be a moderator or super moderator of the level's game.
  */
 export interface PutLevelArchive {
+
+    /**
+     * ID of the game that the level to archive is on.
+     */
     gameId: string;
+
+    /**
+     * ID of the level to archive.
+     */
     levelId: string;
 }
 
@@ -141,24 +266,58 @@ export interface PutLevelArchive {
  * Restores an archived level.
  */
 export interface PutLevelRestore {
+
+    /**
+     * ID of the game that the level to restore is on.
+     * 
+     * You must be a moderator or super moderator of the level's game.
+     */
     gameId: string;
+
+    /**
+     * ID of the level to restore.
+     */
     levelId: string;
 }
 
 /**
- * Re-orders levels.
+ * Re-orders levels in a game.
+ * 
+ * You must be a moderator or super moderator of the level's game.
  */
 export interface PutLevelOrder {
+
+    /**
+     * ID of the game to order levels on.
+     */
     gameId: string;
-    levelId: string;
+
+    /**
+     * The new order of levels.
+     */
+    levelIds: string[];
 }
 
 /**
  * Creates a new variable.
+ * 
+ * You must be a moderator or super moderator of the variables's game.
  */
 export interface PutVariable {
+
+    /**
+     * ID of the game that the variable to create is on.
+     */
     gameId: string;
+
+    /**
+     * Settings for the new variable.
+     */
     variable: Interfaces.Variable;
+
+    /**
+     * Values for the new variable.
+     */
     values: Interfaces.Value[];
 }
 
@@ -900,11 +1059,7 @@ export interface PutGame { // TODO: needs param testing
 /**
  * Add a moderator to a game.
  */
-export interface PutGameModerator {
-    gameId: string;
-    userId: string;
-    level: Enums.GamePowerLevel;
-}
+export interface PutGameModerator extends Interfaces.GameModerator {}
 
 /**
  * Remove a moderator from a game.
