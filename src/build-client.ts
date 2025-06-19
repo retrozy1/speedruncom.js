@@ -1,11 +1,11 @@
-import { Project, SourceFile, InterfaceDeclaration } from 'ts-morph';
+import { Project, SourceFile, InterfaceDeclaration, OptionalKind, MethodDeclarationStructure } from 'ts-morph';
 import { execSync } from 'child_process';
 
 const project = new Project({
     tsConfigFilePath: "tsconfig.json",
 });
 
-const isInterfaceEmpty = (interfaceName: string, sourceFile: SourceFile): boolean => {
+const isInterfaceEmpty = (interfaceName: string, sourceFile: SourceFile) => {
     const declarations = sourceFile.getExportedDeclarations().get(interfaceName);
     if (!declarations || declarations.length === 0) return false;
 
@@ -14,7 +14,12 @@ const isInterfaceEmpty = (interfaceName: string, sourceFile: SourceFile): boolea
 
     const props = (decl as InterfaceDeclaration).getProperties();
     return props.length === 0;
-}
+};
+
+const isInterfaceAllOptional = (interfaceName: string, sourceFile: SourceFile) => {
+    const interfaceDecl = sourceFile.getInterfaceOrThrow(interfaceName);
+    return interfaceDecl.getProperties().every(prop => prop.hasQuestionToken());
+};
 
 const baseClient = project.getSourceFileOrThrow('src/BaseClient.ts');
 const clientFile = project.createSourceFile('src/Client.ts', baseClient.getFullText(), { overwrite: true });
@@ -29,57 +34,38 @@ const postEndpointNames = Array.from(postEndpointsFile.getExportedDeclarations()
 
 const responseNames = new Set(Array.from(responsesFile.getExportedDeclarations().keys()));
 
-for (const endpointName of getEndpointNames) {
-    const returnType = responseNames.has(endpointName) ? `Promise<Responses.${endpointName}>` : 'Promise<void>';
-    const isEmpty = isInterfaceEmpty(endpointName, getEndpointsFile);
-
-    const parameters = [{
+const makeMethod = (name: string, isStatic: boolean, returnType: string, isEmpty: boolean, interfaces: string, isOptional: boolean) => {
+    const method: OptionalKind<MethodDeclarationStructure> = {
+        name,
+        isStatic,
+        isAsync: true,
+        returnType,
+        statements: [`return await this.request('${name}', params);`]
+    }
+    if (!isEmpty) method.parameters = [{
         name: 'params',
-        type: `GetEndpoints.${endpointName}`,
-        hasQuestionToken: isEmpty
+        type: `${interfaces}.${name}`,
+        hasQuestionToken: isOptional
     }];
 
-    clientClass.addMethod({
-        name: endpointName,
-        isAsync: true,
-        parameters,
-        returnType,
-        statements: [`return await this.request('${endpointName}', params, 'post');`]
-    });
+    clientClass.addMethod(method);
+}
 
-    clientClass.addMethod({
-        name: endpointName,
-        isStatic: true,
-        isAsync: true,
-        parameters,
-        returnType,
-        statements: [`return await this.request('${endpointName}', params, 'get');`]
-    });
+for (const endpointName of getEndpointNames) {
+    const returnType = responseNames.has(endpointName) ? `Promise<Readonly<Responses.${endpointName}>>` : 'Promise<void>';
+    const isEmpty = isInterfaceEmpty(endpointName, getEndpointsFile);
+    const isAllOptional = isInterfaceAllOptional(endpointName, getEndpointsFile);
+
+    makeMethod(endpointName, false, returnType, isEmpty, 'GetEndpoints', isAllOptional);
+    makeMethod(endpointName, true, returnType, isEmpty, 'GetEndpoints', isAllOptional);
 }
 
 for (const endpointName of postEndpointNames) {
-    const returnType = responseNames.has(endpointName) ? `Promise<Responses.${endpointName}>` : 'Promise<void>';
+    const returnType = responseNames.has(endpointName) ? `Promise<Readonly<Responses.${endpointName}>>` : 'Promise<void>';
     const isEmpty = isInterfaceEmpty(endpointName, postEndpointsFile);
+    const isAllOptional = isInterfaceAllOptional(endpointName, postEndpointsFile);
 
-    const parameters = [{
-        name: 'params',
-        type: `PostEndpoints.${endpointName}`,
-        hasQuestionToken: isEmpty
-    }];
-
-    clientClass.addMethod({
-        name: endpointName,
-        isAsync: true,
-        parameters,
-        returnType,
-        statements: [`return await this.request('${endpointName}', params, 'post');`]
-    });
+    makeMethod(endpointName, false, returnType, isEmpty, 'PostEndpoints', isAllOptional);
 }
 
 clientFile.saveSync();
-
-execSync('git config user.name "github-actions[bot]"');
-execSync('git config user.email "github-actions[bot]@users.noreply.github.com"');
-execSync('git add .');
-execSync(`git commit -m "Updated Client.ts"`);
-execSync('git push');

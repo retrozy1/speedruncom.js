@@ -3,9 +3,12 @@ import * as GetEndpoints from './endpoints/endpoints.get.js';
 import * as PostEndpoints from './endpoints/endpoints.post.js'
 import * as Responses from './responses.js';
 
-const LANG = 'en';
-const ACCEPT = 'application/json';
 const BASE_USER_AGENT = 'speedrun.js';
+const BASE_URL = 'https://www.speedrun.com/api/v2/';
+const HEADERS = {
+    'Accept-Language': 'en',
+    'Accept': 'application/json'
+}
 
 const isBrowser = typeof window !== 'undefined';
 
@@ -14,8 +17,13 @@ const objectToBase64 = (obj: object) => {
     return Buffer.from(jsonString).toString('base64');
 }
 
+interface config {
+    PHPSESSID?: string;
+    userAgent?: string;
+}
+
 class APIError extends Error {
-    public status: number;
+    status: number;
 
     constructor(message: string, status: number) {
         super(message);
@@ -26,74 +34,65 @@ class APIError extends Error {
 
 export default class Client {
 
-    axiosClient: AxiosInstance = axios.create({
-        baseURL: 'https://www.speedrun.com/api/v2/',
+    /**
+     * `AxiosInstance` used on instance-called methods (called with `POST`).
+     */
+    axiosClient = axios.create({
+        baseURL: BASE_URL,
+        method: 'POST',
         withCredentials: true,
-        headers: {
-            'Accept-Language': LANG,
-            'Accept': ACCEPT,
-        }
+        headers: HEADERS
     });
 
-    static axiosClient: AxiosInstance = axios.create({
-        baseURL: 'https://www.speedrun.com/api/v2/',
-        headers: {
-            'Accept-Language': LANG,
-            'Accept': ACCEPT,
-        }
+    /**
+     * `AxiosInstance` used on Client-called methods (called with `GET`).
+     */
+    static axiosClient = axios.create({
+        baseURL: BASE_URL,
+        method: 'GET',
+        headers: HEADERS
     });
 
-    user!: string;
-    pass!: string;
+    private username!: string;
+    private password!: string;
 
-    constructor({ PHPSESSID, userAgent }: { PHPSESSID?: string, userAgent?: string }) {
-        if (!isBrowser) this.axiosClient.defaults.headers.common['User-Agent'] = BASE_USER_AGENT + (userAgent ? `/${userAgent}` : '');
+    private headers = this.axiosClient.defaults.headers.common;
 
-        if (PHPSESSID) {
-            if (isBrowser) {
-                console.error('You cannot use a PHPSESSID to authenticate in a browser environment.');
-            } else {
-                this.axiosClient.defaults.headers.common['Cookie'] = `PHPSESSID=${PHPSESSID}`;
-            }
-        }
+    constructor(config?: config) {
+        if (config) this.config(config);
 
         this.axiosClient.interceptors.response.use(
             (response: AxiosResponse) => response,
             (error: AxiosError) => {
-                if (error.response) {
-                    const data = error.response?.data as { error?: string };
-                    throw new APIError(data?.error || 'Unknown error', error.response.status);
-                }
+                const data = error.response.data as { error?: string };
+                throw new APIError(data.error || 'Unknown error', error.response.status);
             }
         );
     }
 
-    async request<T>(endpoint: string, params: object = {}, method: string = 'post'): Promise<T> {
-        let response: any;
-        if (method === 'post') {
-            response = await this.axiosClient.post<T>(endpoint, params);
-        } else {
-            response = await this.axiosClient.get(`${endpoint}?_r=${objectToBase64(params)}`);
+    config(config: config) {
+        if (!isBrowser) this.headers['User-Agent'] = BASE_USER_AGENT + (config.userAgent ? `/${config.userAgent}` : '');
+
+        if (config.PHPSESSID) {
+            if (isBrowser) {
+                console.error('You cannot use a PHPSESSID to authenticate in a browser environment.');
+            } else {
+                this.headers['Cookie'] = `PHPSESSID=${config.PHPSESSID}`;
+            }
         }
+    }
+
+    async request<T>(endpoint: string, params: object = {}): Promise<T> {
+        const response = await this.axiosClient.post<T>(endpoint, params);
         
         const cookie = response.headers['set-cookie'];
-        if (cookie && !isBrowser) this.axiosClient.defaults.headers.common['Cookie'] = `PHPSESSID=${cookie[0].split('=')[1].split(';')[0]}`;
+        if (cookie && !isBrowser) this.headers['Cookie'] = cookie[0].split(';')[0];
 
         return response.data;
     }
 
-    static async request<T>(endpoint: string, params: object = {}, method: string = 'post'): Promise<T> {
-        let response: any;
-        if (method === 'post') {
-            response = await this.axiosClient.post<T>(endpoint, params);
-        } else {
-            response = await this.axiosClient.get(`${endpoint}?_r=${objectToBase64(params)}`);
-        }
-        
-        const cookie = response.headers['set-cookie'];
-        if (cookie && !isBrowser) this.axiosClient.defaults.headers.common['Cookie'] = `PHPSESSID=${cookie[0].split('=')[1].split(';')[0]}`;
-
-        return response.data;
+    static async request<T>(endpoint: string, params: object): Promise<T> {
+        return (await this.axiosClient.get(`${endpoint}?_r=${objectToBase64(params)}`)).data;
     }
 
     //Built-in endpoints for auth
@@ -103,8 +102,8 @@ export default class Client {
      * If the account has two factor authentication, you have to use `setToken` with the token sent to the account's email address.
      */
     async login(username: string, password: string) {
-        this.user = username;
-        this.pass = password;
+        this.username = username;
+        this.password = password;
 
         return await this.request('PutAuthLogin', {
             name: username,
@@ -118,8 +117,8 @@ export default class Client {
      */
     async setToken(token: string) {
         return await this.request('PutAuthLogin', {
-            name: this.user,
-            password: this.pass,
+            name: this.username,
+            password: this.password,
             token
         });
     }
@@ -130,9 +129,8 @@ export default class Client {
     async logout() {
         if (isBrowser) return await this.request('PutAuthLogout');
 
-        delete this.axiosClient.defaults.headers.common['Cookie'];
+        delete this.headers['Cookie'];
     }
 
     // Endpoints (auto-generated with build-client)
-
 }
