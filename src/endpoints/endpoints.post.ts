@@ -311,9 +311,13 @@ export interface PutVariable {
     gameId: string;
 
     /**
-     * `Variable`
+     * Settings for the new variable.
      */
     variable: Interfaces.Variable;
+
+    /**
+     * Values for the new variable.
+     */
     values: Interfaces.Value[];
 }
 

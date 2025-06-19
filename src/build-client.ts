@@ -1,5 +1,4 @@
 import { Project, SourceFile, InterfaceDeclaration, OptionalKind, MethodDeclarationStructure } from 'ts-morph';
-import { execSync } from 'child_process';
 
 const project = new Project({
     tsConfigFilePath: "tsconfig.json",
