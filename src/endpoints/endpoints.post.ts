@@ -1207,7 +1207,23 @@ export interface PutUserDelete {
 }
 
 /**
- * Delete a comment.
+ * Updates a comment.
+ */
+export interface PutCommentUpdate {
+    
+    /**
+     * ID of the comment to update.
+     */
+    commentId: string;
+
+    /**
+     * New text of the comment.
+     */
+    text: string;
+}
+
+/**
+ * Deletes a comment.
  */
 export interface PutCommentDelete {
     commentId: string;
