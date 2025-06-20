@@ -1,6 +1,6 @@
 {
   "name": "speedruncom.js",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "WIP NodeJS module for Speedrun's version 2 API.",
   "type": "module",
   "author": {
@@ -16,7 +16,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "clean": "rimraf dist src/Client.ts",
-    "build": "node --loader ts-node/esm src/build-client.ts && tsc"
+    "prepare": "tsx src/build-client.ts",
+    "build": "tsc"
   },
   "devDependencies": {
     "@types/node": "^22.15.24",

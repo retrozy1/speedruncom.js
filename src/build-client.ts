@@ -1,4 +1,4 @@
-import { Project, SourceFile, InterfaceDeclaration, OptionalKind, MethodDeclarationStructure } from 'ts-morph';
+import { Project, SourceFile, InterfaceDeclaration, OptionalKind, MethodDeclarationStructure, SyntaxKind } from 'ts-morph';
 
 const project = new Project({
     tsConfigFilePath: "tsconfig.json",
@@ -15,9 +15,16 @@ const isInterfaceEmpty = (interfaceName: string, sourceFile: SourceFile) => {
     return props.length === 0;
 };
 
-const isInterfaceAllOptional = (interfaceName: string, sourceFile: SourceFile) => {
-    const interfaceDecl = sourceFile.getInterfaceOrThrow(interfaceName);
-    return interfaceDecl.getProperties().every(prop => prop.hasQuestionToken());
+const isInterfaceAllOptional = (name: string, sourceFile: SourceFile) => {
+    const iface = sourceFile.getInterface(name);
+    if (iface) {
+        return iface.getProperties().some(p => !p.hasQuestionToken());
+    }
+
+    const typeNode = sourceFile.getTypeAliasOrThrow(name).getType();
+    return typeNode
+        .getProperties()
+        .some(p => !p.isOptional());
 };
 
 const baseClient = project.getSourceFileOrThrow('src/BaseClient.ts');
@@ -39,7 +46,7 @@ const makeMethod = (name: string, isStatic: boolean, returnType: string, isEmpty
         isStatic,
         isAsync: true,
         returnType,
-        statements: [`return await this.request('${name}', params);`]
+        statements: [`return await this.request('${name}'${!isEmpty ? ', params' : ''});`]
     }
     if (!isEmpty) method.parameters = [{
         name: 'params',

@@ -3,7 +3,7 @@ import * as GetEndpoints from './endpoints/endpoints.get.js';
 import * as PostEndpoints from './endpoints/endpoints.post.js'
 import * as Responses from './responses.js';
 
-const BASE_USER_AGENT = 'speedrun.js';
+const BASE_USER_AGENT = 'speedruncom.js';
 const BASE_URL = 'https://www.speedrun.com/api/v2/';
 const HEADERS = {
     'Accept-Language': 'en',
@@ -91,7 +91,7 @@ export default class Client {
         return response.data;
     }
 
-    static async request<T>(endpoint: string, params: object): Promise<T> {
+    static async request<T>(endpoint: string, params: object = {}): Promise<T> {
         return (await this.axiosClient.get(`${endpoint}?_r=${objectToBase64(params)}`)).data;
     }
 
