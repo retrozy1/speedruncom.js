@@ -61,7 +61,7 @@ export interface GetGameRecordHistory {
     runList: Interfaces.GameRun[];
 }
 
-export interface GetSearch { //TODO add platform, TODO this is probably inacurate i think the users are much less detailed + more
+export interface GetSearch {
     gameList: Interfaces.Game[];
     newsList: Interfaces.GameNews[];
     pageList: Interfaces.Article[];
@@ -300,33 +300,6 @@ export interface GetRun {
     users: Interfaces.User[];
     values: Interfaces.Value[];
     variables: Interfaces.Variable[];
-}
-
-export interface GetSearch {
-    gameList: Interfaces.Game[];
-    newsList: Interfaces.GameNews[];
-    pageList: Interfaces.Article[];
-    seriesList: Interfaces.Series[];
-    userList: Interfaces.User[];
-    challengeList: Interfaces.Challenge[];
-}
-
-export interface GetSeriesList {
-    seriesList: Interfaces.Series[];
-    pagination: Interfaces.Pagination;
-}
-
-export interface GetSeriesSummary {
-    series: Interfaces.Series;
-    forum: Interfaces.Forum;
-    gameList: Interfaces.Game[];
-    moderatorList: Interfaces.SeriesModerator[];
-    theme: Interfaces.Theme;
-    threadList: Interfaces.Thread[];
-    userList: Interfaces.User[];
-    gameCount: number;
-    streamCount: number;
-    threadCount: number;
 }
 
 export interface GetStreamList {
