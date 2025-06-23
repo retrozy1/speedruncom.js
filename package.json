@@ -16,8 +16,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "clean": "rimraf dist src/Client.ts",
-    "prepare": "tsx src/build-client.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "prepare": "tsx src/build-client.ts && npm run build"
   },
   "devDependencies": {
     "@types/node": "^22.15.24",
