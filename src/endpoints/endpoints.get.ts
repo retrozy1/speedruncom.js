@@ -641,15 +641,32 @@ export interface GetUserModeration {
 }
 
 /**
- * Get a list of comments on an item.
+ * Get a list of comments on an item, and data of the parent.
  */
 export interface GetCommentList {
+
+    /**
+     * ID of the parent item to fetch.
+     */
     itemId: string;
 
     /**
      * `ItemType` of the item referenced in `itemId`.
      */
     itemType: Enums.ItemType;
+
+    /**
+     * The maximum amount of `Comment`s per page.
+     * 
+     * @max 100
+     * @default 100
+     */
+    limit?: number;
+
+    /**
+     * The comment page, in relation to `limit`.
+     */
+    page?: number;
 }
 
 /**
