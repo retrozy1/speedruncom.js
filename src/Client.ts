@@ -17,12 +17,12 @@ const objectToBase64 = (obj: object) => {
     return Buffer.from(jsonString).toString('base64');
 }
 
-interface config {
+export interface config {
     PHPSESSID?: string;
     userAgent?: string;
 }
 
-class APIError extends Error {
+export class APIError extends Error {
     status: number;
 
     constructor(message: string, status: number) {
@@ -93,34 +93,6 @@ export default class Client {
 
     static async request<T>(endpoint: string, params: object = {}): Promise<T> {
         return (await this.axiosClient.get(`${endpoint}?_r=${objectToBase64(params)}`)).data;
-    }
-
-    //Built-in endpoints for auth
-
-    /**
-     * Attempts to authorize your cookies if using a browser, or authorizes this Client if otherwise.
-     * If the account has two factor authentication, you have to use `setToken` with the token sent to the account's email address.
-     */
-    async login(username: string, password: string) {
-        this.username = username;
-        this.password = password;
-
-        return await this.request('PutAuthLogin', {
-            name: username,
-            password
-        });
-    }
-
-    /**
-     * Attempts to authorize your cookies if using a browser, or authorizes this Client if otherwise, with the token that `login()` sent to the account's email address.
-     * @param token The 5-digit code sent to your email after a successful `login()`.
-     */
-    async setToken(token: string) {
-        return await this.request('PutAuthLogin', {
-            name: this.username,
-            password: this.password,
-            token
-        });
     }
 
     /**
