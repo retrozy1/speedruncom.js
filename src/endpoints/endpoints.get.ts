@@ -67,12 +67,12 @@ interface GetGameData_Base {
     /**
      * ID of the game.
      */
-    gameId?: string;
+    gameId: string;
 
     /**
      * Game page URL.
      */
-    gameUrl?: string;
+    gameUrl: string;
 }
 
 export type GetGameData = AtLeastOne<GetGameData_Base, 'gameId' | 'gameUrl'>;
@@ -87,12 +87,12 @@ interface GetGameSummary_Base {
     /**
      * ID of the game.
      */
-    gameId?: string;
+    gameId: string;
 
     /**
      * Subpath URL of the game.
      */
-    gameUrl?: string;
+    gameUrl: string;
 }
 
 export type GetGameSummary = AtLeastOne<GetGameSummary_Base, 'gameId' | 'gameUrl'>;
@@ -381,10 +381,20 @@ export interface GetArticleList {
 /**
  * Gets a specific site article.
  */
-export interface GetArticle {
-    id?: string;
-    slug?: string;
+interface GetArticle_Base {
+
+    /**
+     * ID of the article to fetch.
+     */
+    id: string;
+
+    /**
+     * Slug of the article to fetch.
+     */
+    slug: string;
 }
+
+export type GetArticle = AtLeastOne<GetArticle_Base>;
 
 /**
  * Gets a list of games.
@@ -658,8 +668,9 @@ export interface GetCommentList {
     /**
      * The maximum amount of `Comment`s per page.
      * 
-     * @max 100
-     * @default 100
+     * When this is >= 500 but <= 1000, it will fetch a maximum of 500 `Run`s, but when over 1000 it will return a maximum of 20 runs.
+     * @max 500
+     * @default 20
      */
     limit?: number;
 

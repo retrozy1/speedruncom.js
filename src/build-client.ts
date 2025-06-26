@@ -18,13 +18,13 @@ const isInterfaceEmpty = (interfaceName: string, sourceFile: SourceFile) => {
 const isInterfaceAllOptional = (name: string, sourceFile: SourceFile) => {
     const iface = sourceFile.getInterface(name);
     if (iface) {
-        return iface.getProperties().some(p => !p.hasQuestionToken());
+        return iface.getProperties().every(p => p.hasQuestionToken());
     }
 
     const typeNode = sourceFile.getTypeAliasOrThrow(name).getType();
     return typeNode
         .getProperties()
-        .some(p => !p.isOptional());
+        .every(p => p.isOptional());
 };
 
 const baseClient = project.getSourceFileOrThrow('src/BaseClient.ts');
