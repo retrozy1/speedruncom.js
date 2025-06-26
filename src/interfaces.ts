@@ -1231,12 +1231,12 @@ export interface RunSettings {
     time?: RunTime;
     timeWithLoads?: RunTime;
     igt?: RunTime;
-    platformId: string;
+    platformId?: string;
     emulator: boolean;
-    video: string;
-    comment: string;
+    video?: string;
+    comment?: string;
     date: number;
-    values: VariableValue[];
+    values?: VariableValue[];
 }
 
 export interface Series {
