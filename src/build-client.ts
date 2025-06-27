@@ -1,4 +1,4 @@
-import { Project, SourceFile, InterfaceDeclaration, OptionalKind, MethodDeclarationStructure, SyntaxKind } from 'ts-morph';
+import { Project, SourceFile, Node, OptionalKind, MethodDeclarationStructure } from 'ts-morph';
 
 const project = new Project({
     tsConfigFilePath: "tsconfig.json",
@@ -9,16 +9,19 @@ const isInterfaceEmpty = (interfaceName: string, sourceFile: SourceFile) => {
     if (!declarations || declarations.length === 0) return false;
 
     const decl = declarations[0];
-    if (!decl || !decl.getKindName || decl.getKindName() !== "InterfaceDeclaration") return false;
+    if (!Node.isInterfaceDeclaration(decl)) return false;
 
-    const props = (decl as InterfaceDeclaration).getProperties();
-    return props.length === 0;
+    const type = decl.getType();
+    const allProperties = type.getProperties();
+
+    return allProperties.length === 0;
 };
+
 
 const isInterfaceAllOptional = (name: string, sourceFile: SourceFile) => {
     const iface = sourceFile.getInterface(name);
     if (iface) {
-        return iface.getProperties().every(p => p.hasQuestionToken());
+        return iface.getType().getProperties().every(p => p.isOptional());
     }
 
     const typeNode = sourceFile.getTypeAliasOrThrow(name).getType();
