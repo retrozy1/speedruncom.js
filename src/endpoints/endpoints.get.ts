@@ -210,6 +210,11 @@ export interface GetLatestLeaderboard {
      * @default 25
      */
     limit?: number;
+
+    /**
+     * The run list page, in relation to `limit`.
+     */
+    page?: number;
 }
 
 /**
@@ -377,6 +382,11 @@ export interface GetGameList {
      * @default 500
      */
     limit?: number;
+
+    /**
+     * The game list page, in relation to `limit`.
+     */
+    page?: number;
 }
 
 /**
@@ -408,6 +418,11 @@ export interface GetSeriesList {
      * @default 500
      */
     limit?: number;
+
+    /**
+     * The leaderboard page, in relation to `limit`.
+     */
+    page?: number;
 }
 
 /**
@@ -434,17 +449,17 @@ export interface GetGameLevelSummary {
     params?: Interfaces.LeaderboardParams;
 
     /**
-     * The leaderboard page, in relation to `limit`.
-     */
-    page?: number;
-
-    /**
      * The limit of Runs per page.
      * 
      * @max Unknown - likely around 99999.
      * @default Unknown - likely around 99999.
      */
     limit?: number;
+
+    /**
+     * The leaderboard page, in relation to `limit`.
+     */
+    page?: number;
 }
 
 /**
