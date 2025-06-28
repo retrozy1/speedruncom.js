@@ -463,6 +463,12 @@ export interface PutResource {
  */
 export interface PutResourceUpdate {
     // check all check base64 encoding of content probably a `resourceId`
+
+    /**
+     * ID of the resource to update.
+     */
+    resourceId: string;
+
     gameId: string;
 
     /**
