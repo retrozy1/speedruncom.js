@@ -15,10 +15,10 @@
   },
   "types": "dist/index.d.ts",
   "scripts": {
-    "clean": "rimraf dist src/Client.ts",
+    "clean": "rimraf dist",
     "build": "tsc",
-    "render": "tsx src/build-client.ts",
-    "prepare": "npm run render && npm run build"
+    "render": "node dist/build-client.js",
+    "prepare": "npm run build && npm run render"
   },
   "devDependencies": {
     "@types/node": "^22.15.24",
