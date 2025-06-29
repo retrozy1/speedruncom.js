@@ -535,9 +535,11 @@ export interface PutRunDelete {
 /**
  * Assigns a verification level `RunStatus` to a run.
  */
+//TODO
 export interface PutRunVerification {
     runId: string;
     verified: Enums.RunStatus;
+    reason?: string;
 }
 
 /**
