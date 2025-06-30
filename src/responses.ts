@@ -284,6 +284,12 @@ export interface GetNewsList {
     users: Interfaces.User[];
 }
 
+export interface GetResource {
+    resource: Interfaces.Resource;
+    game: Interfaces.Game[];
+    users: Interfaces.User[];
+}
+
 export interface GetResourceList {
     resourceList: Interfaces.Resource[];
     users: Interfaces.User[];
