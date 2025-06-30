@@ -512,6 +512,13 @@ export interface GetNews {
 }
 
 /**
+ * Gets a single resource.
+ */
+export interface GetResource {
+    resourceId: string;
+}
+
+/**
  * Get a list of a game's resources.
  */
 export interface GetResourceList {
