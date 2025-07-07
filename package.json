@@ -13,9 +13,9 @@
     "axios": "^1.9.0",
     "ts-morph": "^26.0.0"
   },
-  "types": "dist/index.d.ts",
+  "types": "lib/index.d.ts",
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rimraf lib",
     "build": "tsc",
     "render": "tsx src/build-client.ts",
     "prepare": "npm run render && npm run build"
@@ -26,5 +26,5 @@
     "tsx": "^4.20.3",
     "typescript": "^5.8.3"
   },
-  "main": "dist/index.js"
+  "main": "lib/index.js"
 }
