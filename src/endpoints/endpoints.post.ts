@@ -515,8 +515,8 @@ export interface GetModerationRuns {
     verified?: Enums.RunStatus;
     verifiedById?: string;
     videoState?: Enums.VideoState;
-    limit?: number;
-    page?: number;
+    limit: number;
+    page: number;
 }
 
 /**
