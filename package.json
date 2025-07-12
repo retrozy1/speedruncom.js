@@ -17,8 +17,7 @@
   "scripts": {
     "clean": "rimraf lib",
     "build": "tsc",
-    "render": "tsx src/build-client.ts",
-    "prepare": "npm run render && npm run build"
+    "prepare": "npm run build"
   },
   "devDependencies": {
     "@types/node": "^22.15.24",
