@@ -25,8 +25,6 @@ export default class Client {
     }
 
     async post<T extends keyof Endpoints, A extends Endpoints[T]>(endpoint: T, params: A, axiosConfig?: AxiosRequestConfig) {
-        type Response = T extends keyof Responses ? T : void;
-
-        return await this.axiosClient.post<Response>(endpoint, params, axiosConfig);
+        return await this.axiosClient.post<T extends keyof Responses ? Responses[T] : void>(endpoint, params, axiosConfig);
     }
 }

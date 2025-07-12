@@ -361,7 +361,7 @@ export default interface Responses {
         pagination: Interfaces.Pagination;
     };
 
-    // POST/PUT/other endpoints
+    // POST
 
     GetAuditLogList: {
         auditLogList: Interfaces.AuditLogEntry[];
