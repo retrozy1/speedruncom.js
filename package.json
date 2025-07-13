@@ -1,6 +1,6 @@
 {
   "name": "speedruncom.js",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "WIP NodeJS module for Speedrun's version 2 API.",
   "type": "module",
   "author": {
