@@ -364,7 +364,7 @@ export interface CommentableProperties {
 }
 
 export interface Commentable {
-    readonly itemType: Enums.ItemType;
+    readonly itemType: Enums.CommentableItemType;
     readonly itemId: string;
     readonly properties: CommentableProperties;
     /**Permissions of the logged in user. If not logged in; `canPostComments` is `false`.*/
@@ -373,7 +373,7 @@ export interface Commentable {
 
 export interface Comment {
     readonly id: string;
-    readonly itemType: Enums.ItemType;
+    readonly itemType: Enums.ItemType.Comment;
     readonly itemId: string;
     readonly date: number;
     readonly userId: string;
@@ -385,7 +385,7 @@ export interface Comment {
 }
 
 export interface Like {
-    readonly itemType: Enums.ItemType;
+    readonly itemType: Enums.ItemType.Comment;
     readonly itemId: string;
     readonly userId: string;
     readonly date: number;

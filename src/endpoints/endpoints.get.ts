@@ -606,9 +606,9 @@ export default interface GETEndpoints {
         itemId: string;
 
         /**
-         * `ItemType` of the item referenced in `itemId`.
+         * `CommentableItemType` of the item referenced in `itemId`.
          */
-        itemType: Enums.ItemType;
+        itemType: Enums.CommentableItemType;
 
         /**
          * The maximum amount of `Comment`s per page.

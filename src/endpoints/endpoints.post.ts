@@ -792,7 +792,7 @@ export default interface POSTEndpoints {
      */
     GetCommentable: {
         itemId: string;
-        itemType: Enums.ItemType;
+        itemType: Enums.CommentableItemType;
     };
 
     /**
@@ -800,7 +800,7 @@ export default interface POSTEndpoints {
      */
     PutComment: {
         itemId: string;
-        itemType: Enums.ItemType;
+        itemType: Enums.CommentableItemType;
         text: string;
     };
 
@@ -815,9 +815,9 @@ export default interface POSTEndpoints {
         itemId: string;
 
         /**
-         * `ItemType` of the item you are liking or removing your like from.
+         * Comment `ItemType`.
          */
-        itemType: Enums.ItemType;
+        itemType: Enums.ItemType.Comment;
 
         /**
          * Whether you are liking a comment (`true`) or removing your like from a comment (`false`).
@@ -840,7 +840,7 @@ export default interface POSTEndpoints {
         /**
          * `itemType` of the item you are modifying the comment settings on.
          */
-        itemType: Enums.ItemType;
+        itemType: Enums.CommentableItemType;
         disabled: boolean;
         locked: boolean;
     };

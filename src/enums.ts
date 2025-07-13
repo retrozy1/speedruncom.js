@@ -35,6 +35,14 @@ export enum ItemType {
     ChallengeRun
 }
 
+export enum CommentableItemType {
+    Run = 2,
+    Thread = 7,
+    News = 27,
+    Article = 30,
+    ChallengeRun = 33
+}
+
 export enum ForumType {
     FrontPage = 1,
     Supporter,
