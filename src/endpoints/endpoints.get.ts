@@ -225,6 +225,19 @@ export default interface GETEndpoints {
          * ID of the user.
          */
         userId: string;
+
+        /**
+         * The maximum amount of comments to fetch.
+         * 
+         * @max Unknown - likely around 99999.
+         * @default Unknown - likely around 99999.
+         */
+        limit?: number;
+
+        /**
+         * The comment list page, in relation to `limit`.
+         */
+        page?: number;
     };
 
     /**
@@ -236,6 +249,19 @@ export default interface GETEndpoints {
          * ID of the user.
          */
         userId: string;
+
+        /**
+         * The maximum amount of comments to fetch.
+         * 
+         * @max Unknown - likely around 99999.
+         * @default Unknown - likely around 99999.
+         */
+        limit?: number;
+
+        /**
+         * The thread list page, in relation to `limit`.
+         */
+        page?: number;
     };
 
     /**
