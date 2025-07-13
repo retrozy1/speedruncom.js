@@ -732,24 +732,6 @@ export default interface POSTEndpoints {
         regenerate: boolean;
     };
 
-    GetUserFollowers: {
-        userId: string;
-        limit?: number;
-        page?: number;
-    };
-
-    GetUserFollowingGames: {
-        userId: string;
-        limit?: number;
-        page?: number;
-    };
-
-    GetUserFollowingUsers: {
-        userId: string;
-        limit?: number;
-        page?: number;
-    };
-
     /**
      * Get a list of games that a user has boosted.
      */

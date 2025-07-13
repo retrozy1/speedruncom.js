@@ -276,6 +276,75 @@ export default interface GETEndpoints {
     };
 
     /**
+     * Gets users following a user.
+     */
+    GetUserFollowers: {
+
+        /**
+         * ID of the user to get followers of.
+         */
+        userId: string;
+
+        /**
+         * The maximum amount of followers to fetch.
+         * 
+         * @max Unknown - likely around 99999.
+         * @default Unknown - likely around 99999.
+         */
+        limit?: number;
+
+        /**
+         * The follower list page, in relation to `limit`.
+         */
+        page?: number;
+    };
+
+    /**
+     * Gets games that a user follows.
+     */
+    GetUserFollowingGames: {
+
+        /**
+         * ID of the user to fetch followed games from.
+         */
+        userId: string;
+
+        /**
+         * The maximum amount of games to fetch.
+         * 
+         * @max Unknown - likely around 99999.
+         * @default Unknown - likely around 99999.
+         */
+        limit?: number;
+
+        /**
+         * The game list page, in relation to `limit`.
+         */
+        page?: number;
+    };
+
+    GetUserFollowingUsers: {
+
+        /**
+         * ID of the user to fetch followed users from.
+         */
+        userId: string;
+
+        /**
+         * The maximum amount of users to fetch.
+         * 
+         * @max Unknown - likely around 99999.
+         * @default Unknown - likely around 99999.
+         */
+        limit?: number;
+
+        /**
+         * The users list page, in relation to `limit`.
+         */
+        page?: number;
+    };
+
+    /**
      * Gets all Titles in the site.
      */
     GetTitleList: {};
