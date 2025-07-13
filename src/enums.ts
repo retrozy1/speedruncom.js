@@ -81,14 +81,20 @@ export enum SitePowerLevel {
 
 export enum EventType {
     None = "",
+    CategoryArchived = "category-archived",
     CategoryCreated = "category-created",
+    
+    /**
+     * @deprecated Categories can only be archived as of the site revamp.
+     */
     CategoryRemoved = "category-removed",
     CategoryRestored = "category-restored",
     CategoryUpdated = "category-updated",
     CommentCreated = "comment-created",
     CommentDeleted = "comment-deleted",
+
     /**
-     * New comment updates are not recognized as events as of a few years ago.
+     * @deprecated New comment updates are not recognized as events as of a few years ago.
      */
     CommentUpdated = "comment-updated",
     GameCoversUpdated = "game-covers-updated",
@@ -102,7 +108,56 @@ export enum EventType {
     GameRestored = "game-restored",
     GameUpdated = "game-updated",
     GameRequestReviewed = "gamerequest-reviewed",
-    LevelCreated = "level-created"
+    GuideCreated = 'guide-created',
+    GuideDeleted = 'guide-deleted',
+    LevelArchived = 'level-archived',
+    LevelCreated = 'level-created',
+
+    /**
+     * @deprecated Levels can only be archived as of the site revamp.
+     */
+    LevelRemoved = 'level-removed',
+    LevelUpdated = 'level-updated',
+    ResourceCreated = 'resource-created',
+    ResourceDeleted = 'resource-deleted',
+    ResourceUpdated = 'resource-updated',
+    RunCommentCreated = 'run-comment-created',
+    RunCommentDeleted = 'run-comment-deleted',
+    RunCommentUpdated = 'run-comment-updated',
+    RunAtRiskUpdated = 'run-atrisk-updated',
+    RunCreated = 'run-created',
+    RunDeleted = 'run-deleted',
+    RunReviewed = 'run-reviewed',
+    RunUpdated = 'run-updated',
+    ThemeCreated = 'theme-created',
+    ThemeDeleted = 'theme-deleted',
+    ThemeFileDeleted = 'theme-file-deleted',
+    ThemeFileUpdated = 'theme-file-updated',
+    ThemeUpdated = 'theme-updated',
+    ThreadCreated = 'thread-created',
+    UserApiKeyUpdated = 'user-apikey-updated',
+    UserBanned = 'user-banned',
+    UserCommentsWiped = 'user-comments-wiped',
+    UserDeleted = 'user-deleted',
+    UserModNote = 'user-modnote',
+    UserRestored = 'user-restored',
+    UserUnbanned = 'user-unbanned',
+    UserUpdated = 'user-updated',
+    ValueCreated = 'value-created',
+
+    /**
+     * @deprecated Variables can only be archived as of the site revamp.
+     */
+    ValueRemoved = 'value-removed',
+    ValueUpdated = 'value-updated',
+    VariableArchived = 'variable-archived',
+    VariableCreated = 'variable-created',
+
+    /**
+     * @deprecated Variables can only be archived as of the site revamp.
+     */
+    VariableRemoved = 'variable-removed',
+    VariableUpdated = 'variable-updated'
 }
 
 export enum ChallengeState {
