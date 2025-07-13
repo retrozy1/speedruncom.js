@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import GETEndpoints from './endpoints/endpoints.get.js';
-import POSTEndpoints from './endpoints/endpoints.post.js'
-import Responses from './responses.js';
+import GETEndpoints from './endpoints/endpoints.get';
+import POSTEndpoints from './endpoints/endpoints.post'
+import Responses from './responses';
 
 type Endpoints = GETEndpoints & POSTEndpoints;
 

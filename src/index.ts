@@ -1,6 +1,6 @@
-export * from './enums.js';
-export * from './interfaces.js';
+export * from './enums';
+export * from './interfaces';
 
-import Client from './Client.js';
+import Client from './Client';
 
 export default Client;

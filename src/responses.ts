@@ -1,4 +1,4 @@
-import * as Interfaces from './interfaces.js';
+import * as Interfaces from './interfaces';
 
 export default interface Responses {
     GetGameLeaderboard2: {
