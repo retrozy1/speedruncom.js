@@ -1156,7 +1156,7 @@ interface Run_Base {
     /**
      * Availibility and 'status' of the video of a run.
      */
-    readonly VideoState: Enums.VideoState;
+    readonly videoState: Enums.VideoState;
 }
 
 /**
