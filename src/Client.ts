@@ -20,11 +20,11 @@ export default class Client {
         withCredentials: true
     });
 
-    async get<T extends keyof GETEndpoints, A extends GETEndpoints[T]>(endpoint: T, params: A, axiosConfig?: AxiosRequestConfig) {
-        return await this.axiosClient.get<Responses[T]>(`${endpoint}?_r=${objectToBase64(params)}`, axiosConfig);
+    async get<E extends keyof GETEndpoints, P extends GETEndpoints[E]>(endpoint: E, params: P, axiosConfig?: AxiosRequestConfig) {
+        return await this.axiosClient.get<Responses[E]>(`${endpoint}?_r=${objectToBase64(params)}`, axiosConfig);
     }
 
-    async post<T extends keyof Endpoints, A extends Endpoints[T]>(endpoint: T, params: A, axiosConfig?: AxiosRequestConfig) {
-        return await this.axiosClient.post<T extends keyof Responses ? Responses[T] : void>(endpoint, params, axiosConfig);
+    async post<E extends keyof Endpoints, P extends Endpoints[E]>(endpoint: E, params: P, axiosConfig?: AxiosRequestConfig) {
+        return await this.axiosClient.post<E extends keyof Responses ? Responses[E] : void>(endpoint, params, axiosConfig);
     }
 }
