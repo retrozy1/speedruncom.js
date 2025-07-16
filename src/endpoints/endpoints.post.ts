@@ -1,8 +1,8 @@
 //Endpoints that would give the "Method Not Allowed" error when called with GET.
 
-import * as Enums from '../enums';
-import * as Interfaces from '../interfaces';
-import { AtLeastOne } from '../types';
+import * as Enums from '../enums.js';
+import * as Interfaces from '../interfaces.js';
+import { AtLeastOne } from '../types.js';
 
 export default interface POSTEndpoints {
 

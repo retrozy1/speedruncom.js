@@ -1,7 +1,7 @@
 //Endpoints that don't give the "Method Not Allowed" error when called with `GET`.
 
-import * as Enums from '../enums';
-import * as Interfaces from '../interfaces';
+import * as Enums from '../enums.js';
+import * as Interfaces from '../interfaces.js';
 
 export default interface GETEndpoints {
 
