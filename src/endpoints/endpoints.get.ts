@@ -31,6 +31,20 @@ export default interface GETEndpoints {
         page?: number;
     };
 
+    GetGameData: {
+        
+        /**
+         * ID of the game.
+         */
+        gameId: string;
+    } | {
+
+        /**
+         * Game page URL.
+         */
+        gameUrl: string;
+    }
+
     /**
      * Gets a specific site article.
      */
