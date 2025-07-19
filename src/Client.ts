@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import GETEndpoints from './endpoints/endpoints.get.js';
 import POSTEndpoints from './endpoints/endpoints.post.js'
 import Responses from './responses.js';

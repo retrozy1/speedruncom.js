@@ -631,6 +631,19 @@ export default interface GETEndpoints {
          * ID of the forum.
          */
         forumId: string;
+
+        /**
+         * The thread page, in relation to `limit`.
+         */
+        page: number;
+
+        /**
+         * The maximum amount of `Thread`s to fetch.
+         * 
+         * @default 30
+         * @max 100
+         */
+        limit: number;
     };
 
     /**

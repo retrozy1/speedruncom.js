@@ -2,6 +2,7 @@ import * as Interfaces from './interfaces.js';
 
 export default interface Responses {
     GetGameLeaderboard2: {
+        
         /**
          * Runs in the leaderboard.
          */
