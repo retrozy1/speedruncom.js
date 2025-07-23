@@ -635,7 +635,7 @@ export default interface GETEndpoints {
         /**
          * The thread page, in relation to `limit`.
          */
-        page: number;
+        page?: number;
 
         /**
          * The maximum amount of `Thread`s to fetch.
@@ -643,7 +643,7 @@ export default interface GETEndpoints {
          * @default 30
          * @max 100
          */
-        limit: number;
+        limit?: number;
     };
 
     /**
