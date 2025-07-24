@@ -474,6 +474,10 @@ export default interface POSTEndpoints {
         verified?: Enums.RunStatus;
         verifiedById?: string;
         videoState?: Enums.VideoState;
+
+        /**
+         * @max 100
+         */
         limit: number;
         page: number;
     };
