@@ -26,7 +26,7 @@ export default interface Responses {
         moderators: Interfaces.GameModerator[];
         platforms: Interfaces.Platform[];
         regions: Interfaces.Region[];
-        theme?: Interfaces.Theme[];
+        theme?: Interfaces.Theme;
         users: Interfaces.User[];
         values: Interfaces.Value[];
         variables: Interfaces.Variable[];

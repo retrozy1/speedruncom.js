@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import GETEndpoints from './endpoints/endpoints.get.js';
 import POSTEndpoints from './endpoints/endpoints.post.js'
 import Responses from './responses.js';
@@ -15,10 +15,13 @@ export default class Client {
         baseURL: 'https://www.speedrun.com/api/v2/',
         headers: {
             'Accept-Language': 'en',
-            'Accept': 'application/json'
+            '_': '',
+            'User-Agent': null
         },
-        withCredentials: true
+        withCredentials: true,
+        transformRequest: [data => typeof data === 'string' ? data : JSON.stringify(data)]
     });
+
 
     async get<E extends keyof GETEndpoints, P extends GETEndpoints[E]>(endpoint: E, params: P, axiosConfig?: AxiosRequestConfig) {
         return await this.axiosClient.get<Responses[E]>(`${endpoint}?_r=${objectToBase64(params)}`, axiosConfig);

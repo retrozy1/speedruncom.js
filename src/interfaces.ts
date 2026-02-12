@@ -8,7 +8,7 @@ export interface Category {
     /**
      * ID of the category.
      */
-    readonly id: string;
+    id: string;
 
     /**
      * Name of the category.
@@ -20,17 +20,17 @@ export interface Category {
      * This is never actually used in site pages.
      * The URL is permanent and can never update, even when changing the category name.
      */
-    readonly url: string;
+    url: string;
 
     /**
      * A global, site-wide position order number for the category.
      */
-    readonly pos: number;
+    pos: number;
 
     /**
      * ID of the game the category is on.
      */
-    readonly gameId: string;
+    gameId: string;
 
     /**
      * Whether or not the category is miscellaneous.
@@ -87,17 +87,17 @@ export interface ChallengeModerator {
     /**
      * ID of the challenge being moderated.
      */
-    readonly challengeId: string;
+    challengeId: string;
 
     /**
      * ID of the user moderating.
      */
-    readonly userId: string;
+    userId: string;
 
     /**
      * `GamePowerLevel` of the moderator.
      */
-    readonly level: Enums.GamePowerLevel;
+    level: Enums.GamePowerLevel;
 }
 
 /**
@@ -108,32 +108,32 @@ export interface ChallengeStanding {
     /**
      * ID of the challenge.
      */
-    readonly challengeId: string;
+    challengeId: string;
     
     /**
      * todo
      */
-    readonly place: number;
+    place: number;
 
     /**
      * todo
      */
-    readonly registeredPlayerIds: string[];
+    registeredPlayerIds: string[];
 
     /**
      * todo
      */
-    readonly prizeAmount: number;
+    prizeAmount: number;
 
     /**
      * todo
      */
-    readonly unregisteredPlayers: string[]
+    unregisteredPlayers: string[]
 
     /**
      * todo
      */
-    readonly prizeCurrency: string;
+    prizeCurrency: string;
 }
 
 /**
@@ -144,12 +144,12 @@ export interface ChallengePrize {
     /**
      * The ranking in the challenge for the reward.
      */
-    readonly place: number;
+    place: number;
 
     /**
      * The amount of money rewarded to the player in the `place`.
      */
-    readonly amount: number;
+    amount: number;
 }
 
 /**
@@ -160,13 +160,13 @@ export interface ChallengePrizeConfig {
     /**
      * TODO
      */
-    readonly prizePool: number;
+    prizePool: number;
 
     /**
      * TODO
      */
-    readonly currency: string;
-    readonly prizes: ChallengePrize[];
+    currency: string;
+    prizes: ChallengePrize[];
 }
 
 /**
@@ -177,33 +177,33 @@ export interface GlobalChallengeRanking {
     /**
      * ID of the user.
      */
-    readonly userId: string;
+    userId: string;
 
     /**
      * The user's site-wide rank.
      */
-    readonly rank: number;
-    readonly totalEarnings: number;
+    rank: number;
+    totalEarnings: number;
 
     /**
      * The amount of first place ranks the user has achieved in challenges.
      */
-    readonly firstPlaces: number;
+    firstPlaces: number;
 
     /**
      * The amount of second place ranks the user has achieved in challenges.
      */
-    readonly secondPlaces: number;
+    secondPlaces: number;
 
     /**
      * The amount of third place ranks the user has achieved in challenges.
      */
-    readonly thirdPlaces: number;
+    thirdPlaces: number;
 
     /**
      * The total amount of challenges the user has entered.
      */
-    readonly challengesEntered: number;
+    challengesEntered: number;
 }
 
 /**
@@ -214,85 +214,85 @@ export interface Challenge {
     /**
      * ID of the challenge.
      */
-    readonly id: string;
+    id: string;
 
     /**
      * Name of the challenge.
      */
-    readonly name: string;
+    name: string;
 
     /**
      * todo
      */
-    readonly announcement: string;
+    announcement: string;
 
     /**
      * Subpath URL of the challenge.
      */
-    readonly url: string;
+    url: string;
 
     /**
      * ID of the game the challenge is based on.
      */
-    readonly gameId: string;
+    gameId: string;
 
     /**
      * UNIX timestamp of when the challenge was created.
      */
-    readonly createDate: number;
+    createDate: number;
 
     /**
      * UNIX timestamp of when the challenge settings were last updated.
      */
-    readonly updateDate: number;
+    updateDate: number;
 
     /**
      * todo
      */
-    readonly startDate: number;
+    startDate: number;
 
     /**
      * todo
      */
-    readonly endDate: number;
+    endDate: number;
 
     /**
      * `ChallengeState` of the challenge.
      */
-    readonly state: Enums.ChallengeState;
+    state: Enums.ChallengeState;
 
     /**
      * Description of the challenge.
      */
-    readonly description: string;
+    description: string;
 
     /**
      * Rules of the challenge (not to be confused with `contestRules`).
      */
-    readonly rules: string;
+    rules: string;
 
     /**
      * 
      */
-    readonly numPlayers: number;
-    readonly exactPlayers: boolean;
-    readonly playerMatchMode: Enums.PlayerMatchMode;
-    readonly timeDirection: Enums.TimeDirection;
-    readonly enforceMs: boolean;
+    numPlayers: number;
+    exactPlayers: boolean;
+    playerMatchMode: Enums.PlayerMatchMode;
+    timeDirection: Enums.TimeDirection;
+    enforceMs: boolean;
 
     /**
      * Subpath URL of the challenge's cover image.
      * check if opt todo
      */
-    readonly coverImagePath: string;
-    readonly contest: boolean;
-    readonly contestRules: string;
-    readonly runCommentsMode: Enums.ItemPermissionType;
+    coverImagePath: string;
+    contest: boolean;
+    contestRules: string;
+    runCommentsMode: Enums.ItemPermissionType;
 
     /**
      * `ChallengePrizeConfig` of the challenge.
      */
-    readonly prizeConfig: ChallengePrizeConfig;
+    prizeConfig: ChallengePrizeConfig;
 }
 
 /**
@@ -303,22 +303,22 @@ export interface Title {
     /**
      * ID of the title.
      */
-    readonly id: string;
+    id: string;
 
     /**
      * Title of the challenge.
      */
-    readonly title: string;
+    title: string;
 
     /**
      * Description of how the challenge is rewarded to players.
      */
-    readonly comment: string;
+    comment: string;
 
     /**
      * Subpath URL of the challenge that rewards the title.
      */
-    readonly referenceUrl: string;
+    referenceUrl: string;
 }
 
 /**
@@ -329,66 +329,66 @@ export interface CommentPermissions {
     /**
      * Whether or not 
      */
-    readonly canManage: boolean;
+    canManage: boolean;
 
     /**
      * Whether or 
      */
-    readonly canViewComments: boolean;
-    readonly canPostComments: boolean;
+    canViewComments: boolean;
+    canPostComments: boolean;
 
     /**
      * Whether or not editing comments is allowed.
      */
-    readonly canEditComments: boolean;
+    canEditComments: boolean;
 
     /**
      * Whether or not deleting comments is allowsed.
      */
-    readonly canDeleteComments: boolean;
+    canDeleteComments: boolean;
 
     /**
      * Reasons for not being able to not view a thread.
      */
-    readonly cannotViewReasons: string[];
+    cannotViewReasons: string[];
 
     /**
      * Reasons for not being able to post a comment.
      */
-    readonly cannotPostReasons: string[];
+    cannotPostReasons: string[];
 }
 
 export interface CommentableProperties {
-    readonly disabled: boolean;
-    readonly locked: boolean;
+    disabled: boolean;
+    locked: boolean;
 }
 
 export interface Commentable {
-    readonly itemType: Enums.CommentableItemType;
-    readonly itemId: string;
-    readonly properties: CommentableProperties;
+    itemType: Enums.CommentableItemType;
+    itemId: string;
+    properties: CommentableProperties;
     /**Permissions of the logged in user. If not logged in; `canPostComments` is `false`.*/
-    readonly permissions: CommentPermissions;
+    permissions: CommentPermissions;
 }
 
 export interface Comment {
-    readonly id: string;
-    readonly itemType: Enums.ItemType.Comment;
-    readonly itemId: string;
-    readonly date: number;
-    readonly userId: string;
+    id: string;
+    itemType: Enums.ItemType.Comment;
+    itemId: string;
+    date: number;
+    userId: string;
     /**May be omitted on deleted comments.*/
-    readonly text?: string;
-    readonly parentId?: string;
-    readonly deleted: boolean;
-    readonly deletedUserId?: string;
+    text?: string;
+    parentId?: string;
+    deleted: boolean;
+    deletedUserId?: string;
 }
 
 export interface Like {
-    readonly itemType: Enums.ItemType.Comment;
-    readonly itemId: string;
-    readonly userId: string;
-    readonly date: number;
+    itemType: Enums.ItemType.Comment;
+    itemId: string;
+    userId: string;
+    date: number;
 }
 
 export interface SocialNetwork {
@@ -396,51 +396,51 @@ export interface SocialNetwork {
     /**
      * `SocialConnection` of the social network.
      */
-    readonly id: Enums.SocialConnection;
+    id: Enums.SocialConnection;
 
     /**
      * Name of the social network.
      */
-    readonly name: string;
+    name: string;
 
     /**
      * Arbitrary and unknown determination of if the platform is popular.
      * 
      * This does not have to do with if the platform is depricated or not.
      */
-    readonly major: boolean;
+    major: boolean;
 
     /**
      * Site-wide ordering method of the platform.
      */
-    readonly pos: number;
+    pos: number;
 
     /**
      * Either a URL with a `[id]` placeholder of where the entered value would be stored, `popup` when there is complex authentication of the social network, or an empty string when the value you enter is exactly what the end result will be.
      * 
      * Example: `https://www.youtube.com/user/[id]` 
      */
-    readonly pattern: string;
+    pattern: string;
 }
 
 export interface Area {
-    readonly id: string;
-    readonly name: string;
-    readonly fullName: string;
-    readonly label: string;
-    readonly flagIcon: string;
-    readonly lbFlagIcon: string;
-    readonly lbName: string;
+    id: string;
+    name: string;
+    fullName: string;
+    label: string;
+    flagIcon: string;
+    lbFlagIcon: string;
+    lbName: string;
 }
 
 export interface Color {
-    readonly id: string;
-    readonly name: string;
-    readonly darkColor: string;
+    id: string;
+    name: string;
+    darkColor: string;
     /**@deprecated `darkColor` is always used on the site*/
-    readonly lightColor: string;
+    lightColor: string;
     /**@deprecated colors now seem to be sorted by their name's ascending alphabetical order (A-Z)*/
-    readonly pos: number;
+    pos: number;
 }
 
 /**
@@ -451,98 +451,98 @@ export interface Forum {
     /**
      * `id` of this forum section.
      */
-    readonly id: string;
+    id: string;
 
     /**
      * Name of the forum. If this is the game's forum, it is the game name.
      */
-    readonly name: string;
+    name: string;
 
     /**
      * Page URL of the forum. If this is the game's forum, it is the game's page URL.
      */
-    readonly url: string;
+    url: string;
 
     /**
      * A description used to describe site-wide forums.
      */
-    readonly description?: string;
+    description?: string;
 
     /**
      * The `ForumType` the forum is.
      */
-    readonly type: Enums.ForumType;
+    type: Enums.ForumType;
 
     /**
      * The amount of threads inside of a forum.
      */
-    readonly threadCount: number;
+    threadCount: number;
 
     /**
      * The amont of combined posts of every thread in the forum.
      */
-    readonly postCount: number;
+    postCount: number;
 
     /**
      * The ID of the latest post in any thread in the forum.
      */
-    readonly lastPostId: string;
+    lastPostId: string;
 
     /**
      * The `userId` of the latest post in any thread in the forum.
      */
-    readonly lastPostUserId: string;
+    lastPostUserId: string;
 
     /**
      * The UNIX timestamp of when the latest post in any thread in the forum was posted.
      */
-    readonly lastPostDate: number;
+    lastPostDate: number;
 
     /**
      * 
      */
-    readonly touchDate: number;
+    touchDate: number;
 }
 
 export interface Thread {
-    readonly id: string;
-    readonly name: string;
-    readonly gameId: string;
-    readonly forumId: string;
-    readonly userId: string;
-    readonly replies: number;
-    readonly created: number;
-    readonly lastCommentId: string;
-    readonly lastCommentUserId: string;
-    readonly lastCommentDate: number;
-    readonly sticky: boolean;
-    readonly locked: boolean;
+    id: string;
+    name: string;
+    gameId: string;
+    forumId: string;
+    userId: string;
+    replies: number;
+    created: number;
+    lastCommentId: string;
+    lastCommentUserId: string;
+    lastCommentDate: number;
+    sticky: boolean;
+    locked: boolean;
 }
 
 export interface ForumReadStatus {
-    readonly forumId: string;
-    readonly date: number;
+    forumId: string;
+    date: number;
 }
 
 export interface Datatype {
-    readonly threadId: string;
-    readonly date: number;
+    threadId: string;
+    date: number;
 }
 
 export interface Leaderboard {
-    readonly category: Category;
-    readonly game: Game;
-    readonly pagination: Pagination;
-    readonly platforms: Platform[];
+    category: Category;
+    game: Game;
+    pagination: Pagination;
+    platforms: Platform[];
 
     /**
      * Every Player with a run in a game.
      */
-    readonly players: Player[];
-    readonly regions: Region[];
-    readonly runs: GameRun[];
-    readonly values: VariableValue[];
-    readonly variables: Variable[];
+    players: Player[];
+    regions: Region[];
+    runs: GameRun[];
+    values: VariableValue[];
+    variables: Variable[];
 }
 
 /**
@@ -615,173 +615,173 @@ export interface LeaderboardParams {
 }
 
 export interface RunCount {
-    readonly gameId: string;
-    readonly categoryId: string;
-    readonly levelId?: string;
-    readonly variableId?: string;
-    readonly valueId?: string;
-    readonly count: number;
+    gameId: string;
+    categoryId: string;
+    levelId?: string;
+    variableId?: string;
+    valueId?: string;
+    count: number;
 }
 
 export interface Platform {
-    readonly id: string;
-    readonly name: string;
-    readonly url: string;
-    readonly year: number;
+    id: string;
+    name: string;
+    url: string;
+    year: number;
 }
 
 export interface Article {
-    readonly id: string;
-    readonly slug: string;
-    readonly title: string;
-    readonly summary: string;
-    readonly body: string;
-    readonly createDate: number;
-    readonly updateDate: number;
-    readonly publishDate?: number;
-    readonly rejectDate?: number;
-    readonly publishTarget: string;
-    readonly publishTags: string[];
-    readonly coverImagePath?: string;
-    readonly commentsCount: number;
-    readonly community?: boolean;
-    readonly gameId?: string;
-    readonly userId?: string;
-    readonly editorId?: string;
+    id: string;
+    slug: string;
+    title: string;
+    summary: string;
+    body: string;
+    createDate: number;
+    updateDate: number;
+    publishDate?: number;
+    rejectDate?: number;
+    publishTarget: string;
+    publishTags: string[];
+    coverImagePath?: string;
+    commentsCount: number;
+    community?: boolean;
+    gameId?: string;
+    userId?: string;
+    editorId?: string;
     /**day it was pinned */
-    readonly stickyDate?: number;
+    stickyDate?: number;
 }
 
 export interface Region {
-    readonly id: string;
-    readonly name: string;
-    readonly url: string;
-    readonly flag: string;
+    id: string;
+    name: string;
+    url: string;
+    flag: string;
 }
 
 export interface Pagination {
-    readonly count: number;
-    readonly page: number;
-    readonly pages: number;
-    readonly per: number;
+    count: number;
+    page: number;
+    pages: number;
+    per: number;
 }
 
 export interface Guide {
-    readonly id: string;
-    readonly name: string;
-    readonly text: string;
-    readonly date: number;
-    readonly userId: string;
-    readonly gameId: string;
+    id: string;
+    name: string;
+    text: string;
+    date: number;
+    userId: string;
+    gameId: string;
 }
 
 export interface Resource {
-    readonly id: string;
-    readonly type: Enums.ResourceType;
-    readonly name: string;
-    readonly description: string;
-    readonly date: number;
-    readonly userId: string;
-    readonly gameId: string;
-    readonly path?: string;
-    readonly link?: string;
-    readonly fileName?: string;
-    readonly authorNames: string;  // TODO: exhaustive check for lists AND CHECK THAT UCHI ARTICLE WITH META??
+    id: string;
+    type: Enums.ResourceType;
+    name: string;
+    description: string;
+    date: number;
+    userId: string;
+    gameId: string;
+    path?: string;
+    link?: string;
+    fileName?: string;
+    authorNames: string;  // TODO: exhaustive check for lists AND CHECK THAT UCHI ARTICLE WITH META??
 }
 
 export interface Stream {
-    readonly id: string;
-    readonly gameId?: string;
-    readonly userId?: string;
-    readonly areaId?: string;
-    readonly url: string;
-    readonly title: string;
-    readonly previewUrl: string;
-    readonly channelName: string;
-    readonly viewers: number;
+    id: string;
+    gameId?: string;
+    userId?: string;
+    areaId?: string;
+    url: string;
+    title: string;
+    previewUrl: string;
+    channelName: string;
+    viewers: number;
     /**If the stream has a PB on SRC (and has their account linked)  TODO: check*/
-    readonly hasPb: boolean;
+    hasPb: boolean;
 }
 
 export interface AuditLogEntry {
-    readonly id: string;
-    readonly date: number;
-    readonly eventType: Enums.EventType
-    readonly actorId: string;
-    readonly gameId: string; // TODO check if optional, prolly is
+    id: string;
+    date: number;
+    eventType: Enums.EventType
+    actorId: string;
+    gameId: string; // TODO check if optional, prolly is
     /**A json dict of extra context based on eventType.*/
-    readonly context: string;
-    readonly userId?: string;
+    context: string;
+    userId?: string;
 }
 
 export interface Session {
-    readonly signedIn: boolean;
-    readonly showAds: boolean;
-    readonly user?: User;
-    readonly theme?: Theme;
-    readonly powerLevel: Enums.SitePowerLevel;
-    readonly dateFormat: Enums.DateFormat;
-    readonly timeFormat: Enums.TimeFormat;
-    readonly timeReference: Enums.TimeReference;
-    readonly timeUnits: Enums.TimeDisplayUnits;
-    readonly homepageStream: Enums.HomepageStreamType;
-    readonly disableThemes: boolean;
-    readonly csrfToken: string;
-    readonly networkToken?: string;
-    readonly gameList: Game[];
-    readonly gameFollowerList: GameFollower[];
-    readonly gameModeratorList: GameModerator[];
-    readonly gameRunnerList: GameRunner[];
-    readonly seriesList: Series[];
-    readonly seriesModeratorList: SeriesModerator[];
-    readonly boostAvailableTokens?: number;
-    readonly boostNextTokenDate: number;
-    readonly boostNextTokenAmount: number;
-    readonly userFollowerList: UserFollower[];
-    readonly enabledExperimentIds: string[];  // TODO: check
-    readonly challengeModeratorList: ChallengeModerator[];  // TODO: check
+    signedIn: boolean;
+    showAds: boolean;
+    user?: User;
+    theme?: Theme;
+    powerLevel: Enums.SitePowerLevel;
+    dateFormat: Enums.DateFormat;
+    timeFormat: Enums.TimeFormat;
+    timeReference: Enums.TimeReference;
+    timeUnits: Enums.TimeDisplayUnits;
+    homepageStream: Enums.HomepageStreamType;
+    disableThemes: boolean;
+    csrfToken: string;
+    networkToken?: string;
+    gameList: Game[];
+    gameFollowerList: GameFollower[];
+    gameModeratorList: GameModerator[];
+    gameRunnerList: GameRunner[];
+    seriesList: Series[];
+    seriesModeratorList: SeriesModerator[];
+    boostAvailableTokens?: number;
+    boostNextTokenDate: number;
+    boostNextTokenAmount: number;
+    userFollowerList: UserFollower[];
+    enabledExperimentIds: string[];  // TODO: check
+    challengeModeratorList: ChallengeModerator[];  // TODO: check
 }
 
 export interface Conversation {
-    readonly id: string;
-    readonly participantUserIds: string[];
-    readonly lastMessageId: string;
-    readonly lastMessageUser: string;
-    readonly lastMessageText: string;
-    readonly lastMessageDate: number;
-    readonly readDate: number;
+    id: string;
+    participantUserIds: string[];
+    lastMessageId: string;
+    lastMessageUser: string;
+    lastMessageText: string;
+    lastMessageDate: number;
+    readDate: number;
 }
 
 export interface ConversationLightweight {
-    readonly id: string;
+    id: string;
     /**TODO check if empty */
-    readonly participantUserIds: string[];
-    readonly lastMessageId: string;
-    readonly lastMessageDate: number;
+    participantUserIds: string[];
+    lastMessageId: string;
+    lastMessageDate: number;
 }
 
 export interface ConversationParticipant {
-    readonly conversationId: string;
-    readonly userId: string;
-    readonly joinedDate: number;
+    conversationId: string;
+    userId: string;
+    joinedDate: number;
     /**TODO check if optional*/
-    readonly leftDate: number;
+    leftDate: number;
 }
 
 export interface ConversationMessage {
-    readonly id: string;
-    readonly conversationId: string;
-    readonly userId: string;
-    readonly text: string;
-    readonly date: number;
+    id: string;
+    conversationId: string;
+    userId: string;
+    text: string;
+    date: number;
 }
 
 export interface SystemMessage {
-    readonly id: string;
-    readonly userId: string;
-    readonly text: string;
-    readonly date: number;
-    readonly read: boolean;
+    id: string;
+    userId: string;
+    text: string;
+    date: number;
+    read: boolean;
 }
 
 /**
@@ -792,119 +792,119 @@ export interface Game {
     /**
      * ID of the game.
      */
-    readonly id: string;
+    id: string;
     
     /**
      * Name of the game.
      */
-    readonly name: string;
+    name: string;
 
     /**
      * Page URL of the game.
      */
-    readonly url: string;
+    url: string;
 
     /**
      * Unused enum that is always `1`. todo check if gameType is this
      */
-    readonly type: 1;
+    type: 1;
     
     /**
      * Whether or not a game has Load Removed Time (LRT) as a timing method.
      */
-    readonly loadtimes: boolean;
+    loadtimes: boolean;
 
     /**
      * Whether or not the game supports entering milliseconds when entering a time into a run.
      */
-    readonly milliseconds: boolean;
+    milliseconds: boolean;
 
     /**
      * Whether or not a game has In Game Time (IGT) as a timing method.
      */
-    readonly igt: boolean;
+    igt: boolean;
 
     /**
      * Whether or not runs require moderators to verify them.
      */
-    readonly verification: boolean;
+    verification: boolean;
     
     /**
      * Whether or not the default option for 'Automatically Verify Run' is true.
      */
-    readonly autoVerify?: boolean;
+    autoVerify?: boolean;
 
     /**
      * Whether or not videos are required for submission.
      */
-    readonly requireVideo: boolean;
+    requireVideo: boolean;
 
     /**
      * Emulator allowability in a game.
      */
-    readonly emulator: Enums.EmulatorType;
+    emulator: Enums.EmulatorType;
 
     /**
      * Default timing method of the game.
      */
-    readonly defaultTimer: Enums.TimingMethod;
-    readonly validTimers: Enums.TimingMethod[];
-    readonly releaseDate?: number;
-    readonly addedDate: number;
-    readonly touchDate: number;
-    readonly baseGameId?: string;
-    readonly coverPath: string; //check if opt
-    readonly trophy1stPath?: string;
-    readonly trophy2ndPath?: string;
-    readonly trophy3rdPath?: string;
-    readonly trophy4thPath?: string;
-    readonly runCommentsMode: Enums.ItemPermissionType;
-    readonly runCount: number;
-    readonly activePlayerCount: number;
-    readonly totalPlayerCount: number;
-    readonly boostReceivedCount: number;
-    readonly boostDistinctDonorsCount: number;
-    readonly rules?: string;
-    readonly viewPowerLevel: Enums.SitePowerLevel;
-    readonly platformIds: string[];
-    readonly regionIds: string[];
-    readonly gameTypeIds: Enums.GameType[];
-    readonly websiteUrl?: string;
-    readonly discordUrl?: string;
-    readonly defaultView: Enums.DefaultViewType
-    readonly guidePermissionType: Enums.ItemPermissionType;
-    readonly resourcePermissionType: Enums.ItemPermissionType;
-    readonly staticAssets: StaticAsset[];
-    readonly embargoDate?: number;
-    readonly embargoText?: string;
+    defaultTimer: Enums.TimingMethod;
+    validTimers: Enums.TimingMethod[];
+    releaseDate?: number;
+    addedDate: number;
+    touchDate: number;
+    baseGameId?: string;
+    coverPath: string; //check if opt
+    trophy1stPath?: string;
+    trophy2ndPath?: string;
+    trophy3rdPath?: string;
+    trophy4thPath?: string;
+    runCommentsMode: Enums.ItemPermissionType;
+    runCount: number;
+    activePlayerCount: number;
+    totalPlayerCount: number;
+    boostReceivedCount: number;
+    boostDistinctDonorsCount: number;
+    rules?: string;
+    viewPowerLevel: Enums.SitePowerLevel;
+    platformIds: string[];
+    regionIds: string[];
+    gameTypeIds: Enums.GameType[];
+    websiteUrl?: string;
+    discordUrl?: string;
+    defaultView: Enums.DefaultViewType
+    guidePermissionType: Enums.ItemPermissionType;
+    resourcePermissionType: Enums.ItemPermissionType;
+    staticAssets: StaticAsset[];
+    embargoDate?: number;
+    embargoText?: string;
 }
 
 export interface GameStats {
-    readonly gameId: string;
-    readonly totalRuns: number;
-    readonly totalRunsFG: number;
-    readonly totalRunsIL: number;
-    readonly totalRunTime: number;
-    readonly recentRuns: number;
-    readonly recentRunsFG: number;
-    readonly recentRunsIL: number;
-    readonly totalPlayers: number;
-    readonly activePlayers: number;
-    readonly followers: number;
-    readonly guides: number;
-    readonly resources: number;
+    gameId: string;
+    totalRuns: number;
+    totalRunsFG: number;
+    totalRunsIL: number;
+    totalRunTime: number;
+    recentRuns: number;
+    recentRunsFG: number;
+    recentRunsIL: number;
+    totalPlayers: number;
+    activePlayers: number;
+    followers: number;
+    guides: number;
+    resources: number;
 }
 
 export interface GameNews {
-    readonly id: string;
-    readonly gameId: string;
-    readonly userId: string;
-    readonly title: string;
+    id: string;
+    gameId: string;
+    userId: string;
+    title: string;
     /**
      * Omitted for all but the first item in `GetGameSummary.newsList[]`.
      */
-    readonly body?: string;
-    readonly dateSubmitted: number;
+    body?: string;
+    dateSubmitted: number;
 }
 
 export interface GameModerator {
@@ -914,26 +914,26 @@ export interface GameModerator {
 }
 
 export interface GameBoost {
-    readonly id: string;
-    readonly createdAt: number;
-    readonly updatedAt: number;
-    readonly gameId: string;
-    readonly donorUserId: string;
-    readonly anonymous: boolean;
-    readonly recipientUserIds: [];
+    id: string;
+    createdAt: number;
+    updatedAt: number;
+    gameId: string;
+    donorUserId: string;
+    anonymous: boolean;
+    recipientUserIds: [];
 }
 
 export interface GameTypeDetails {
-    readonly id: Enums.GameType
-    readonly name: string;
-    readonly url: string;
-    readonly description: string;
-    readonly allowBaseGame: boolean;
+    id: Enums.GameType
+    name: string;
+    url: string;
+    description: string;
+    allowBaseGame: boolean;
 }
 
 /**TODO: Check for optional properties*/
 export interface GameSettings {
-    readonly id: string;
+    id: string;
     name: string;
     url: string;
     twitchName: string;
@@ -971,65 +971,65 @@ export interface GameSettings {
 }
 
 export interface GameModerationStats {
-    readonly gameId: string;
+    gameId: string;
     /**enum? appears to always be 0*/
-    readonly state: number;
-    readonly count: number;
-    readonly minDate?: number;
-    readonly maxDate?: number;
+    state: number;
+    count: number;
+    minDate?: number;
+    maxDate?: number;
 }
 
 export interface GameFollower {
-    readonly gameId: string;
-    readonly followerId: string;
-    readonly pos?: number;
-    readonly accessCount: number;
-    readonly lastAccessDate: number;
+    gameId: string;
+    followerId: string;
+    pos?: number;
+    accessCount: number;
+    lastAccessDate: number;
 }
 
 export interface GameRunner {
-    readonly gameId: string;
-    readonly userId: string;
-    readonly runCount: number;
+    gameId: string;
+    userId: string;
+    runCount: number;
 }
 
 export interface NewLevel {
-    readonly gameId: string;
+    gameId: string;
     name: string;
     rules?: string;
     archived: boolean;
 }
 
 export interface Level extends NewLevel {
-    readonly id: string;
-    readonly url: string;
-    readonly pos: number;
+    id: string;
+    url: string;
+    pos: number;
 }
 
 export interface Notification {
-    readonly id: string;
-    readonly date: number;
-    readonly title: string;
-    readonly path: string;
-    readonly read: boolean;
+    id: string;
+    date: number;
+    title: string;
+    path: string;
+    read: boolean;
 }
 
 export interface NotificationSetting {
-    readonly type: number;  //# enum??
-    readonly gameId?: string;
-    readonly site: boolean;
-    readonly email: boolean;
+    type: number;  //# enum??
+    gameId?: string;
+    site: boolean;
+    email: boolean;
 }
 
 /**A different type of notification are returned by `GetStaticData` than in other areas.*/
 export interface NotificationSettingStaticData {
-    readonly id: number;
-    readonly group: string;
-    readonly title: string;
-    readonly pos: number;
-    readonly gameSpecific: boolean;
-    readonly siteDefault: number;
-    readonly emailDefault: boolean;
+    id: number;
+    group: string;
+    title: string;
+    pos: number;
+    gameSpecific: boolean;
+    siteDefault: number;
+    emailDefault: boolean;
 }
 
 export interface GameOrderGroup {
@@ -1042,121 +1042,121 @@ export interface GameOrderGroup {
 }
 
 export interface GameOrdering {
-    readonly defaultGroups: GameOrderGroup[];
-    readonly supporterGroups: GameOrderGroup[];
+    defaultGroups: GameOrderGroup[];
+    supporterGroups: GameOrderGroup[];
 }
 
 interface Run_Base {
     /**
      * Unique identification characters of a run.
      */
-    readonly id: string;
+    id: string;
     /**
      * Unique identification characters of the run's game.
      */
-    readonly gameId: string;
+    gameId: string;
     
     /**
      * Timing of the run, in seconds. If the run has an *LRT* (Load Removed Time) **and** an *RTA* (Real Time Attack) time, this property will be the LRT. If there is an RTA and not an LRT, this will be the RTA.
      */
-    readonly time?: number;
+    time?: number;
 
         /**
      * Timing of the run, in seconds. If the run has an *LRT* (Load Removed Time) **and** an *RTA* (Real Time Attack) time, this property will be the RTA. If there is an LRT and not an RTA, this will be the LRT.
      */
-    readonly timeWithLoads?: number;
+    timeWithLoads?: number;
 
     /**
      * In Game Time* of the run, in seconds.
      */
-    readonly igt?: number;
+    igt?: number;
 
     /**
      * Unique identification characters of a platform. Platforms can be accessed with `GetPlatformList`.
      */
-    readonly platformId?: string;
+    platformId?: string;
 
     /**
      * Whether or not an emulator was used in the run.
      */
-    readonly emulator: boolean;
+    emulator: boolean;
 
     /**
      * Unique identification characters of a region. Found in older games that vary based on regions.
      */
-    readonly regionId?: string;
+    regionId?: string;
 
     /**
      * Everything in the 'Video URL' box.
      */
-    readonly video?: string;
+    video?: string;
 
     /**
      * Description of a run.
      */
-    readonly comment?: string;
+    comment?: string;
     
     /**
      * Unique user identification of the run submitter. Absent if the submitter is deleted.
      */
-    readonly submittedById?: string;
+    submittedById?: string;
 
     /**
      * A run's verification status.
      */
-    readonly verified: Enums.RunStatus;
+    verified: Enums.RunStatus;
 
     /**
      * Unique user identification characters of the run resolver.
      * 
      * Absent if the resolver is deleted.
      */
-    readonly verifiedById?: string;
+    verifiedById?: string;
     
     /**
      * Run rejection reason if it was rejected.
      */
-    readonly reason?: string;
+    reason?: string;
 
     /**
      * UNIX timestamp of a run's (changeable) date.
      */
-    readonly date: number;
+    date: number;
 
     /**
      * UNIX timestamp of when the run was submitted.
      */
-    readonly dateSubmitted?: number;
+    dateSubmitted?: number;
     
     /**
      * UNIX timestamp of when the run was resolved.
      */
-    readonly dateVerified?: number;
+    dateVerified?: number;
 
     /**
      * Whether the run is obsolete or not - absent when false.
      */
-    readonly obsolete?: boolean;
+    obsolete?: boolean;
 
     /**
      * Leaderboard rank of the run. Absent when obsolete.
      */
-    readonly place?: number;
+    place?: number;
 
     /**
      * Unique identification characters of players in the run.
      */
-    readonly playerIds: string[];
+    playerIds: string[];
 
     /**
      * Unused property that used to store reports of bad data for a run.
      */
-    readonly issues: null;
+    issues: null;
 
     /**
      * Availibility and 'status' of the video of a run.
      */
-    readonly videoState: Enums.VideoState;
+    videoState: Enums.VideoState;
 }
 
 /**
@@ -1167,35 +1167,35 @@ export interface GameRun extends Run_Base {
     /**
      * Unique identification characters of the run's category.
      */
-    readonly categoryId: string;
+    categoryId: string;
 
     /**
      * Unique identification characters of the run's level, if the run is on an individual level (IL).
      */
-    readonly levelId?: string;
+    levelId?: string;
 
     /**
      * Whether the run has *splits.io* splits. Splits.io has been shut down; this is `false` on all new runs.
      */
-    readonly hasSplits: boolean;
+    hasSplits: boolean;
 
     /**
      * Unique identification characters of values (subcategories and annotations) in the run.
      */
-    readonly valueIds: string[];
+    valueIds: string[];
     
     /**
      * Whether or not the run's category or subcategories were archived - absent when false.
      */
-    readonly orphaned?: boolean;
+    orphaned?: boolean;
 }
 
 export interface ChallengeRun extends Run_Base {
-    readonly challengeId: string;
-    readonly screened: boolean;
-    readonly screenedById?: string;
-    readonly dateScreened?: number;
-    readonly commentsCount: number;
+    challengeId: string;
+    screened: boolean;
+    screenedById?: string;
+    dateScreened?: number;
+    commentsCount: number;
 }
 
 export interface ModerationRun extends GameRun {
@@ -1205,7 +1205,7 @@ export interface ModerationRun extends GameRun {
      * 
      * Missing when false.
      */
-    readonly estimated?: true;
+    estimated?: true;
 }
 
 export interface RunTime {
@@ -1220,7 +1220,7 @@ export interface RunSettings {
     /**
      * Omitted when submitting a new run.
      */
-    readonly runId?: string;
+    runId?: string;
     gameId: string;
     categoryId: string;
     playerNames: string[];
@@ -1240,18 +1240,18 @@ export interface RunSettings {
 }
 
 export interface Series {
-    readonly id: string;
-    readonly name: string;
-    readonly url: string;
-    readonly addedDate: number;
-    readonly touchDate: number;
-    readonly websiteUrl?: string;
-    readonly discordUrl?: string;
-    readonly runCount: number;
-    readonly activePlayerCount: number;
-    readonly totalPlayerCount: number;
-    readonly officialGameCount: number;
-    readonly staticAssets: StaticAsset[];
+    id: string;
+    name: string;
+    url: string;
+    addedDate: number;
+    touchDate: number;
+    websiteUrl?: string;
+    discordUrl?: string;
+    runCount: number;
+    activePlayerCount: number;
+    totalPlayerCount: number;
+    officialGameCount: number;
+    staticAssets: StaticAsset[];
 }
 
 export interface SeriesModerator {
@@ -1283,45 +1283,45 @@ export interface StaticAssetUpdate {
 }
 
 export interface SupporterCredit {
-    readonly id: string;
-    readonly userId: string;
-    readonly providerId: number;  // enum
-    readonly createdAt: number;
-    readonly updatedAt: number;
-    readonly creditType: number;  // enum
-    readonly amount: number;
-    readonly currency: string;
-    readonly receivedAt: number;
-    readonly subscriptionId: string;
-    readonly periodStartsAt: number;
-    readonly periodEndsAt: number;
-    readonly providerItemId: string;
+    id: string;
+    userId: string;
+    providerId: number;  // enum
+    createdAt: number;
+    updatedAt: number;
+    creditType: number;  // enum
+    amount: number;
+    currency: string;
+    receivedAt: number;
+    subscriptionId: string;
+    periodStartsAt: number;
+    periodEndsAt: number;
+    providerItemId: string;
 }
 
 export interface SupporterCode {
-    readonly id: string;
-    readonly code: string;
-    readonly description: string;
-    readonly duration: number;
-    readonly userId: string;
-    readonly createdAt: number;
-    readonly updatedAt: number;
+    id: string;
+    code: string;
+    description: string;
+    duration: number;
+    userId: string;
+    createdAt: number;
+    updatedAt: number;
 }
 
 export interface SupporterSubscription {
-    readonly id: string;
-    readonly userId: string;
-    readonly providerId: number;  // enum
-    readonly createdAt: number;
-    readonly updatedAt: number;
-    readonly expiresAt: number;
-    readonly planId: number;  // enum
-    readonly nextPeriodPlanId: number;  // enum
-    readonly status: number;  // enum
+    id: string;
+    userId: string;
+    providerId: number;  // enum
+    createdAt: number;
+    updatedAt: number;
+    expiresAt: number;
+    planId: number;  // enum
+    nextPeriodPlanId: number;  // enum
+    status: number;  // enum
     /**Default 0, undocumented but assume timestamp otherwise TODO*/
-    readonly trialEndsAt: number;
-    readonly cancelAtPeriodEnd: boolean;
-    readonly canceledAt: number;  // TODO assume timestamp
+    trialEndsAt: number;
+    cancelAtPeriodEnd: boolean;
+    canceledAt: number;  // TODO assume timestamp
 }
 
 export interface Theme {
