@@ -853,7 +853,7 @@ export interface Game {
     addedDate: number;
     touchDate: number;
     baseGameId?: string;
-    coverPath: string; //check if opt
+    coverPath?: string;
     trophy1stPath?: string;
     trophy2ndPath?: string;
     trophy3rdPath?: string;
