@@ -16,5 +16,8 @@
     "@types/node": "^25.5.0",
     "typescript": "^5.8.3"
   },
-  "main": "lib/index.js"
+  "main": "lib/index.js",
+  "repository": {
+    "url": "https://github.com/retrozy1/speedruncom.js"
+  }
 }
