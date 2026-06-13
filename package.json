@@ -7,8 +7,8 @@
   },
   "main": "lib/index.js",
   "devDependencies": {
-    "@types/node": "^25.5.0",
-    "typescript": "^5.8.3"
+    "@types/node": "^25.9.3",
+    "typescript": "^6.0.3"
   },
   "description": "WIP NodeJS module for Speedrun's version 2 API.",
   "license": "MIT",
