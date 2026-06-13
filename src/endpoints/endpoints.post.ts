@@ -474,6 +474,12 @@ export default interface POSTEndpoints {
         verified?: Enums.RunStatus;
         verifiedById?: string;
         videoState?: Enums.VideoState;
+
+        /**
+         * The maximum amount of moderation runs per page.
+         * 
+         * @max 100
+        */
         limit: number;
         page: number;
     };
